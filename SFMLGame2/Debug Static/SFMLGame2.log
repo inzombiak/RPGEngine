@@ -1,0 +1,15 @@
+﻿  LevelLoader.cpp
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(257): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(351): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(354): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(372): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(390): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(393): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(407): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(515): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(522): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(524): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\visual studio 2013\projects\sfmlgame2\sfmlgame2\levelloader.cpp(525): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+  InventoryItem.cpp
+  Generating Code...
+  SFMLGame2.vcxproj -> C:\Users\Zareh\documents\visual studio 2013\Projects\SFMLGame2\Debug Static\SFMLGame2.exe
