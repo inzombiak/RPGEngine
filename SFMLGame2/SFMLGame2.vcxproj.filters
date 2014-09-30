@@ -149,9 +149,6 @@
     <ClInclude Include="PlayerObserver.h">
       <Filter>Header Files\Actors</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectComponent.h">
-      <Filter>Header Files\Actors</Filter>
-    </ClInclude>
     <ClInclude Include="custom_defininitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -159,6 +156,12 @@
       <Filter>Header Files\Actors</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
+      <Filter>Header Files\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityComponent.h">
       <Filter>Header Files\Actors</Filter>
     </ClInclude>
   </ItemGroup>

@@ -183,7 +183,8 @@
   <ItemGroup>
     <ClInclude Include="custom_defininitions.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="ObjectComponent.h" />
+    <ClInclude Include="interfaces.h" />
+    <ClInclude Include="EntityComponent.h" />
     <ClInclude Include="Algorithms.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Game.h" />
