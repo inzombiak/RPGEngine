@@ -4,7 +4,7 @@
 #include "VisibleGameObject.h"
 #include "Tile.h"
 #include "Player.h"
-#include "RenderComponent.h"
+//#include "RenderComponent.h"
 #include <memory>
 #include <string>
 

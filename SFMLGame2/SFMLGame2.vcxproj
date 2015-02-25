@@ -86,12 +86,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\SFML\SFML-2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SFML\SFML-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SFML\SFML-2.1\Libs\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\SFML\SFMLGIT\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -158,51 +158,75 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Algorithms.cpp" />
+    <ClCompile Include="CollisionComponent.cpp" />
+    <ClCompile Include="ComponenetFactory.cpp" />
+    <ClCompile Include="ComponentBase.cpp" />
     <ClCompile Include="Consumable.cpp" />
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityFactory.cpp" />
+    <ClCompile Include="EntityRenderer.cpp" />
+    <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
+    <ClCompile Include="GameObjectManagerNew.cpp" />
+    <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="ItemComponent.cpp" />
     <ClCompile Include="ItemFactroy.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="LevelLoaderOLD.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="ObjectFactory.cpp" />
     <ClCompile Include="ObjectRenderer.cpp" />
+    <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ItemCatalog.cpp" />
     <ClCompile Include="PlayerObserver.cpp" />
-    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
+    <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="VisibleGameObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CollisionComponent.h" />
+    <ClInclude Include="ComponentFactory.h" />
+    <ClInclude Include="ComponentBase.h" />
+    <ClInclude Include="ConsumableItem.h" />
     <ClInclude Include="custom_defininitions.h" />
     <ClInclude Include="Entity.h" />
-    <ClInclude Include="ObjectComponent.h" />
+    <ClInclude Include="EntityFactory.h" />
+    <ClInclude Include="EntityRenderer.h" />
+    <ClInclude Include="Equipment.h" />
+    <ClInclude Include="GameObjectManagerNew.h" />
+    <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="interfaces.h" />
     <ClInclude Include="Algorithms.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObjectManager.h" />
-    <ClInclude Include="ItemComponantManager.h" />
+    <ClInclude Include="InventoryComponent.h" />
     <ClInclude Include="ItemComponent.h" />
     <ClInclude Include="ItemFactory.h" />
+    <ClInclude Include="Level.h" />
+    <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="Physics.h" />
     <ClInclude Include="PlayerObserver.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="tinyxml2.h" />
+    <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="ItemCatalog.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="ObjectRenderer.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="LevelLoaderOLD.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="VisibleGameObject.h" />

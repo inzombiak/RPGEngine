@@ -1,348 +1,135 @@
+/*
+The methods of creating Entities and Components here are temporary
+*/
 #include "LevelLoader.h"
+#include "Debug.h"
+#include "Entity.h"
+#include "RenderComponent.h"
 
 bool LevelLoader::CreateLevel(int levelID)
 {
 	bool result;
-	string filename = "data/levels/level" + to_string(levelID) + ".tmx";
+
+	string filename = "data/levels/level" + std::to_string(levelID) + ".tmx";
+	XMLError error = m_levelFile.LoadFile(filename.c_str());
 	m_currentLevel = levelID;
-	result = ReadParameters(filename);
+
+	result = ReadParameters();
 	if (!result)
 	{
 		return false;
 	}
+
 	Debug::StartTimer("LLDEBUG_Reading tiles: ");
-	result = LoadLevel(filename);
+
+	result = LoadLevel();
 	if (!result)
 	{
 		return false;
 	}
+
 	Debug::EndTimer("end: ");
 	return true;
 }
 
-bool LevelLoader::ReadParameters(string filename)
+bool LevelLoader::ReadParameters()
 {
-	ifstream f;
-	string garbage;
-	char input;
+	//TODO add errors
 
-	f.open(filename);
-	if (f.fail() == true)
-	{
-		return false;
-	}
+	XMLNode* pRoot = m_levelFile.FirstChildElement("map");
+	XMLElement* pMapParam = pRoot->ToElement();
 
-	getline(f, garbage);
-	garbage = "";
-	//Read Level Width
-	f.get(input);
-	while (input != 'w')
-	{
-		f.get(input);
-	}
-	while (input != '"')
-	{
-		f.get(input);
-	}
-	f.get(input);
-	while (input != '"')
-	{
-		garbage += input;
-		f.get(input);
-	}
-	m_levelWidth = atoi(garbage.c_str());
-	garbage = "";
+	pMapParam->QueryAttribute("width", &m_levelWidth);
+	pMapParam->QueryAttribute("height", &m_levelHeight);
+	pMapParam->QueryAttribute("tileheight", &m_tileSize);
 
-	//Read Level Height
-	f.get(input);
-	while (input != '"')
-	{
-		f.get(input);
-	}
-	f.get(input);
-	while (input != '"')
-	{
-		garbage += input;
-		f.get(input);
-	}
-	m_levelHeight = atoi(garbage.c_str());
-	garbage = "";
+	pMapParam = pRoot->FirstChildElement("tileset");
+	XMLElement* pTilesetParam = pMapParam->FirstChildElement("image");
+	m_currentTextureName = pTilesetParam->Attribute("source");
+	pTilesetParam->QueryAttribute("width", &m_textureWidth);
+	pTilesetParam->QueryAttribute("height", &m_textureHeight);
 
-	//Read Tile Size
-	f.get(input);
-	while (input != '"')
-	{
-		f.get(input);
-	}
-	f.get(input);
-	while (input != '"')
-	{
-		garbage += input;
-		f.get(input);
-	}
-	m_tileSize = atoi(garbage.c_str());
-	garbage = "";
-
-	getline(f, garbage);
-	getline(f, garbage);
-
-	//Get Texture Name
-	garbage = "";
-	f.get(input);
-	while (input != '"')
-	{
-		f.get(input);
-	}
-	f.get(input);
-	while (input != '"')
-	{
-		garbage += input;
-		f.get(input);
-	}
-	m_currentTextureName = garbage;
-	garbage = "";
-
-	//Get Texture Width
-	f.get(input);
-	while (input != '"')
-	{
-		f.get(input);
-	}
-	f.get(input);
-	while (input != '"')
-	{
-		garbage += input;
-		f.get(input);
-	}
-	m_textureWidth = atoi(garbage.c_str());
-	garbage = "";
-
-	//Get Texture Height
-	f.get(input);
-	while (input != '"')
-	{
-		f.get(input);
-	}
-	f.get(input);
-	while (input != '"')
-	{
-		garbage += input;
-		f.get(input);
-	}
-	m_textureHeight = atoi(garbage.c_str());
-	garbage = "";
 	m_currentTexture.loadFromFile("data/levels/" + m_currentTextureName);
-	f.close();
-	
+
 	return true;
 }
 
-bool LevelLoader::LoadLevel(string filename)
+bool LevelLoader::LoadLevel()
 {
-	ifstream f;
-	int worldIndex = 0, tileIndex = 0;
-	int values[4];
-	char input = '1';
-	string garbage, layerName, name;
-	LayerType layerType;
-	bool endOfLayer = false;
+	//Add errors
 
-	m_levelMatrix = new int*[m_levelHeight];
+	m_levelMatrix.resize(m_levelHeight);
 	for (int i = 0; i < m_levelHeight; ++i)
-		m_levelMatrix[i] = new int[m_levelWidth]();
-
-	f.open(filename);
-
-	getline(f, garbage);
-	getline(f, garbage);
-	getline(f, garbage);
-	getline(f, garbage);
-	getline(f, garbage);
-	
-	//Read layers
-	while (true)
 	{
-		garbage = "";
-		while (input != '<' )
-		{
-			f.get(input);
-		}
+		m_levelMatrix[i].resize(m_levelWidth);
+	}
 		
-		f.get(input);
-		while (input != ' ')
+	int worldIndex = 0;
+	int tileIndex;
+	string  layerName;
+
+	XMLNode* pRoot = m_levelFile.FirstChildElement("map");
+	XMLElement* pLayer = pRoot->FirstChildElement("layer");
+
+	//Load Tiles
+	while (pLayer != nullptr)
+	{
+		layerName = pLayer->Attribute("name");
+		XMLElement* pData = pLayer->FirstChildElement("data");
+		XMLElement* pTile = pData->FirstChildElement("tile");
+		worldIndex = 0;
+		while (pTile != nullptr)
 		{
-			garbage += input;
-			f.get(input);
-			if (f.eof())
+			worldIndex++;
+			pTile->QueryAttribute("gid", &tileIndex);
+			if (tileIndex != 0)
 			{
-				break;
+				int i = floor((worldIndex - 1) / m_levelWidth);
+				int j = (worldIndex - 1) % m_levelWidth;
+				m_levelMatrix[i][j] = tileIndex;
+				map<int, pair<int, int>>::const_iterator mapElement = m_staticObjectIdentifiers.find(tileIndex);
+
+				if (mapElement != m_staticObjectIdentifiers.end())
+				{
+					CreateTile(worldIndex, tileIndex, mapElement->second.first, mapElement->second.second, layerName);
+				}
+				else
+				{
+					CreateTile(worldIndex, tileIndex, layerName);
+				}
 			}
+			pTile = pTile->NextSiblingElement("tile");
 		}
-		if (f.eof())
-		{
-			break;
-		}
-
-		if (garbage == "objectgroup")
-		{
-			layerType = LayerType::ObjectLayer;
-		}
-		else if (garbage == "layer")
-		{
-			layerType = LayerType::TileLayer;
-		}
-
-		while (input != '"')
-		{
-			f.get(input);
-		}
-
-		f.get(input);
-		garbage = "";
-		while (input != '"')
-		{
-			garbage += input;
-			f.get(input);
-		}
-
-		layerName = garbage;
-		endOfLayer = false;
-		getline(f, garbage);
-		garbage = "";
-		if (layerType == LayerType::TileLayer)
-		{
-			worldIndex = 0;
-			getline(f, garbage);
-			while (true)
-			{
-				garbage = "";
-				f.get(input);
-				while (input != '<')
-				{
-					f.get(input);
-				}
-				
-				f.get(input);
-				if (input == 't')
-				{
-					for (int i = 0; i < 9; i += 3)
-					{
-						f.get(input);
-						f.get(input);
-						f.get(input);
-					}
-				}
-				else if (input == '/')
-				{
-					f.get(input);
-					if (input == 'd')
-					{
-						getline(f, garbage);
-						getline(f, garbage);
-						break;
-					}
-				}
-				worldIndex++;
-				f.get(input);
-				if (input != '0')
-				{
-					garbage = "";
-					while (input != '"')
-					{
-						garbage += input;
-						f.get(input);
-					}
-					
-					tileIndex = atoi(garbage.c_str());
-					int i = floor((worldIndex - 1) / m_levelWidth);
-					int j = (worldIndex - 1) % m_levelWidth;
-					m_levelMatrix[i][j] = tileIndex;
-					map<int, pair<int, int>>::const_iterator mapElement = m_staticObjectIdentifiers.find(tileIndex);
-					
-					if (mapElement != m_staticObjectIdentifiers.end())
-					{
-						CreateTile(worldIndex, tileIndex, mapElement->second.first, mapElement->second.second, layerName);
-					}
-					else
-					{
-						CreateTile(worldIndex, tileIndex, layerName);
-					}
-					
-				}
-
-			}
-		}
-		else if (layerType == LayerType::ObjectLayer)
-		{
-			while (true)
-			{
-				while (input != '<')
-				{
-					f.get(input);
-				}
-
-				garbage = "";
-				f.get(input);
-
-				while (input != ' ')
-				{
-					garbage += input;
-					f.get(input);
-					if (garbage == "/object")
-					{
-						endOfLayer = true;
-						break;
-					}
-				}
-				if (endOfLayer)
-				{
-					break;
-				}
-				if (garbage == "object")
-				{
-					//Get object name
-					while (input != '"')
-					{
-						f.get(input);
-					}
-					f.get(input);
-					name = "";
-					while (input != '"')
-					{
-						name += input;
-						f.get(input);
-					}
-
-					//Get object x, y, witdth and height
-					for (int i = 0; i < 4; ++i)
-					{
-						f.get(input);
-						garbage = "";
-						while (input != '"')
-						{
-							f.get(input);
-						}
-						f.get(input);
-						while (input != '"')
-						{
-							garbage += input;
-							f.get(input);
-						}
-						values[i] = atoi(garbage.c_str());
-					}
-					GenerateObject(layerName, values);
-				}
-				while (input != '\n')
-				{
-					f.get(input);
-				}
-
-			}
-			cout << garbage;
-		}
+		pLayer = pLayer->NextSiblingElement("layer");
 	}
 
-	f.close();
+	//Load objects
+	int values[4];
+	XMLElement* pObjectGroup = pRoot->FirstChildElement("objectgroup");
+	XMLElement* pObject;
+
+	while (pObjectGroup != nullptr)
+	{
+		layerName = pObjectGroup->Attribute("name");
+
+		pObject = pObjectGroup->FirstChildElement("object");
+
+		while (pObject != nullptr)
+		{
+			values[0] = pObject->IntAttribute("x");
+			values[1] = pObject->IntAttribute("y");
+			values[2] = pObject->IntAttribute("width");
+			values[3] = pObject->IntAttribute("height");
+
+			GenerateObject(layerName, values);
+
+			pObject = pObjectGroup->NextSiblingElement("object");
+		}
+
+		pObjectGroup = pRoot->NextSiblingElement("objectGroup");
+	}
+
+
 	return true;
 }
 
@@ -367,12 +154,9 @@ void LevelLoader::CreateTile(int worldIndex, int tileIndex, string depth)
 	subRect.height = m_tileSize;
 
 	int y = i*m_tileSize, x = j *m_tileSize;
-	Tile* newTile = new Tile();
+	
+	StrongEntityPtr newTile = m_entityFactory.CreateTileFromTmx(sf::Vector2f(x, y), m_currentTexture, subRect);
 
-	newTile->SetPosition(x, y);
-	newTile->Load(m_currentTexture, subRect);
-	newTile->SetSolid(false);
-	newTile->SetVisible(true);
 	if (depth == "Background")
 	{
 		m_backgroundTiles.push_back(newTile);
@@ -381,7 +165,7 @@ void LevelLoader::CreateTile(int worldIndex, int tileIndex, string depth)
 	{
 		m_foregroundTiles.push_back(newTile);
 	}
-	
+
 }
 
 void LevelLoader::CreateTile(int worldIndex, int tileIndex, int width, int height, string depth)
@@ -402,12 +186,8 @@ void LevelLoader::CreateTile(int worldIndex, int tileIndex, int width, int heigh
 	subRect.height = height*m_tileSize;
 
 	int y = i*m_tileSize, x = j *m_tileSize;
-	Tile* newTile = new Tile();
-
-	newTile->SetPosition(x, y);
-	newTile->Load(m_currentTexture, subRect);
-	newTile->SetSolid(false);
-	newTile->SetVisible(true);
+	
+	StrongEntityPtr newTile = m_entityFactory.CreateTileFromTmx(sf::Vector2f(x, y),m_currentTexture, subRect);
 
 	if (depth == "Background")
 	{
@@ -421,152 +201,96 @@ void LevelLoader::CreateTile(int worldIndex, int tileIndex, int width, int heigh
 
 void LevelLoader::GenerateObject(string layerName, int values[])
 {
-	VisibleGameObject* newObject = NULL;
+	StrongEntityPtr newObject;
 
 	if (layerName == "Collision")
 	{
-		newObject = ObjectFactory::GenerateCollisionBox(values);
+		newObject = m_entityFactory.CreateCollisionEntity(sf::Vector2f(values[0], values[1]), sf::Vector2f(values[2], values[3]));
 	}
-	if (layerName == "Player")
+	if (newObject)
 	{
-		m_playerStartX = values[0];
-		m_playerStartY = values[1];
-		return;
-	}
-	
-	if (newObject != NULL)
-	{
-		m_collisionObjects.push_back(newObject);
+		m_collisionEntities.push_back(newObject);
 	}
 
 	return;
 }
 
-void LevelLoader::Draw(sf::RenderWindow& rw)
+vector<StrongEntityPtr> LevelLoader::GetForegroundTiles()
 {
-	for (vector<VisibleGameObject*>::iterator it = m_backgroundTiles.begin(); it != m_backgroundTiles.end(); ++it)
-	{
-		{
-			(*it)->Draw(rw);
-		}
-	}
-
-	/*for (vector<VisibleGameObject*>::iterator it = m_foregroundTiles.begin(); it != m_foregroundTiles.end(); ++it)
-	{
-		{
-			(*it)->Draw(rw);
-		}
-	}
-
-	for (vector<VisibleGameObject*>::iterator it = m_collisionObjects.begin(); it != m_collisionObjects.end(); ++it)
-	{
-		(*it)->Draw(rw);
-	}
-
-	for (vector<VisibleGameObject*>::iterator it = m_interactableObjects.begin(); it != m_interactableObjects.end(); ++it)
-	{
-		{
-			(*it)->Draw(rw);
-		}
-	}*/
-}
-
-void LevelLoader::GetPlayerStart(int& x, int& y)
-{
-	x = m_playerStartX;
-	y = m_playerStartY;
-}
-
-void LevelLoader::Destroy()
-{
-	for (int i = 0; i < m_levelHeight; ++i)
-	{
-		delete [] m_levelMatrix[i];
-	}
-	delete [] m_levelMatrix;
-
-	//m_interactableObjects.erase(m_interactableObjects.begin(), m_interactableObjects.end());
-	//m_collisionObjects.erase(m_collisionObjects.begin(), m_collisionObjects.end());
-	m_backgroundTiles.erase(m_backgroundTiles.begin(), m_backgroundTiles.end());
-}
-/*
-int**& LevelLoader::GetLevelMatrix()
-{
-	return m_levelMatrix;
-}*/
-
-vector<VisibleGameObject*>& LevelLoader::GetLevelTiles()
-{
-	return m_foregroundTiles;
-}
-
-vector<VisibleGameObject*>& LevelLoader::GetLevelStaticObjects()
-{
-	return m_collisionObjects;
-}
-
-vector<VisibleGameObject*>& LevelLoader::GetLevelMovableObjects()
-{
-	return m_collisionObjects;
-}
-
-sf::Vector2f LevelLoader::GetLevelSize()
-{
-	return sf::Vector2f(m_levelWidth * m_tileSize, m_levelHeight * m_tileSize);
-}
-
-vector<int> LevelLoader::PossibleTiles(sf::Vector2f objectPosition)
-{
-	int objectI, objectJ;
-	vector<int> result;
-	int x = objectPosition.x, y = objectPosition.y;
-
-	objectJ = floor(x / m_tileSize);
-	objectI = floor(y / m_tileSize);
-
-	int startI = objectI - 5, endI = objectI + 5, startJ = objectJ - 5, endJ = objectJ + 5;
-
-	if (startI < 0)
-		startI = 0;
-	else if (endI > m_levelHeight)
-		endI = m_levelHeight;
-	if (startJ < 0)
-		startJ = 0;
-	else if (endJ > m_levelWidth)
-		endJ = m_levelWidth;
-
-	for (int i = startI; i < endI; ++i)
-	{
-		for (int j = startJ; j < endJ; ++j)
-		{
-			int c = m_levelMatrix[i][j];
-			if (c > 0)
-				result.push_back(c);
-		}
-	}
-
+	auto result = m_foregroundTiles;
+	m_foregroundTiles.clear();
 	return result;
 }
 
-int** LevelLoader::m_levelMatrix;
-int LevelLoader::m_levelWidth;
-int LevelLoader::m_levelHeight;
-int LevelLoader::m_textureWidth;
-int LevelLoader::m_textureHeight;
-int LevelLoader::m_playerStartX;
-int LevelLoader::m_playerStartY;
-int LevelLoader::m_tileSize;
-int LevelLoader::m_currentLevel;
-sf::Texture LevelLoader::m_currentTexture;
-string LevelLoader::m_currentTextureName;
-vector<VisibleGameObject*> LevelLoader::m_backgroundTiles;
-vector<VisibleGameObject*> LevelLoader::m_foregroundTiles;
-vector<VisibleGameObject*> LevelLoader::m_collisionObjects;
-vector<VisibleGameObject*> LevelLoader::m_interactableObjects;
-vector<VisibleGameObject*> LevelLoader::m_staticObjects;
-const map<int, pair<int, int>> LevelLoader::m_staticObjectIdentifiers = 
-{ 
-	{ 811, { 2, 4 } }, 
+vector<StrongEntityPtr> LevelLoader::GetBackgroundTiles()
+{
+	auto result = m_backgroundTiles;
+	m_backgroundTiles.clear();
+	return result;
+}
+
+vector<StrongEntityPtr> LevelLoader::GetCollisionEntities()
+{
+	auto result = m_collisionEntities;
+	m_collisionEntities.clear();
+	return result;
+}
+
+void LevelLoader::Draw(sf::RenderWindow& rw)
+{
+	for (int i = 0; i < m_backgroundTiles.size(); ++i)
+	{
+		StrongEntityPtr strongEntity = ConvertToStrongPtr<Entity>(m_backgroundTiles[i]);
+		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(strongEntity->GetComponent(ComponentBase::GetIDFromName("RenderComponent")));
+		std::shared_ptr<RenderComponent> renderComp = CastComponentToDerived<RenderComponent>(compPtr);
+		rw.draw(renderComp->GetSprite());
+	}
+
+	for (int i = 0; i < m_foregroundTiles.size(); ++i)
+	{
+		StrongEntityPtr strongEntity = ConvertToStrongPtr<Entity>(m_foregroundTiles[i]);
+		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(strongEntity->GetComponent(ComponentBase::GetIDFromName("RenderComponent")));
+		std::shared_ptr<RenderComponent> renderComp = CastComponentToDerived<RenderComponent>(compPtr);
+		rw.draw(renderComp->GetSprite());
+	}
+}
+
+//vector<int> LevelLoader::PossibleTiles(sf::Vector2f objectPosition)
+//{
+//	int objectI, objectJ;
+//	vector<int> result;
+//	int x = objectPosition.x, y = objectPosition.y;
+//
+//	objectJ = floor(x / m_tileSize);
+//	objectI = floor(y / m_tileSize);
+//
+//	int startI = objectI - 5, endI = objectI + 5, startJ = objectJ - 5, endJ = objectJ + 5;
+//
+//	if (startI < 0)
+//		startI = 0;
+//	else if (endI > m_levelHeight)
+//		endI = m_levelHeight;
+//	if (startJ < 0)
+//		startJ = 0;
+//	else if (endJ > m_levelWidth)
+//		endJ = m_levelWidth;
+//
+//	for (int i = startI; i < endI; ++i)
+//	{
+//		for (int j = startJ; j < endJ; ++j)
+//		{
+//			int c = m_levelMatrix[i][j];
+//			if (c > 0)
+//				result.push_back(c);
+//		}
+//	}
+//
+//	return result;
+//}
+
+const map<int, pair<int, int>> LevelLoader::m_staticObjectIdentifiers =
+{
+	{ 811, { 2, 4 } },
 	{ 809, { 2, 4 } },
 	{ 807, { 2, 4 } },
 	{ 805, { 2, 4 } },

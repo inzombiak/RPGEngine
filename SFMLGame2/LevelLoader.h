@@ -1,61 +1,74 @@
+/*
+Currently this class loads .tmx (Tiled maps) and GameObjectManager loads Entities from other XMLs
+As a result the Getters in this class MUST be used to move all Entities created from the .tmx to the GameObjectManager.
+The getters WILL delete all the elements in the corresponding vectors.
+*/
+
 #ifndef LEVELLOADER_H
 #define LEVELLOADER_H
 
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <map>
+
 #include "SFML\Graphics.hpp"
-#include "Debug.h"
+#include "tinyxml2.h"
+#include "custom_defininitions.h"
+#include "EntityFactory.h"
 
-#include "Tile.h"
-#include "ObjectFactory.h"
+using std::string;
+using std::vector;
+using std::map;
+using std::pair;
 
-using namespace std;
+using tinyxml2::XMLDocument;
+using tinyxml2::XMLError;
+using tinyxml2::XMLNode;
+using tinyxml2::XMLElement;
 
 class LevelLoader
 {
 public:
-	bool CreateLevel(int);
 
+	bool CreateLevel(int); //Loades level by index provided
 	bool ClearLevel(int);
 
-	void Destroy();
-	void Draw(sf::RenderWindow&);
-	void GetPlayerStart(int&, int&);
-	sf::Vector2f GetLevelSize();
+	void Draw(sf::RenderWindow& rw);
 
-	//static int**& GetLevelMatrix();
-
-	static vector<VisibleGameObject*>& GetLevelTiles();
-	static vector<VisibleGameObject*>& GetLevelStaticObjects();
-	static vector<VisibleGameObject*>& GetLevelMovableObjects();
-	static vector<int> PossibleTiles(sf::Vector2f);
-	//static void GetLevelParameters(int, int, int, int);
+	vector<StrongEntityPtr> GetForegroundTiles(); //Get vector of foreground tiles
+	vector<StrongEntityPtr> GetBackgroundTiles(); //Get vector of background tiles
+	vector<StrongEntityPtr> GetCollisionEntities(); //Get vector of collision boxes
 
 private:
-	static bool ReadParameters(string);
-	static bool LoadLevel(string);
-	static void CreateTile(int, int, string);
-	static void GenerateObject(string, int[]);
-	static void CreateTile(int, int, int, int, string);
+	bool ReadParameters();
+	bool LoadLevel();
+	void CreateTile(int, int, string);
+	void CreateTile(int, int, int, int, string);
+	void GenerateObject(string, int[]);
+
 	enum LayerType { ObjectLayer, TileLayer };
 
-	static int** m_levelMatrix;
-	static int m_levelWidth;
-	static int m_levelHeight;
-	static int m_textureWidth;
-	static int m_textureHeight;
-	static int m_playerStartX;
-	static int m_playerStartY;
-	static int m_tileSize;
-	static int m_currentLevel;
-	static sf::Texture m_currentTexture;
-	static string m_currentTextureName;
-	static vector<VisibleGameObject*> m_backgroundTiles;
-	static vector<VisibleGameObject*> m_foregroundTiles;
-	static vector<VisibleGameObject*> m_collisionObjects;
-	static vector<VisibleGameObject*> m_interactableObjects;
-	static vector<VisibleGameObject*> m_staticObjects;
+	XMLDocument m_levelFile;
+
+	vector<vector<int>> m_levelMatrix;
+	int m_levelWidth;
+	int m_levelHeight;
+	int m_textureWidth;
+	int m_textureHeight;
+	int m_playerStartX;
+	int m_playerStartY;
+	int m_tileSize;
+	int m_currentLevel;
+
+	EntityFactory m_entityFactory;
+
+	sf::Texture m_currentTexture;
+	string m_currentTextureName;
+
+	vector<StrongEntityPtr> m_backgroundTiles;
+	vector<StrongEntityPtr> m_foregroundTiles;
+	vector<StrongEntityPtr> m_collisionEntities;
 
 	//Map is tile index, width and height of object
 	static const map<int, pair<int, int>> m_staticObjectIdentifiers;

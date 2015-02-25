@@ -4,17 +4,11 @@
 using std::cout;
 using std::endl;
 
-//sf::RenderWindow _mainWindow(sf::VideoMode(800, 600), "SFML works!");
 void Game::Start()
 {
-
-
 	if (m_gameState != Uninitialized)
 		return;
 	m_mainWindow.create(sf::VideoMode(m_windowWidth, m_windowHeight, 32), "SFML works!");
-
-//	m_itemCatalog = ItemCatalog::GetInstance();
-	//m_itemCatalog->Initialize("data/MainItemCatalog.ic");
 
 	m_levelLoader = new LevelLoader();
 	m_gameObjectManager = new GameObjectManager();
@@ -42,16 +36,12 @@ void Game::ChangeLevel(int levelNumber)
 {
 	int px, py;
 	m_levelLoader->CreateLevel(levelNumber);
-	//m_levelLoader->GetPlayerStart(px, py);
-
-	m_gameObjectManager->SetPlayer(500, 300, "data/player.png");
-
 	m_playerObserver->SetUI(m_UI);
-	m_gameObjectManager->GetPlayer()->SetObserver(m_playerObserver);
-
-	m_gameObjectManager->SetStaticObjects(LevelLoader::GetLevelStaticObjects());
-	m_gameObjectManager->SetMovableObjects(LevelLoader::GetLevelMovableObjects());
-	m_gameObjectManager->SetTiles(LevelLoader::GetLevelTiles());
+	m_gameObjectManager->SetPlayer(0, 0, "");
+	
+	//m_gameObjectManager->SetStaticObjects(m_levelLoader->GetLevelStaticObjects());
+	//m_gameObjectManager->SetMovableObjects(LevelLoader::GetLevelMovableObjects());
+	//m_gameObjectManager->SetTiles(LevelLoader::GetLevelTiles());
 
 	m_gameObjectManager->SetLevelStatus(false);
 	m_gameClock.restart();
@@ -136,7 +126,6 @@ void Game::Update()
 
 	if (m_gameObjectManager->GetLevelStatus())
 	{
-		m_levelLoader->Destroy();
 		m_gameObjectManager->Destroy();
 		ChangeLevel(2);
 	}
@@ -159,7 +148,6 @@ void Game::Destroy()
 	}
 	if (m_levelLoader)
 	{
-		m_levelLoader->Destroy();
 		delete  m_levelLoader;
 	}
 	if (m_UI)

@@ -1,5 +1,9 @@
 #include "VisibleGameObject.h"
 #include "Player.h"
+#include "Entity.h"
+#include "EntityFactory.h"
+#include "TransformComponent.h"
+#include "RenderComponent.h"
 #include "LevelLoader.h"
 #include "ObjectRenderer.h"
 #include <Windows.h>
@@ -24,7 +28,7 @@ public:
 	void SetMovableObjects(vector<VisibleGameObject*>&);
 	void SetTiles(std::vector<VisibleGameObject*>&);
 	void SetPlayer(int, int, string);
-	Player* GetPlayer();
+	StrongEntityPtr GetPlayer();
 
 	bool GetLevelStatus();
 	void SetLevelStatus(bool);
@@ -37,12 +41,17 @@ private:
 
 	void Move(float);
 	void TestForCollision();
-	vector<VisibleGameObject*> GetPossibleCollisions(VisibleGameObject&);
 
+	EntityFactory m_entityFactory;
+
+	vector<StrongEntityPtr> m_entities;
+
+	vector<VisibleGameObject*> GetPossibleCollisions(VisibleGameObject&);
 	vector<VisibleGameObject*> m_staticGameObjects;
 	vector<VisibleGameObject*> m_movableGameObjects;
 	vector<VisibleGameObject*> m_levelTiles;
-	Player* m_Player;
+	
+	StrongEntityPtr m_player;
 	ObjectRenderer m_renderer;
 	bool m_isLevelComplete;
 };

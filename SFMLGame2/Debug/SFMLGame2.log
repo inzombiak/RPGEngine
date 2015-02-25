@@ -1,78 +1,38 @@
-﻿  VisibleGameObject.cpp
-  UI.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\ui.cpp(66): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\ui.cpp(67): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\ui.cpp(75): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\ui.cpp(76): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
-  tinyxml2.cpp
-  Tile.cpp
-  PlayerObserver.cpp
-  ItemCatalog.cpp
-  Player.cpp
-  ObjectRenderer.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\objectrenderer.cpp(31): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(16): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(9) : while compiling class template member function 'std::vector<VisibleGameObject *,std::allocator<_Ty>> Algorithms<VisibleGameObject *>::MergeSort(std::vector<_Ty,std::allocator<_Ty>> &,bool (__cdecl *)(T &,T &))'
-          with
-          [
-              _Ty=VisibleGameObject *
-  ,            T=VisibleGameObject *
-          ]
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\objectrenderer.cpp(39) : see reference to function template instantiation 'std::vector<VisibleGameObject *,std::allocator<_Ty>> Algorithms<VisibleGameObject *>::MergeSort(std::vector<_Ty,std::allocator<_Ty>> &,bool (__cdecl *)(T &,T &))' being compiled
-          with
-          [
-              _Ty=VisibleGameObject *
-  ,            T=VisibleGameObject *
-          ]
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\objectrenderer.cpp(39) : see reference to class template instantiation 'Algorithms<VisibleGameObject *>' being compiled
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(23): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(55): warning C4018: '<' : signed/unsigned mismatch
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(36) : while compiling class template member function 'std::vector<VisibleGameObject *,std::allocator<_Ty>> Algorithms<VisibleGameObject *>::Merge(std::vector<_Ty,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,bool (__cdecl *)(T &,T &))'
-          with
-          [
-              _Ty=VisibleGameObject *
-  ,            T=VisibleGameObject *
-          ]
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(30) : see reference to function template instantiation 'std::vector<VisibleGameObject *,std::allocator<_Ty>> Algorithms<VisibleGameObject *>::Merge(std::vector<_Ty,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,bool (__cdecl *)(T &,T &))' being compiled
-          with
-          [
-              _Ty=VisibleGameObject *
-  ,            T=VisibleGameObject *
-          ]
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(61): warning C4018: '<' : signed/unsigned mismatch
-  ObjectFactory.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\objectfactory.cpp(15): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\objectfactory.cpp(33): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-  MainMenu.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\mainmenu.cpp(74): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-  Main.cpp
-  LevelLoader.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(257): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(351): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(354): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(372): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(390): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(393): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(407): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(515): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(522): warning C4244: 'initializing' : conversion from 'float' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(524): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(525): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
-  ItemFactroy.cpp
-  ItemComponent.cpp
-  Item.cpp
-  InventoryItem.cpp
-  Inventory.cpp
-  GameObjectManager.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\gameobjectmanager.cpp(110): warning C4305: '=' : truncation from 'double' to 'float'
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\gameobjectmanager.cpp(159): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-  Game.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\game.cpp(43): warning C4101: 'px' : unreferenced local variable
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\game.cpp(43): warning C4101: 'py' : unreferenced local variable
-  Debug.cpp
+﻿  GameObjectManagerNew.cpp
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\gameobjectmanagernew.cpp(71): warning C4101: 'pComp' : unreferenced local variable
+  Entity.cpp
   Generating Code...
   Compiling...
-  Consumable.cpp
-  Algorithms.cpp
+  RenderComponent.cpp
+  LevelLoader.cpp
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(87): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(138): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(141): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(158): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(174): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(177): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(190): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(208): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(241): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(249): warning C4018: '<' : signed/unsigned mismatch
+  InputComponent.cpp
+  GameObjectManager.cpp
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\gameobjectmanager.cpp(119): warning C4305: '=' : truncation from 'double' to 'float'
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\gameobjectmanager.cpp(182): warning C4101: 'pComp' : unreferenced local variable
+  EntityRenderer.cpp
+  EntityFactory.cpp
+  CollisionComponent.cpp
   Generating Code...
+  Skipping... (no relevant changes detected)
+  UI.cpp
+  TransformComponent.cpp
+  PlayerObserver.cpp
+  Player.cpp
+  ObjectFactory.cpp
+  InventoryItem.cpp
+  Inventory.cpp
+  Equipment.cpp
+  ComponentBase.cpp
+  Main.cpp
+  Game.cpp
   SFMLGame2.vcxproj -> C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\SFMLGame2.exe

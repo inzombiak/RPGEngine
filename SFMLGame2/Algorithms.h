@@ -5,7 +5,7 @@ template<class T>
 class Algorithms
 {
 public:
-	static std::vector<T> Algorithms<T>::MergeSort(std::vector<T>& list, bool (*comparator)(T&, T&))
+	static std::vector<T> Algorithms<T>::MergeSortVector(std::vector<T>& list, bool (*comparator)(T&, T&))
 	{
 		if (list.size() <= 1)
 		{
@@ -67,4 +67,3 @@ private:
 		return result;
 	}
 };
-

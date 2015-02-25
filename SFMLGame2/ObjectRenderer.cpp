@@ -36,7 +36,7 @@ void ObjectRenderer::Draw(sf::RenderWindow& rw)
 
 void ObjectRenderer::Sort(std::vector<VisibleGameObject*>& list)
 {
-	list = Algorithms<VisibleGameObject*>::MergeSort(list, CompareBottom);
+	list = Algorithms<VisibleGameObject*>::MergeSortVector(list, CompareBottom);
 }
 
 void ObjectRenderer::Swap(VisibleGameObject*& obj1, VisibleGameObject*& obj2)

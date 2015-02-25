@@ -1,32 +1,42 @@
 #ifndef RENDERCOMPONENT_H
 #define RENDERCOMPONENT_H
 
-#include "SFML\Graphics.hpp"
-#include "ObjectComponent.h"
+#include "ComponentBase.h"
 
-
-
-class RenderComponent : public ObjectComponent
+class RenderComponent : public ComponentBase
 {
 public:
-	const sf::Texture& GetTexture() const;
-	void SetTexture(const sf::Texture& texture);
+	virtual bool Init(const XMLElement* componentNode) override;
+	virtual void PostInit() override;
+	void Update(float dt);
 
+	const char* GetName()
+	{
+		return COMPONENT_NAME;
+	}
+
+	//Setter and Getters
 	void SetPosition(const sf::Vector2f position);
 
-	void SetVisible(bool isVisible);
-	const bool IsVisible() const;
+	void SetTexture(const sf::Texture& texture);
+	const sf::Texture& GetTexture() const;
 
-	const sf::Sprite& GetSprite();
-	void SetSprite(sf::Sprite sprite);
+	void SetVisible(bool isVisible) ;
+	const bool GetVisible() const;
 
-	void SetTextureRect(sf::Rect<int> textureBounds);
-	sf::Rect<int> GetTextureRect() const;
+	void SetSprite(const sf::Sprite sprite);
+	const sf::Sprite& GetSprite() const;
+
+	void SetTextureRect(const sf::Rect<int> textureBounds);
+	const sf::Rect<int> GetTextureRect() const;
+
+	const static char* COMPONENT_NAME;
 
 private:
-	sf::Sprite m_objectSprite;
+	sf::Sprite m_sprite;
 	sf::Texture m_texture;
-	bool m_visible;
+	sf::Rect<int> m_textureBounds;
+	bool m_visible = true;
 };
 
 #endif

@@ -17,6 +17,7 @@
 #include "MainMenu.h"
 #include "ItemCatalog.h"
 #include "PlayerObserver.h"
+#include "LevelLoader.h"
 
 #include <sstream>
 class Game
@@ -27,6 +28,7 @@ public:
 	float GetTime();
 	void ChangeLevel(int);
 	void ShowMenu();
+
 private:
 	void Update();
 	void Draw();
@@ -41,7 +43,7 @@ private:
 
 	GameObjectManager* m_gameObjectManager;
 	LevelLoader* m_levelLoader;
-//	ItemCatalog* m_itemCatalog;
+	
 	UI* m_UI;
 	PlayerObserver* m_playerObserver;
 

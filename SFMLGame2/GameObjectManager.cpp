@@ -1,5 +1,5 @@
 #include "GameObjectManager.h"
-
+#include "InputComponent.h"
 
 void GameObjectManager::Add(std::string filename, VisibleGameObject* object)
 {
@@ -9,11 +9,6 @@ void GameObjectManager::Add(std::string filename, VisibleGameObject* object)
 
 void GameObjectManager::Destroy()
 {
-	if (m_Player)
-	{
-		delete m_Player;
-	}
-
 	while (!m_staticGameObjects.empty())
 	{
 		delete m_staticGameObjects.back();
@@ -38,13 +33,27 @@ void GameObjectManager::Destroy()
 
 void GameObjectManager::Update(float time)
 {
-	m_Player->Update(time);
+//	m_player->Update(time);
 
 	for (vector<VisibleGameObject*>::iterator it = m_movableGameObjects.begin(); it != m_movableGameObjects.end(); ++it)
 	{
 		(*it)->Update(time);
 	}
-
+	shared_ptr<InputComponent> rc = static_pointer_cast<InputComponent>(StrongComponentPtr(m_player->GetComponent(ComponentBase::GetIDFromName(InputComponent::COMPONENT_NAME))));
+	if (!m_player->GetComponent(ComponentBase::GetIDFromName(InputComponent::COMPONENT_NAME)).expired())
+	{
+		rc->Update(time);
+	}
+	shared_ptr<TransformComponent> rc2 = static_pointer_cast<TransformComponent>(StrongComponentPtr(m_player->GetComponent(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME))));
+	if (!m_player->GetComponent(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME)).expired())
+	{
+		rc2->Update(time);
+	}
+	shared_ptr<RenderComponent> rc3 = static_pointer_cast<RenderComponent>(StrongComponentPtr(m_player->GetComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME))));
+	if (!m_player->GetComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME)).expired())
+	{
+		rc3->Update(time);
+	}
 	Move(time);
 	//m_Player->Move(0, 1, time);
 	//m_Player->Move(1, 0, time);
@@ -54,35 +63,35 @@ void GameObjectManager::Update(float time)
 
 void GameObjectManager::Move(float time)
 {
-	m_Player->Move(0, 1, time);
+	//m_Player->Move(1, 1, time);
 
 	for (vector<VisibleGameObject*>::iterator it = m_staticGameObjects.begin(); it != m_staticGameObjects.end(); ++it)
 	{
 		if ((*it)->GetSolid())
 		{
-			if (CheckCollision(m_Player->GetGlobalCollisionRectangle(), (*it)->GetGlobalCollisionRectangle()))
-			{
-				//m_Player->Stop();
-				int r = ResolveCollision((*m_Player), *(*it));
-				if (r == 0)
-					m_Player->SetGrounded(true);
-				else if (r == 1)
-					m_Player->SetVelocityY(0);
-			}
+			//if (CheckCollision(m_Player->GetGlobalCollisionRectangle(), (*it)->GetGlobalCollisionRectangle()))
+			//{
+			//	//m_Player->Stop();
+			//	int r = ResolveCollision((*m_Player), *(*it));
+			//	if (r == 0)
+			//		m_Player->SetGrounded(true);
+			//	else if (r == 1)
+			//		m_Player->SetVelocityY(0);
+			//}
 		}
 	}
 
-	m_Player->Move(1, 0, time);
+	//m_Player->Move(1, 0, time);
 	
 	for (vector<VisibleGameObject*>::iterator it = m_staticGameObjects.begin(); it != m_staticGameObjects.end(); ++it)
 	{
 		if ((*it)->GetSolid())
 		{
-			if (CheckCollision(m_Player->GetGlobalCollisionRectangle(), (*it)->GetGlobalCollisionRectangle()))
+			/*if (CheckCollision(m_Player->GetGlobalCollisionRectangle(), (*it)->GetGlobalCollisionRectangle()))
 			{
 				ResolveCollision((*m_Player), *(*it));
 				m_Player->SetVelocityX(0);
-			}
+			}*/
 		}
 	}
 }
@@ -144,6 +153,12 @@ void GameObjectManager::Draw(sf::RenderWindow &rw)
 	{
 		(*it)->Draw(rw);
 	}
+	shared_ptr<RenderComponent> rc = static_pointer_cast<RenderComponent>(StrongComponentPtr(m_player->GetComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME))));
+	if (!m_player->GetComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME)).expired())
+	{
+		sf::Sprite s = rc->GetSprite();
+		rw.draw(s);
+	}
 	m_renderer.Draw(rw);
 }
 
@@ -155,9 +170,23 @@ bool GameObjectManager::CheckCollision(sf::Rect<float>& r1, sf::Rect<float>& r2)
 
 void GameObjectManager::SetPlayer(int x, int y, string filename)
 {
-	m_Player = new Player();
-	m_Player->SetPosition(x, y);
-	m_Player->Load(filename);
+
+	string f = "data/Entities.xml";
+
+	XMLDocument file;
+	file.LoadFile(f.c_str());
+
+	XMLNode* pRoot = file.FirstChild();
+	XMLElement* pEntities = pRoot->FirstChildElement("Entities");
+	XMLElement* pEntity = pEntities->FirstChildElement("Entity");
+	XMLElement* pComp;
+
+	while (pEntity != nullptr)
+	{
+		m_player = m_entityFactory.CreateEntity(pEntity);
+
+		pEntity = pEntity->NextSiblingElement("Entity"); 
+	}
 }
 
 void GameObjectManager::SetStaticObjects(vector<VisibleGameObject*>& objects)
@@ -174,12 +203,12 @@ void GameObjectManager::SetTiles(vector<VisibleGameObject*>& tiles)
 {
 	m_levelTiles = tiles;
 	m_renderer.SetStaticObjects(tiles);
-	m_renderer.SetPlayer(m_Player);
+	//m_renderer.SetPlayer(m_Player);
 }
 
-Player* GameObjectManager::GetPlayer()
+StrongEntityPtr GameObjectManager::GetPlayer()
 {
-	return m_Player;
+	return m_player;
 }
 
 bool GameObjectManager::GetLevelStatus()
@@ -194,14 +223,14 @@ void GameObjectManager::SetLevelStatus(bool b)
 
 vector<VisibleGameObject*> GameObjectManager::GetPossibleCollisions(VisibleGameObject& object)
 {
-	vector<int> possibleCollTileIndicies = LevelLoader::PossibleTiles(object.GetPosition());
+	//vector<int> possibleCollTileIndicies = LevelLoader::PossibleTiles(object.GetPosition());
 	vector<VisibleGameObject*> result;
 
-	while (!possibleCollTileIndicies.empty())
+	/*while (!possibleCollTileIndicies.empty())
 	{
 		result.push_back(m_levelTiles[possibleCollTileIndicies.back()]);
 		possibleCollTileIndicies.pop_back();
-	}
+	}*/
 
 	return result;
 }
