@@ -141,11 +141,11 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp">
+    <ClCompile Include="GameObjectManagerOLD.cpp">
       <Filter>Source Files\Old</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjectManagerNew.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>Source Files\Engines</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -248,16 +248,16 @@
     <ClInclude Include="LevelLoader.h">
       <Filter>Header Files\Engines</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManagerNew.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
     <ClInclude Include="Physics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManagerOLD.h">
+      <Filter>Header Files\Old</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

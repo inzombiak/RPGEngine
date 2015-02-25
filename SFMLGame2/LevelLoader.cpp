@@ -11,7 +11,7 @@ bool LevelLoader::CreateLevel(int levelID)
 	bool result;
 
 	string filename = "data/levels/level" + std::to_string(levelID) + ".tmx";
-	XMLError error = m_levelFile.LoadFile(filename.c_str());
+	tinyxml2::XMLError error = m_levelFile.LoadFile(filename.c_str());
 	m_currentLevel = levelID;
 
 	result = ReadParameters();
@@ -36,7 +36,7 @@ bool LevelLoader::ReadParameters()
 {
 	//TODO add errors
 
-	XMLNode* pRoot = m_levelFile.FirstChildElement("map");
+	tinyxml2::XMLNode* pRoot = m_levelFile.FirstChildElement("map");
 	XMLElement* pMapParam = pRoot->ToElement();
 
 	pMapParam->QueryAttribute("width", &m_levelWidth);
@@ -68,7 +68,7 @@ bool LevelLoader::LoadLevel()
 	int tileIndex;
 	string  layerName;
 
-	XMLNode* pRoot = m_levelFile.FirstChildElement("map");
+	tinyxml2::XMLNode* pRoot = m_levelFile.FirstChildElement("map");
 	XMLElement* pLayer = pRoot->FirstChildElement("layer");
 
 	//Load Tiles

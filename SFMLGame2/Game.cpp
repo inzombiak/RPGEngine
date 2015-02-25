@@ -37,13 +37,11 @@ void Game::ChangeLevel(int levelNumber)
 	int px, py;
 	m_levelLoader->CreateLevel(levelNumber);
 	m_playerObserver->SetUI(m_UI);
-	m_gameObjectManager->SetPlayer(0, 0, "");
-	
-	//m_gameObjectManager->SetStaticObjects(m_levelLoader->GetLevelStaticObjects());
-	//m_gameObjectManager->SetMovableObjects(LevelLoader::GetLevelMovableObjects());
-	//m_gameObjectManager->SetTiles(LevelLoader::GetLevelTiles());
+	m_gameObjectManager->LoadEntities("");
+	m_gameObjectManager->SetBackgroundTiles(m_levelLoader->GetBackgroundTiles());
+	m_gameObjectManager->SetForegroundTiles(m_levelLoader->GetForegroundTiles());
+	m_gameObjectManager->SetCollisionBoxes(m_levelLoader->GetCollisionEntities());
 
-	m_gameObjectManager->SetLevelStatus(false);
 	m_gameClock.restart();
 }
 
@@ -124,17 +122,13 @@ void Game::Update()
 		frames++;
 	}
 
-	if (m_gameObjectManager->GetLevelStatus())
-	{
-		m_gameObjectManager->Destroy();
-		ChangeLevel(2);
-	}
 
 }
 
 void Game::Draw()
 {
-	m_levelLoader->Draw(m_mainWindow);
+	//m_levelLoader->Draw(m_mainWindow);
+	//m_gameObjectManager->Draw(m_mainWindow);
 	m_gameObjectManager->Draw(m_mainWindow);
 	m_UI->Draw(m_mainWindow);
 }
@@ -143,7 +137,6 @@ void Game::Destroy()
 {
 	if (m_gameObjectManager)
 	{
-		m_gameObjectManager->Destroy();
 		delete m_gameObjectManager;
 	}
 	if (m_levelLoader)

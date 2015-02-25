@@ -168,8 +168,8 @@
     <ClCompile Include="EntityRenderer.cpp" />
     <ClCompile Include="Equipment.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameObjectManagerOLD.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
-    <ClCompile Include="GameObjectManagerNew.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
@@ -202,13 +202,13 @@
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EntityRenderer.h" />
     <ClInclude Include="Equipment.h" />
-    <ClInclude Include="GameObjectManagerNew.h" />
+    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="interfaces.h" />
     <ClInclude Include="Algorithms.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameObjectManager.h" />
+    <ClInclude Include="GameObjectManagerOLD.h" />
     <ClInclude Include="InventoryComponent.h" />
     <ClInclude Include="ItemComponent.h" />
     <ClInclude Include="ItemFactory.h" />

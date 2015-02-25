@@ -22,11 +22,6 @@ using std::vector;
 using std::map;
 using std::pair;
 
-using tinyxml2::XMLDocument;
-using tinyxml2::XMLError;
-using tinyxml2::XMLNode;
-using tinyxml2::XMLElement;
-
 class LevelLoader
 {
 public:
@@ -49,7 +44,7 @@ private:
 
 	enum LayerType { ObjectLayer, TileLayer };
 
-	XMLDocument m_levelFile;
+	tinyxml2::XMLDocument m_levelFile;
 
 	vector<vector<int>> m_levelMatrix;
 	int m_levelWidth;

@@ -25,8 +25,8 @@ public:
 			right.push_back(list[i]);
 		}
 
-		left = MergeSort(left, comparator);
-		right = MergeSort(right, comparator);
+		left = MergeSortVector(left, comparator);
+		right = MergeSortVector(right, comparator);
 		result = Merge(left, right, comparator);
 		return result;
 	};

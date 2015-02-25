@@ -1,10 +1,4 @@
-﻿  GameObjectManagerNew.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\gameobjectmanagernew.cpp(71): warning C4101: 'pComp' : unreferenced local variable
-  Entity.cpp
-  Generating Code...
-  Compiling...
-  RenderComponent.cpp
-  LevelLoader.cpp
+﻿  LevelLoader.cpp
 c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(87): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
 c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(138): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
 c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(141): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
@@ -15,24 +9,4 @@ c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(190): warnin
 c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(208): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
 c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(241): warning C4018: '<' : signed/unsigned mismatch
 c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(249): warning C4018: '<' : signed/unsigned mismatch
-  InputComponent.cpp
-  GameObjectManager.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\gameobjectmanager.cpp(119): warning C4305: '=' : truncation from 'double' to 'float'
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\gameobjectmanager.cpp(182): warning C4101: 'pComp' : unreferenced local variable
-  EntityRenderer.cpp
-  EntityFactory.cpp
-  CollisionComponent.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  UI.cpp
-  TransformComponent.cpp
-  PlayerObserver.cpp
-  Player.cpp
-  ObjectFactory.cpp
-  InventoryItem.cpp
-  Inventory.cpp
-  Equipment.cpp
-  ComponentBase.cpp
-  Main.cpp
-  Game.cpp
   SFMLGame2.vcxproj -> C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\SFMLGame2.exe
