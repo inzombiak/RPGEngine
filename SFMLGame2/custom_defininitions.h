@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #ifndef CUSTOM_DEFENITIONS_H
 #define CUSTOM_DEFENITIONS_H
 
@@ -157,3 +158,5 @@ private:
 
 
 #endif
+=======
+>>>>>>> 3a4d79cf25455d100c03d851ae957c28a2dfb440

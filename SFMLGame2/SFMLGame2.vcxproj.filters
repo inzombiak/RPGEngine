@@ -242,14 +242,28 @@
     <ClInclude Include="ItemManager.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="ItemComponentBase.h">
       <Filter>Header Files\Components\Item Components</Filter>
     </ClInclude>
     <ClInclude Include="RestorationItemComponent.h">
       <Filter>Header Files\Components\Item Components</Filter>
+=======
+    <ClInclude Include="custom_defininitions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Header Files\Actors</Filter>
+>>>>>>> 3a4d79cf25455d100c03d851ae957c28a2dfb440
     </ClInclude>
     <ClInclude Include="ConsumableItemComponent.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityComponent.h">
+      <Filter>Header Files\Actors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

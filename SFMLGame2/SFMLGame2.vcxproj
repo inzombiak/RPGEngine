@@ -198,6 +198,7 @@
     <ClInclude Include="ConsumableItemComponent.h" />
     <ClInclude Include="custom_defininitions.h" />
     <ClInclude Include="Entity.h" />
+<<<<<<< HEAD
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EntityRenderer.h" />
     <ClInclude Include="Equipment.h" />
@@ -205,6 +206,10 @@
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="interfaces.h" />
+=======
+    <ClInclude Include="interfaces.h" />
+    <ClInclude Include="EntityComponent.h" />
+>>>>>>> 3a4d79cf25455d100c03d851ae957c28a2dfb440
     <ClInclude Include="Algorithms.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Game.h" />
