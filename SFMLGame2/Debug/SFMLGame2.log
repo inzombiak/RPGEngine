@@ -1,12 +1,2 @@
-﻿  LevelLoader.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(87): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(138): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(141): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(158): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(174): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(177): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(190): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(208): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(241): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\levelloader.cpp(249): warning C4018: '<' : signed/unsigned mismatch
+﻿  ItemManager.cpp
   SFMLGame2.vcxproj -> C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\SFMLGame2.exe

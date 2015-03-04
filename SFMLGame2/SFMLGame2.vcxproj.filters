@@ -13,20 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Actors">
-      <UniqueIdentifier>{1d0ff60f-1b13-4077-997d-07da94bc1db3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Components">
       <UniqueIdentifier>{28cdbc00-73ca-4470-ab5f-2971a418b46b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Actors">
-      <UniqueIdentifier>{34e6708f-6ffc-4f2a-ba64-b9c7f9b29dce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Components">
       <UniqueIdentifier>{0f1d055f-9510-46a9-933c-aa6fe6a8a383}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engines">
-      <UniqueIdentifier>{a70e6b56-2929-4ce3-b823-82e8ddfdcf48}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Utilities">
       <UniqueIdentifier>{f7e0dce4-f784-4788-be98-9ae4dac0ef0c}</UniqueIdentifier>
@@ -40,19 +31,25 @@
     <Filter Include="Header Files\Old">
       <UniqueIdentifier>{6b385767-940d-4bee-a2c4-bc3358e96d4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engines">
+    <Filter Include="Header Files\Systems">
+      <UniqueIdentifier>{a70e6b56-2929-4ce3-b823-82e8ddfdcf48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems">
       <UniqueIdentifier>{8d894742-b41d-444e-96b6-f2608e347369}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{34e6708f-6ffc-4f2a-ba64-b9c7f9b29dce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{1d0ff60f-1b13-4077-997d-07da94bc1db3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components\Item Components">
+      <UniqueIdentifier>{ceb53ee9-4b19-448b-b51c-63800136bd5b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyxml2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\Actors</Filter>
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="ComponentBase.cpp">
       <Filter>Source Files\Components</Filter>
@@ -68,15 +65,6 @@
     </ClCompile>
     <ClCompile Include="Debug.cpp">
       <Filter>Source Files\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemCatalog.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemFactroy.cpp">
-      <Filter>Source Files\Old</Filter>
     </ClCompile>
     <ClCompile Include="Equipment.cpp">
       <Filter>Source Files\Components</Filter>
@@ -96,70 +84,76 @@
     <ClCompile Include="InventoryItem.cpp">
       <Filter>Source Files\Old</Filter>
     </ClCompile>
-    <ClCompile Include="LevelLoaderOLD.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
     <ClCompile Include="VisibleGameObject.cpp">
       <Filter>Source Files\Old</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectFactory.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectRenderer.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Actors</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerObserver.cpp">
-      <Filter>Source Files\Actors</Filter>
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="EntityRenderer.cpp">
-      <Filter>Source Files\Engines</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityFactory.cpp">
-      <Filter>Source Files\Engines</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponenetFactory.cpp">
-      <Filter>Source Files\Engines</Filter>
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="LevelLoader.cpp">
-      <Filter>Source Files\Engines</Filter>
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Source Files\Engines</Filter>
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files\Engines</Filter>
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files\Engines</Filter>
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="Physics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ComponenetFactory.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityFactory.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
     <ClCompile Include="InputComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml2.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformManager.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemComponentBase.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="RestorationItemComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameObjectManagerOLD.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObjectManager.cpp">
-      <Filter>Source Files\Engines</Filter>
+    <ClCompile Include="ConsumableItemComponent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ItemFactory.h">
-      <Filter>Header Files\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\Actors</Filter>
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="PlayerObserver.h">
-      <Filter>Header Files\Actors</Filter>
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Header Files\Actors</Filter>
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="ComponentBase.h">
       <Filter>Header Files\Components</Filter>
@@ -180,24 +174,21 @@
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
-      <Filter>Header Files\Engines</Filter>
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="interfaces.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
-      <Filter>Header Files\Engines</Filter>
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="UI.h">
-      <Filter>Header Files\Engines</Filter>
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
       <Filter>Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="ConsumableItem.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Equipment.h">
@@ -209,55 +200,55 @@
     <ClInclude Include="InventoryComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="ItemComponent.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectRenderer.h">
-      <Filter>Header Files\Engines</Filter>
-    </ClInclude>
-    <ClInclude Include="EntityRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LevelLoaderOLD.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
     <ClInclude Include="InventoryItem.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
       <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="VisibleGameObject.h">
       <Filter>Header Files\Old</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectFactory.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
     <ClInclude Include="LevelLoader.h">
-      <Filter>Header Files\Engines</Filter>
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Physics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EntityRenderer.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentFactory.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="InputComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManagerOLD.h">
-      <Filter>Header Files\Old</Filter>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
+    <ClInclude Include="TransformManager.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemComponentBase.h">
+      <Filter>Header Files\Components\Item Components</Filter>
+    </ClInclude>
+    <ClInclude Include="RestorationItemComponent.h">
+      <Filter>Header Files\Components\Item Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsumableItemComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

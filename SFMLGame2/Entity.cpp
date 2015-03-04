@@ -1,12 +1,6 @@
 #include "Entity.h"
 #include "ComponentBase.h"
 
-Entity::Entity(EntityID id, EntityType type)
-{
-	m_ID = id;
-	m_type = type;
-}
-
 void Entity::PostInit()
 {
 	for (ComponentMap::iterator it = m_components.begin(); it != m_components.end(); ++it)

@@ -1,0 +1,10 @@
+<ItemCatalog>
+	<Item name = "Healing Potion" description = "Recover HP" iconfilepath = "data/Item Icons/red-potion.png">
+		<ItemComponent type = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
+		<ItemComponent type = "RestorationItemComponent" effect = "HP" amount = "100"/>
+	</Item>
+	<Item name = "Mana Potion" description = "Recover Mana" iconfilepath = "data/Item Icons/blue-potion.png">
+		<ItemComponent type = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
+		<ItemComponent type = "RestorationItemComponent" effect = "Mana" amount = "10"/>
+	</Item>
+</ItemCatalog>

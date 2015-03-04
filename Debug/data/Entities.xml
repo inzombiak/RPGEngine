@@ -1,8 +1,13 @@
 <EntityDoc>
 	<Entities>
 		<Entity type = "Player">
-			<Component type = "Transform" x = "200" y = "200" vx = "0" vy = "0" movable = "0"></Component>
-			<Component type = "Render" texturefile = "data/player.png"  visible = "0"></Component>
+			<Component name = "TransformComponent" x = "200" y = "200" vx = "0" vy = "0" movable = "0"></Component>
+			<Component name = "RenderComponent" filepath = "data/player.png"  visible = "1" depth = "1"></Component>
+			<Component name = "CollisionComponent" x = "200" y = "200" width = "" height = ""></Component>
+			<Component name = "InputComponent"></Component>
+		</Entity>
+		<Entity type = "Item">
+			<Component name = "BaseItemComponent" itemname = "Mana Potion">
 		</Entity>
 	</Entities>
 </EntityDoc>

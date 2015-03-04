@@ -1,7 +1,6 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
 
-#include "Item.h"
 #include "InventoryItem.h"
 #include <vector>
 #include <map>

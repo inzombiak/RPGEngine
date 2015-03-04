@@ -10,9 +10,14 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
+#include "EntityManager.h"
+#include "TransformManager.h"
+#include "InputManager.h"
+#include "ItemManager.h"
+#include "EntityRenderer.h"
+
 #include "UI.h"
 #include "Player.h"
-#include "GameObjectManager.h"
 #include "LevelLoader.h"
 #include "MainMenu.h"
 #include "ItemCatalog.h"
@@ -28,6 +33,7 @@ public:
 	float GetTime();
 	void ChangeLevel(int);
 	void ShowMenu();
+	void CreateEntities();
 
 private:
 	void Update();
@@ -41,18 +47,23 @@ private:
 	bool m_IDown;
 	void GameLoop();
 
-	GameObjectManager* m_gameObjectManager;
-	LevelLoader* m_levelLoader;
-	
+	EntityManager m_entityManager;
+	EntityRenderer* m_renderer;
+	InputManager* m_inputManager;
+	TransformManager* m_transformManager;
+	ItemManager* m_itemManager;
+
 	UI* m_UI;
 	PlayerObserver* m_playerObserver;
 
 	GameState m_gameState = Uninitialized;
 	sf::RenderWindow m_mainWindow;
 	static sf::Clock m_gameClock;
-
 	const float m_minTimestep = sf::seconds(1.f/60.f).asSeconds();
-	int m_maxFrames = 5;
+	const int m_maxFrames = 5;
 	float remainingTime;
 	float m_time;
+
+	const string ENTITIES_FILE = "data/Entities.xml";
+	const string LEVEL_FILE = "data/levels/level2.tmx";
 };

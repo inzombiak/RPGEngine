@@ -2,7 +2,6 @@
 #define INVENTORYCOMPONENT_H
 
 #include "ComponentBase.h"
-#include "Item.h"
 
 #include <vector>
 

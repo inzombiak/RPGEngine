@@ -10,7 +10,13 @@ class Entity
 {
 
 public:
-	explicit Entity(EntityID id, EntityType type);
+	Entity() {};
+	
+	void Init(EntityID id, EntityType type)
+	{
+		m_ID = id;
+		m_type = type;
+	}
 
 	inline EntityType GetType() const
 	{

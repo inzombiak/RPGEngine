@@ -11,8 +11,13 @@ bool RenderComponent::Init(const XMLElement* node)
 		//TODO add error message
 		return false;
 	}
-	SetTexture(tex);
+	SetTexture(tex, sf::Rect<int>(0, 0,tex.getSize().x, tex.getSize().y));
 	if(node->QueryBoolAttribute("visible", &m_visible) != tinyxml2::XMLError::XML_SUCCESS)
+	{
+		//TODO add error message
+		return false;
+	}
+	if (node->QueryIntAttribute("depth", &m_depth) != tinyxml2::XMLError::XML_SUCCESS)
 	{
 		//TODO add error message
 		return false;
@@ -43,11 +48,11 @@ void RenderComponent::SetPosition(const sf::Vector2f position)
 	m_sprite.setPosition(position);
 }
 
-void RenderComponent::SetTexture(const sf::Texture& texture)
+void RenderComponent::SetTexture(const sf::Texture& texture, sf::Rect<int> textureRect)
 {
 	m_texture = texture;
 	m_sprite.setTexture(m_texture);
-	m_sprite.setPosition(200, 200);
+	m_sprite.setTextureRect(textureRect);
 }
 const sf::Texture& RenderComponent::GetTexture() const
 {
@@ -79,6 +84,15 @@ void RenderComponent::SetTextureRect(const sf::Rect<int> textureBounds)
 const sf::Rect<int> RenderComponent::GetTextureRect() const
 {
 	return m_textureBounds;
+}
+
+void RenderComponent::SetDepth(int depth)
+{
+	m_depth = depth;
+}
+const int RenderComponent::GetDepth() const
+{
+	return m_depth;
 }
 
 const char* RenderComponent::COMPONENT_NAME = "RenderComponent";

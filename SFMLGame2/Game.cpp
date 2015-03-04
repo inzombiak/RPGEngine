@@ -10,9 +10,11 @@ void Game::Start()
 		return;
 	m_mainWindow.create(sf::VideoMode(m_windowWidth, m_windowHeight, 32), "SFML works!");
 
-	m_levelLoader = new LevelLoader();
-	m_gameObjectManager = new GameObjectManager();
 	m_playerObserver = new PlayerObserver();
+	m_renderer = new EntityRenderer(m_mainWindow);
+	m_inputManager = new InputManager();
+	m_transformManager = new TransformManager();
+	m_itemManager = new ItemManager();
 
 	m_UI = new UI();
 	m_UI->SetPlayerMaxHP(100);
@@ -29,20 +31,26 @@ void Game::Start()
 
 	Destroy();
 	m_mainWindow.close();
+}
 
+void Game::CreateEntities()
+{
+	
 }
 
 void Game::ChangeLevel(int levelNumber)
 {
 	int px, py;
-	m_levelLoader->CreateLevel(levelNumber);
+	LevelLoader levelLoader(m_entityManager);
+	levelLoader.CreateLevel(levelNumber);
+	m_itemManager->LoadItemCatalog("data/MainItemCatalog.xml");
+	m_entityManager.LoadEntities("");
+	
 	m_playerObserver->SetUI(m_UI);
-	m_gameObjectManager->LoadEntities("");
-	m_gameObjectManager->SetBackgroundTiles(m_levelLoader->GetBackgroundTiles());
-	m_gameObjectManager->SetForegroundTiles(m_levelLoader->GetForegroundTiles());
-	m_gameObjectManager->SetCollisionBoxes(m_levelLoader->GetCollisionEntities());
-
+	
 	m_gameClock.restart();
+
+	m_renderer->DivideIntoLayers();
 }
 
 float Game::GetTime()
@@ -107,7 +115,6 @@ void Game::GameLoop()
 void Game::Update()
 {
 	int frames;
-	m_maxFrames = 5;
 	m_time = GetTime();
 
 	remainingTime += m_time;
@@ -115,43 +122,27 @@ void Game::Update()
 
 	while ((remainingTime > m_minTimestep) && (frames < m_maxFrames))
 	{
-
-		m_gameObjectManager->Update(m_minTimestep);
-
+		m_inputManager->Update(m_minTimestep);
+		m_entityManager.Update(m_minTimestep);
+		m_transformManager->Update(m_minTimestep);
+		m_renderer->Update(m_minTimestep);
 		remainingTime -= m_minTimestep;
 		frames++;
 	}
-
-
 }
 
 void Game::Draw()
 {
-	//m_levelLoader->Draw(m_mainWindow);
-	//m_gameObjectManager->Draw(m_mainWindow);
-	m_gameObjectManager->Draw(m_mainWindow);
+	m_renderer->Draw();
 	m_UI->Draw(m_mainWindow);
 }
 
 void Game::Destroy()
 {
-	if (m_gameObjectManager)
-	{
-		delete m_gameObjectManager;
-	}
-	if (m_levelLoader)
-	{
-		delete  m_levelLoader;
-	}
 	if (m_UI)
 	{
 		delete m_UI;
 	}
-	/*if (m_itemCatalog)
-	{
-		m_itemCatalog->Destroy();
-		delete m_itemCatalog;
-	}*/
 	if (m_playerObserver)
 	{
 		delete m_playerObserver;

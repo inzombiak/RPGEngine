@@ -3,8 +3,12 @@ The methods of creating Entities and Components here are temporary
 */
 #include "LevelLoader.h"
 #include "Debug.h"
-#include "Entity.h"
-#include "RenderComponent.h"
+#include "EntityFactory.h"
+
+LevelLoader::LevelLoader(EntityManager& em) : m_entityManager(em)
+{
+	
+}
 
 bool LevelLoader::CreateLevel(int levelID)
 {
@@ -137,7 +141,7 @@ void LevelLoader::CreateTile(int worldIndex, int tileIndex, string depth)
 {
 	int i = floor((worldIndex - 1) / m_levelWidth);
 	int j = (worldIndex - 1) % m_levelWidth;
-
+	int layer;
 	int textureI = floor((tileIndex - 1) / (m_textureWidth / m_tileSize));
 	int textureJ = (tileIndex - 1) % (m_textureWidth / m_tileSize);
 
@@ -154,23 +158,20 @@ void LevelLoader::CreateTile(int worldIndex, int tileIndex, string depth)
 	subRect.height = m_tileSize;
 
 	int y = i*m_tileSize, x = j *m_tileSize;
+	StrongEntityPtr newEntity = m_entityManager.CreateEntity();
 	
-	StrongEntityPtr newTile = m_entityFactory.CreateTileFromTmx(sf::Vector2f(x, y), m_currentTexture, subRect);
+	if (depth.compare("Foreground") == 0)
+		layer = 1;
+	else
+		layer = 0;
 
-	if (depth == "Background")
-	{
-		m_backgroundTiles.push_back(newTile);
-	}
-	else if (depth == "Foreground")
-	{
-		m_foregroundTiles.push_back(newTile);
-	}
-
+	EntityFactory::GetInstance()->CreateTileFromTmx(sf::Vector2f(x, y), m_currentTexture, subRect,layer, newEntity);
+	newEntity->PostInit();
 }
 
 void LevelLoader::CreateTile(int worldIndex, int tileIndex, int width, int height, string depth)
 {
-
+	int layer;
 	int i = floor((worldIndex - 1) / m_levelWidth);
 	int j = (worldIndex - 1) % m_levelWidth;
 
@@ -186,17 +187,13 @@ void LevelLoader::CreateTile(int worldIndex, int tileIndex, int width, int heigh
 	subRect.height = height*m_tileSize;
 
 	int y = i*m_tileSize, x = j *m_tileSize;
-	
-	StrongEntityPtr newTile = m_entityFactory.CreateTileFromTmx(sf::Vector2f(x, y),m_currentTexture, subRect);
-
-	if (depth == "Background")
-	{
-		m_backgroundTiles.push_back(newTile);
-	}
-	else if (depth == "Foreground")
-	{
-		m_foregroundTiles.push_back(newTile);
-	}
+	StrongEntityPtr newEntity = m_entityManager.CreateEntity();
+	if (depth.compare("Foreground") == 0)
+		layer = 1;
+	else
+		layer = 0;
+	EntityFactory::GetInstance()->CreateTileFromTmx(sf::Vector2f(x, y), m_currentTexture, subRect, layer, newEntity);
+	newEntity->PostInit();
 }
 
 void LevelLoader::GenerateObject(string layerName, int values[])
@@ -205,54 +202,10 @@ void LevelLoader::GenerateObject(string layerName, int values[])
 
 	if (layerName == "Collision")
 	{
-		newObject = m_entityFactory.CreateCollisionEntity(sf::Vector2f(values[0], values[1]), sf::Vector2f(values[2], values[3]));
-	}
-	if (newObject)
-	{
-		m_collisionEntities.push_back(newObject);
+		EntityFactory::GetInstance()->CreateCollisionEntity(sf::Vector2f(values[0], values[1]), sf::Vector2f(values[2], values[3]), 1, m_entityManager.CreateEntity());
 	}
 
 	return;
-}
-
-vector<StrongEntityPtr> LevelLoader::GetForegroundTiles()
-{
-	auto result = m_foregroundTiles;
-	m_foregroundTiles.clear();
-	return result;
-}
-
-vector<StrongEntityPtr> LevelLoader::GetBackgroundTiles()
-{
-	auto result = m_backgroundTiles;
-	m_backgroundTiles.clear();
-	return result;
-}
-
-vector<StrongEntityPtr> LevelLoader::GetCollisionEntities()
-{
-	auto result = m_collisionEntities;
-	m_collisionEntities.clear();
-	return result;
-}
-
-void LevelLoader::Draw(sf::RenderWindow& rw)
-{
-	for (int i = 0; i < m_backgroundTiles.size(); ++i)
-	{
-		StrongEntityPtr strongEntity = ConvertToStrongPtr<Entity>(m_backgroundTiles[i]);
-		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(strongEntity->GetComponent(ComponentBase::GetIDFromName("RenderComponent")));
-		std::shared_ptr<RenderComponent> renderComp = CastComponentToDerived<RenderComponent>(compPtr);
-		rw.draw(renderComp->GetSprite());
-	}
-
-	for (int i = 0; i < m_foregroundTiles.size(); ++i)
-	{
-		StrongEntityPtr strongEntity = ConvertToStrongPtr<Entity>(m_foregroundTiles[i]);
-		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(strongEntity->GetComponent(ComponentBase::GetIDFromName("RenderComponent")));
-		std::shared_ptr<RenderComponent> renderComp = CastComponentToDerived<RenderComponent>(compPtr);
-		rw.draw(renderComp->GetSprite());
-	}
 }
 
 //vector<int> LevelLoader::PossibleTiles(sf::Vector2f objectPosition)

@@ -11,34 +11,28 @@ class ComponentBase;
 class ComponentFactory
 {
 private:
-	typedef ComponentBase* (ComponentFactory::*ComponentCreationFunc)(void);
-
-	template<class SubClass>
-	ComponentBase* CreationFunction()
-	{
-		return new SubClass();
-	};
-
+	typedef StrongComponentPtr (*ComponentCreationFunc)(void);
 public:
 	template<class SubClass>
-	bool Register(ComponentID id)
+	bool Register(ComponentID id, StrongComponentPtr (*CreationFunction)(void))
 	{
 		auto find = m_creationFunctions.find(id);
 		if (find == m_creationFunctions.end())
 		{
-			m_creationFunctions[id] = &ComponentFactory::CreationFunction<SubClass>;
+			m_creationFunctions[id] = CreationFunction;
 			return true;
 		}
 		return false;
 	}
 
-	ComponentBase* Create(ComponentID id)
+	StrongComponentPtr Create(ComponentID id)
 	{
 		auto find = m_creationFunctions.find(id);
 		if (find != m_creationFunctions.end())
 		{
 			ComponentCreationFunc pFunc = find->second;
-			return (this->*pFunc)();
+			StrongComponentPtr result = (*pFunc)();
+			return result;
 		}
 
 		return NULL;

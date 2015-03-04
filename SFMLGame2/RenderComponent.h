@@ -18,7 +18,7 @@ public:
 	//Setter and Getters
 	void SetPosition(const sf::Vector2f position);
 
-	void SetTexture(const sf::Texture& texture);
+	void SetTexture(const sf::Texture& texture, sf::Rect<int>);
 	const sf::Texture& GetTexture() const;
 
 	void SetVisible(bool isVisible) ;
@@ -30,12 +30,17 @@ public:
 	void SetTextureRect(const sf::Rect<int> textureBounds);
 	const sf::Rect<int> GetTextureRect() const;
 
+	void SetDepth(int depth);
+	const int GetDepth() const;
+
 	const static char* COMPONENT_NAME;
 
 private:
+
 	sf::Sprite m_sprite;
 	sf::Texture m_texture;
 	sf::Rect<int> m_textureBounds;
+	int m_depth;
 	bool m_visible = true;
 };
 
