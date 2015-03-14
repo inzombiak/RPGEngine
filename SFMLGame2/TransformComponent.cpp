@@ -1,6 +1,8 @@
 #include "TransformComponent.h"
+#include "CollisionComponent.h"
+#include "Entity.h"
 
-bool TransformComponent:: Init(const XMLElement* data)
+bool TransformComponent:: Init(XMLElement* data)
 {
 	float x, y, vx, vy;
 	
@@ -28,10 +30,21 @@ void TransformComponent::Update(double dt)
 {
 	m_position.x += dt*m_speed.x;
 	m_position.y += dt*m_speed.y;
+	WeakComponentPtr weakCollisionPtr = m_owner->GetComponent(ComponentBase::GetIDFromName(CollisionComponent::COMPONENT_NAME));
+	//If the entity doesn't have a collision box
+	if (weakCollisionPtr.expired())
+		return;
+	//Otherwise, update the box
+	StrongComponentPtr strongCollisionPtr = ConvertToStrongPtr(weakCollisionPtr);
+	std::shared_ptr<CollisionComponent> collisionBox = CastComponentToDerived<StrongComponentPtr, CollisionComponent>(strongCollisionPtr);
+	sf::FloatRect oldBounds = collisionBox->GetBounds();
+	collisionBox->SetBounds(sf::FloatRect(m_position.x, m_position.y, oldBounds.width, oldBounds.height));
 }
 
 void TransformComponent::SetPosition(const sf::Vector2f position)
 {
+	//TODO
+	//UPDATE SPRITE POSITION
 	m_position = position;
 }
 const sf::Vector2f TransformComponent::GetPosition() const

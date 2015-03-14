@@ -1,9 +1,12 @@
 #include "EntityFactory.h"
 #include "Entity.h"
-#include "ComponentBase.h"
 
+#include "ComponentFactory.h"
+
+#include "ComponentBase.h"
 #include "InputComponent.h"
 #include "InventoryComponent.h"
+#include "PickupComponent.h"
 #include "ItemManager.h"
 #include "RenderComponent.h"
 #include "CollisionComponent.h"
@@ -12,12 +15,18 @@
 #include "TransformManager.h"
 #include "InputManager.h"
 #include "EntityRenderer.h"
+#include "ItemManager.h"
+#include "PhysicsManager.h"
 
 EntityFactory::EntityFactory()
 {
-	m_componentFactory.Register<TransformComponent>(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME), TransformManager::CreateTransformComponent);
-	m_componentFactory.Register<RenderComponent>(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME), EntityRenderer::CreateRenderComponent);
-	m_componentFactory.Register<InputComponent>(ComponentBase::GetIDFromName(InputComponent::COMPONENT_NAME), InputManager::CreateInputComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME), TransformManager::CreateTransformComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME), EntityRenderer::CreateRenderComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(InputComponent::COMPONENT_NAME), InputManager::CreateInputComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(InventoryComponent::COMPONENT_NAME), ItemManager::CreateInventoryComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(ItemPickupComponent::COMPONENT_NAME), ItemManager::CreateItemPickupComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(CollisionComponent::COMPONENT_NAME), PhysicsManager::CreateCollisionComponent);
+	
 }
 
 bool EntityFactory::CreateEntity(XMLElement* currEntityNode, StrongEntityPtr newEntity)
@@ -32,12 +41,7 @@ bool EntityFactory::CreateEntity(XMLElement* currEntityNode, StrongEntityPtr new
 		/*
 		Find a way of merging item and entity creation
 		*/
-		if (currComponentNode->Attribute("name", "BaseItemComponent"))
-		{
-			//newComponent = CreateItemComponent(currComponentNode->Attribute("itemname"));
-		}
-		else
-			newComponent = CreateComponent(currComponentNode);
+		newComponent = CreateComponent(currComponentNode);
 
 		if (newComponent)
 		{
@@ -73,7 +77,7 @@ bool EntityFactory::CreateTileFromTmx(sf::Vector2f position, sf::Texture& textur
 
 	//std::string entityType = currEntityNode->Attribute("type");
 	newEntity->Init(GetNextEntityID(), "Tile");
-	StrongComponentPtr newComp = m_componentFactory.Create(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME));
+	StrongComponentPtr newComp = ComponentFactory::CreateEntityComponent(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME));
 	std::shared_ptr<TransformComponent> transComp = std::static_pointer_cast<TransformComponent>(newComp);
 	transComp->SetMovable(false);
 	transComp->SetPosition(position);
@@ -85,7 +89,7 @@ bool EntityFactory::CreateTileFromTmx(sf::Vector2f position, sf::Texture& textur
 	sprite.setTexture(texture);
 	sprite.setTextureRect(textureRect);
 
-	newComp = m_componentFactory.Create(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME));
+	newComp = ComponentFactory::CreateEntityComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME));
 	std::shared_ptr<RenderComponent> renderComp = std::static_pointer_cast<RenderComponent>(newComp);
 	//renderComp->SetSprite(sprite);
 	renderComp->SetOwner(newEntity);
@@ -101,11 +105,11 @@ bool EntityFactory::CreateTileFromTmx(sf::Vector2f position, sf::Texture& textur
 bool EntityFactory::CreateCollisionEntity(sf::Vector2f position, sf::Vector2f dimensions,int depth, StrongEntityPtr newEntity)
 {
 	/*Todo
-	Fix thos shit
+	Fix this shit
 	*/
 	newEntity->Init(GetNextEntityID(), "Collision");
 
-	StrongComponentPtr newComp = m_componentFactory.Create(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME));
+	StrongComponentPtr newComp = ComponentFactory::CreateEntityComponent(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME));
 	std::shared_ptr<TransformComponent> transComp = std::static_pointer_cast<TransformComponent>(newComp);
 	transComp->SetMovable(false);
 	transComp->SetPosition(position);
@@ -130,22 +134,9 @@ bool EntityFactory::CreateCollisionEntity(sf::Vector2f position, sf::Vector2f di
 
 StrongComponentPtr EntityFactory::CreateComponent(XMLElement* currComponentNode)
 {
-	StrongComponentPtr newComponent = m_componentFactory.Create(ComponentBase::GetIDFromName(currComponentNode->Attribute("name")));
-
-	if (newComponent)
-	{
-		if (!newComponent->Init(currComponentNode))
-		{
-			//ERROR
-			return StrongComponentPtr();
-		}
-		//TODO add init code
-	}
-	else
-	{
+	StrongComponentPtr newComponent = ComponentFactory::CreateEntityComponent(ComponentBase::GetIDFromName(currComponentNode->Attribute("name")));
+	if (!newComponent || !newComponent->Init(currComponentNode))
 		return StrongComponentPtr();
-	}
-
 	return newComponent;
 }
 

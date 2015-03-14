@@ -6,7 +6,7 @@
 class RenderComponent : public ComponentBase
 {
 public:
-	virtual bool Init(const XMLElement* componentNode) override;
+	virtual bool Init(XMLElement* node) override;
 	virtual void PostInit() override;
 	void Update(float dt);
 

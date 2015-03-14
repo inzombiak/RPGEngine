@@ -86,7 +86,7 @@ void UI::AddItem(string name, int quantity)
 
 void UI::ToggleInventory()
 {
-	m_playerInventory.Display();
+//	m_playerInventory.Display();
 }
 
 void UI::Draw(sf::RenderWindow& rw)
@@ -96,6 +96,6 @@ void UI::Draw(sf::RenderWindow& rw)
 	rw.draw(m_playerHPBarFill);
 	rw.draw(m_playerStaminaBar);
 	rw.draw(m_playerStaminaBarFill);
-	m_playerInventory.Draw(rw);
+	//m_playerInventory.Draw(rw);
 	
 }

@@ -6,14 +6,14 @@
 class InputComponent : public ComponentBase
 {
 public:
-	virtual bool Init(const XMLElement* componentNode) override;
+	virtual bool Init(XMLElement* node) override;
 	virtual void PostInit() override {};
 
 	const char* GetName()
 	{
 		return COMPONENT_NAME;
 	}
-	void Update(float dt);
+	void Update(float dt, sf::Event);
 	const static char* COMPONENT_NAME;
 
 private:

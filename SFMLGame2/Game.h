@@ -15,6 +15,7 @@
 #include "InputManager.h"
 #include "ItemManager.h"
 #include "EntityRenderer.h"
+#include "PhysicsManager.h"
 
 #include "UI.h"
 #include "Player.h"
@@ -23,6 +24,7 @@
 #include "ItemCatalog.h"
 #include "PlayerObserver.h"
 #include "LevelLoader.h"
+
 
 #include <sstream>
 class Game
@@ -52,6 +54,7 @@ private:
 	InputManager* m_inputManager;
 	TransformManager* m_transformManager;
 	ItemManager* m_itemManager;
+	PhysicsManager* m_physicsManager;
 
 	UI* m_UI;
 	PlayerObserver* m_playerObserver;

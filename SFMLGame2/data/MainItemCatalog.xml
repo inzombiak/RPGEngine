@@ -1,10 +1,14 @@
 <ItemCatalog>
-	<Item name = "Healing Potion" description = "Recover HP" iconfilepath = "data/Item Icons/red-potion.png">
-		<ItemComponent type = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
-		<ItemComponent type = "RestorationItemComponent" effect = "HP" amount = "100"/>
+	<Item name = "Healing Potion">
+		<Component type = "BaseItemComponent" name = "Healing Potion" description = "Recover HP" iconfilepath = "data/Item Icons/red-potion.png"/>
+		<Component type = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
+		<Component type = "RestorationItemComponent" effect = "HP" amount = "100"/>
+		<RenderComponent type = "RenderComponent" filepath = "data/Item Icons/red-potion.png" visible = "1" depth = "2"/>
 	</Item>
-	<Item name = "Mana Potion" description = "Recover Mana" iconfilepath = "data/Item Icons/blue-potion.png">
-		<ItemComponent type = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
-		<ItemComponent type = "RestorationItemComponent" effect = "Mana" amount = "10"/>
+	<Item name = "Mana Potion">
+		<Component type = "BaseItemComponent" name = "Mana Potion" description = "Recover Mana" />
+		<Component type = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
+		<Component type = "RestorationItemComponent" effect = "Mana" amount = "10"/>
+		<RenderComponent type = "RenderComponent" filepath = "data/Item Icons/blue-potion.png" visible = "1" depth = "2"/>
 	</Item>
 </ItemCatalog>

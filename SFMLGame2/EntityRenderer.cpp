@@ -2,20 +2,27 @@
 #include "Algorithms.h"
 #include "Entity.h"
 #include "ComponentBase.h"
+#include "Debug.h"
 
 void EntityRenderer::DivideIntoLayers()
 {
 	vector <std::shared_ptr<RenderComponent>> m_layer0;
-	vector <std::shared_ptr<RenderComponent>> m_layer1;
+	int layer;
+	
 	for (unsigned int i = 0; i < m_renderComponents[0].size(); ++i)
 	{
-		if (m_renderComponents[0][i]->GetDepth() == 0)
+		layer = m_renderComponents[0][i]->GetDepth();
+		if (layer == 0)
 			m_layer0.push_back(m_renderComponents[0][i]);
 		else
-			m_layer1.push_back(m_renderComponents[0][i]);
+		{
+			if (m_renderComponents.size()  < layer + 1)
+				m_renderComponents.resize(layer + 1);
+			m_renderComponents[layer].push_back(m_renderComponents[0][i]);
+		}
+			
 	}
 	m_renderComponents[0] = m_layer0;
-	m_renderComponents[1] = m_layer1;
 }
 
 void EntityRenderer::Update(float dt)
@@ -35,8 +42,11 @@ void EntityRenderer::Draw()
 	for (unsigned int i = 0; i < m_renderComponents.size(); ++i)
 	{
 		for (unsigned int j = 0; j < m_renderComponents[i].size(); j++)
-		{
-			m_renderWindow.draw(m_renderComponents[i][j]->GetSprite());
+		{	
+			if (!m_renderComponents[i][j]->GetInUse())
+				m_renderComponents[i].erase(m_renderComponents[i].begin() + j);
+			else if (m_renderComponents[i][j]->GetVisible())
+				m_renderWindow.draw(m_renderComponents[i][j]->GetSprite());
 		}
 	}
 }
@@ -48,10 +58,17 @@ StrongComponentPtr EntityRenderer::CreateRenderComponent()
 	return newRenderComp;
 }
 
+StrongComponentPtr EntityRenderer::CreateRenderComponentOnLayer(int layer)
+{
+	std::shared_ptr<RenderComponent> newRenderComp(new RenderComponent());
+	m_renderComponents[layer].push_back(newRenderComp);
+	return newRenderComp;
+}
+
 void EntityRenderer::ZSortEntities()
 {
 	m_framesSinceLastSort++;
-
+	//Only sort layer 1, 2 is UI and 0 is background
 	if (m_framesSinceLastSort == MAX_SORT_FRAME_INTERVAL)
 	{
 		m_renderComponents[1] = Algorithms<std::shared_ptr<RenderComponent>>::MergeSortVector(m_renderComponents[1], CompareBottom);

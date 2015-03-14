@@ -14,7 +14,14 @@ EntityManager::EntityManager()
 
 void EntityManager::Update(float time)
 {
-	//ZSortEntities();
+	for (int i = 0; i < m_entities.size(); ++i)
+	{
+		if (!m_entities[i]->GetInUse())
+		{
+			m_entities[i].reset();
+			m_entities.erase(m_entities.begin() + i);
+		}	
+	}
 }
 
 void EntityManager::Move(float time)

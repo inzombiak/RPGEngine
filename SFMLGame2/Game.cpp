@@ -15,6 +15,7 @@ void Game::Start()
 	m_inputManager = new InputManager();
 	m_transformManager = new TransformManager();
 	m_itemManager = new ItemManager();
+	m_physicsManager = new PhysicsManager();
 
 	m_UI = new UI();
 	m_UI->SetPlayerMaxHP(100);
@@ -60,9 +61,7 @@ float Game::GetTime()
 
 void Game::GameLoop()
 {
-	sf::Event event;
 	m_mainWindow.clear();
-
 	switch (m_gameState)
 	{
 
@@ -80,33 +79,6 @@ void Game::GameLoop()
 			break;
 		}
 	}
-
-	while (m_mainWindow.pollEvent(event))
-	{
-		if (event.type == sf::Event::Closed)
-		{
-			m_gameState = Exiting;
-		}
-		else if (event.type == sf::Event::KeyPressed)
-		{
-			if (event.key.code == sf::Keyboard::I)
-			{
-				if (!m_IDown)
-				{
-					m_UI->ToggleInventory();
-					m_IDown = true;
-				}
-
-			}
-		}
-		else if (event.type == sf::Event::KeyReleased)
-		{
-			if (event.key.code == sf::Keyboard::I)
-			{
-				m_IDown = false;
-			}
-		}
-	}
 	
 
 	m_mainWindow.display();
@@ -114,6 +86,8 @@ void Game::GameLoop()
 
 void Game::Update()
 {
+	sf::Event event;
+	
 	int frames;
 	m_time = GetTime();
 
@@ -122,10 +96,30 @@ void Game::Update()
 
 	while ((remainingTime > m_minTimestep) && (frames < m_maxFrames))
 	{
-		m_inputManager->Update(m_minTimestep);
-		m_entityManager.Update(m_minTimestep);
+		while (m_mainWindow.pollEvent(event))
+		{
+			m_inputManager->Update(m_minTimestep, event);
+			if (event.type == sf::Event::Closed)
+			{
+				m_gameState = Exiting;
+			}
+			else if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::I)
+				{
+					if (!m_IDown)
+					{
+						//m_UI->ToggleInventory();
+						//m_IDown = true;
+					}
+
+				}
+			}
+		}
 		m_transformManager->Update(m_minTimestep);
+		m_physicsManager->Update(m_minTimestep);
 		m_renderer->Update(m_minTimestep);
+		m_entityManager.Update(m_minTimestep);
 		remainingTime -= m_minTimestep;
 		frames++;
 	}
@@ -139,14 +133,20 @@ void Game::Draw()
 
 void Game::Destroy()
 {
+	if (m_renderer)
+		delete m_renderer;
+	if (m_inputManager)
+		delete m_inputManager;
+	if (m_transformManager)
+		delete m_transformManager;
+	if (m_itemManager)
+		delete m_itemManager;
+	if(m_physicsManager)
+		delete m_physicsManager;
 	if (m_UI)
-	{
 		delete m_UI;
-	}
 	if (m_playerObserver)
-	{
 		delete m_playerObserver;
-	}
 }
 
 void Game::ShowMenu()

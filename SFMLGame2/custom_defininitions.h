@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #ifndef CUSTOM_DEFENITIONS_H
 #define CUSTOM_DEFENITIONS_H
 
@@ -7,16 +6,21 @@
 #include <map>
 
 class Entity;
-class ComponentBase;
-
 typedef std::shared_ptr<Entity> StrongEntityPtr;
 typedef std::weak_ptr<Entity> WeakEntityPtr;
 
+class ComponentBase;
 typedef std::shared_ptr<ComponentBase> StrongComponentPtr;
 typedef std::weak_ptr<ComponentBase> WeakComponentPtr;
 
-typedef unsigned int ComponentID; 
+class ItemComponent;
+typedef std::shared_ptr<ItemComponent> StrongItemComponentPtr;
+typedef std::weak_ptr<ItemComponent> WeakItemComponentPtr;
+
+typedef unsigned int ComponentID;
+typedef unsigned int ItemComponentID;
 typedef unsigned int EntityID;
+typedef unsigned int ItemID;
 
 template <class T>
 std::shared_ptr<T> ConvertToStrongPtr(std::weak_ptr<T> weakPtr)
@@ -27,14 +31,18 @@ std::shared_ptr<T> ConvertToStrongPtr(std::weak_ptr<T> weakPtr)
 		return std::shared_ptr<T>(weakPtr);
 }
 
-template<class T>
-std::shared_ptr<T> CastComponentToDerived(StrongComponentPtr component)
+template<class BasePointer, class DerivedClass>
+std::shared_ptr<DerivedClass> CastComponentToDerived(BasePointer component)
 {
 	if (!component)
-		return std::shared_ptr<T>();
+		return std::shared_ptr<DerivedClass>();
 	else
-		return std::static_pointer_cast<T>(component);
+		return std::static_pointer_cast<DerivedClass>(component);
 }
+
+template <class BaseType, class SubType>
+BaseType* GenericObjectCreationFunction(void) { return new SubType; }
+
 
 typedef std::string EntityType;
 
@@ -158,5 +166,3 @@ private:
 
 
 #endif
-=======
->>>>>>> 3a4d79cf25455d100c03d851ae957c28a2dfb440

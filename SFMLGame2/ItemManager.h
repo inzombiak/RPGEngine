@@ -6,12 +6,13 @@ TODO
 Merge Item and ItemComponent creation with Entity nad EntityComponent creation
 */
 
-
 #include <string>
 #include <map>
 #include <vector>
 #include "custom_defininitions.h"
 #include "tinyxml2.h"
+
+#include "ItemComponent.h"
 
 using std::map;
 using std::string;
@@ -19,35 +20,35 @@ using std::vector;
 
 using tinyxml2::XMLElement;
 
-class ItemComponent;
-typedef std::shared_ptr<ItemComponent> StrongItemComponentPtr;
-
-struct Item
-{
-	string name;
-	string description;
-	string iconFilepath;
-	vector<StrongItemComponentPtr> itemComponents;
-};
-
 class ItemManager
 {
 public:
+	ItemManager();
 	void LoadItemCatalog(string filepath);
-	StrongComponentPtr CreateItemComponent(string itemname);
+	static StrongComponentPtr CreateInventoryComponent();
+	static StrongComponentPtr CreateItemPickupComponent();
+	static bool CreateItemByID(ItemID itemID, Item& item);
 
 private:
-	bool InitializeItem(XMLElement* node, Item& item);
+	//Stores information for an item, not actual item
+	class ItemDefinition
+	{
+	public:
+		vector<StrongItemComponentPtr> itemComponents;
+		XMLElement* renderComponenetInfo;
+	};
+
+	tinyxml2::XMLDocument m_xmlFile;
+	bool InitializeItem(XMLElement* node, ItemDefinition& item);
 	StrongItemComponentPtr CreateItemComponent(XMLElement* node);
-
-	typedef map<string, Item> ItemCatalog;
-	ItemCatalog m_itemCatalog;
-
-	typedef StrongItemComponentPtr (*ItemComponentCreationFunc)(XMLElement*);
-	typedef map<string, ItemComponentCreationFunc> ItemComponentCreationFunctions;
-	ItemComponentCreationFunctions m_creationFunctions;
-	bool Register(string name, StrongItemComponentPtr(*CreationFunction)(XMLElement*));
+	
+	typedef map<ItemID, ItemDefinition> ItemCatalog;
+	static ItemCatalog m_itemCatalog;
 };
 
-
+template<class SubClass>
+StrongItemComponentPtr ItemComponentCreationFunction(void)
+{
+	return StrongItemComponentPtr(new SubClass);
+}
 #endif

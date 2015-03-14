@@ -2,9 +2,8 @@
 #include "RenderComponent.h"
 #include "TransformComponent.h"
 
-bool RenderComponent::Init(const XMLElement* node)
+bool RenderComponent::Init(XMLElement* node)
 {
-	
 	sf::Texture tex;
 	if (!tex.loadFromFile(node->Attribute("filepath")))
 	{
@@ -28,7 +27,7 @@ bool RenderComponent::Init(const XMLElement* node)
 void RenderComponent::PostInit()
 {
 	StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(m_owner->GetComponent(GetIDFromName(TransformComponent::COMPONENT_NAME)));
-	std::shared_ptr<TransformComponent> transComp = CastComponentToDerived<TransformComponent>(compPtr);
+	std::shared_ptr<TransformComponent> transComp = CastComponentToDerived<StrongComponentPtr, TransformComponent>(compPtr);
 	float x = transComp->GetPosition().x, y = transComp->GetPosition().y;
 
 	m_sprite.setPosition(x, y);
@@ -36,8 +35,13 @@ void RenderComponent::PostInit()
 
 void RenderComponent::Update(float dt)
 {
-	StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(m_owner->GetComponent(GetIDFromName(TransformComponent::COMPONENT_NAME)));
-	std::shared_ptr<TransformComponent> transComp = CastComponentToDerived<TransformComponent>(compPtr);
+	if (!m_owner)
+		return;
+	WeakComponentPtr weakCompPtr = m_owner->GetComponent(GetIDFromName(TransformComponent::COMPONENT_NAME));
+	if (weakCompPtr.expired())
+		return;
+	StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(weakCompPtr);
+	std::shared_ptr<TransformComponent> transComp = CastComponentToDerived<StrongComponentPtr, TransformComponent>(compPtr);
 	float x = transComp->GetPosition().x, y = transComp->GetPosition().y;
 
 	m_sprite.setPosition(x, y);

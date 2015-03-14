@@ -5,7 +5,7 @@
 class TransformComponent : public ComponentBase
 {
 public:
-	bool Init(const XMLElement* componentNode) override;
+	bool Init(XMLElement* node) override;
 	void PostInit() override {};
 
 	const char* GetName()

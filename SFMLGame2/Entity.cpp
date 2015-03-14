@@ -9,6 +9,13 @@ void Entity::PostInit()
 	}
 }
 
+void Entity::SetInUse(bool inUse)
+{
+	m_inUse = false;
+	for (ComponentMap::iterator it = m_components.begin(); it != m_components.end(); ++it)
+		it->second->SetInUse(false);
+}
+
 WeakComponentPtr Entity::GetComponent(ComponentID compType)
 {
 	ComponentMap::iterator findComp = m_components.find(compType);

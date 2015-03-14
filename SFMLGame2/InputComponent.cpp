@@ -1,18 +1,19 @@
 #include "InputComponent.h"
 #include "TransformComponent.h"
+#include "InventoryComponent.h"
 #include "SFML\Window.hpp"
 #include "Entity.h"
 
-bool InputComponent::Init(const XMLElement* componentNode)
+bool InputComponent::Init(XMLElement* componentNode)
 {
 	return true;
 }
 
 
-void InputComponent::Update(float dt)
+void InputComponent::Update(float dt, sf::Event event)
 {
 	StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(m_owner->GetComponent(GetIDFromName(TransformComponent::COMPONENT_NAME)));
-	std::shared_ptr<TransformComponent> transComp = CastComponentToDerived<TransformComponent>(compPtr);
+	std::shared_ptr<TransformComponent> transComp = CastComponentToDerived<StrongComponentPtr,TransformComponent>(compPtr);
 	float vx = 0, vy = 0;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -30,6 +31,12 @@ void InputComponent::Update(float dt)
 	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
 	{
 		vy = 100.0f;
+	}
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
+	{
+		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(m_owner->GetComponent(GetIDFromName(InventoryComponent::COMPONENT_NAME)));
+		std::shared_ptr<InventoryComponent> invComp = CastComponentToDerived<StrongComponentPtr, InventoryComponent>(compPtr);
+		invComp->ToggleDisplay();
 	}
 
 	transComp->SetSpeed(sf::Vector2f(vx, vy));

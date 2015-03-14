@@ -1,6 +1,6 @@
 #include "ComponentBase.h"
 
-ComponentBase::ComponentBase() : m_owner(0)
+ComponentBase::ComponentBase() : m_owner(0), m_inUse(true)
 {
 }
 

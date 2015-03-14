@@ -24,11 +24,17 @@ public:
 	void Update(float dt);
 	
 	void Draw();
-	static StrongComponentPtr CreateRenderComponent();
+	static StrongComponentPtr CreateRenderComponent(); //Use during level loading, layer separation is done automatically;
+	static StrongComponentPtr CreateRenderComponentOnLayer(int layer); //Use to create a componenet on a specific later;
 private:
 	void ZSortEntities();
 	static bool CompareBottom(std::shared_ptr<RenderComponent>& entity1, std::shared_ptr<RenderComponent>& entity2);
 	sf::RenderWindow& m_renderWindow;
+	/*
+	Each row of the vector is the render layer
+	1 - foreground
+	0 - background
+	*/
 	static vector<vector<std::shared_ptr<RenderComponent>>> m_renderComponents;
 
 	int m_framesSinceLastSort = 0;

@@ -1,36 +1,34 @@
 #ifndef COMPONENTFACTORY_H
-#define COMPONENETFACTORY_H
+#define COMPONENTFACTORY_H
 
 #include <unordered_map>
-
 #include "custom_defininitions.h"
 
 using std::unordered_map;
 
-class ComponentBase;
 class ComponentFactory
 {
 private:
-	typedef StrongComponentPtr (*ComponentCreationFunc)(void);
+	typedef StrongComponentPtr(*EntityComponentCreationFunc)();
+	typedef StrongItemComponentPtr(*ItemComponentCreationFunc)();
 public:
-	template<class SubClass>
-	bool Register(ComponentID id, StrongComponentPtr (*CreationFunction)(void))
+	static bool RegisterEntityComponent(ComponentID id, StrongComponentPtr(*CreationFunction)())
 	{
-		auto find = m_creationFunctions.find(id);
-		if (find == m_creationFunctions.end())
+		auto find = m_entityCompCreationFunctions.find(id);
+		if (find == m_entityCompCreationFunctions.end())
 		{
-			m_creationFunctions[id] = CreationFunction;
+			m_entityCompCreationFunctions[id] = CreationFunction;
 			return true;
 		}
 		return false;
 	}
 
-	StrongComponentPtr Create(ComponentID id)
+	static StrongComponentPtr CreateEntityComponent(ComponentID id)
 	{
-		auto find = m_creationFunctions.find(id);
-		if (find != m_creationFunctions.end())
+		auto find = m_entityCompCreationFunctions.find(id);
+		if (find != m_entityCompCreationFunctions.end())
 		{
-			ComponentCreationFunc pFunc = find->second;
+			EntityComponentCreationFunc pFunc = find->second;
 			StrongComponentPtr result = (*pFunc)();
 			return result;
 		}
@@ -38,8 +36,41 @@ public:
 		return NULL;
 	}
 
-private:	
-	unordered_map<ComponentID, ComponentCreationFunc> m_creationFunctions;
+	static bool RegisterItemComponent(ComponentID id, StrongItemComponentPtr(*CreationFunction)())
+	{
+		auto find = m_itemCompCreationFunctions.find(id);
+		if (find == m_itemCompCreationFunctions.end())
+		{
+			m_itemCompCreationFunctions[id] = CreationFunction;
+			return true;
+		}
+		return false;
+	}
+
+	static StrongItemComponentPtr CreateItemComponent(ItemComponentID id)
+	{
+		auto find = m_itemCompCreationFunctions.find(id);
+		if (find != m_itemCompCreationFunctions.end())
+		{
+			ItemComponentCreationFunc pFunc = find->second;
+			StrongItemComponentPtr result = (*pFunc)();
+			return result;
+		}
+
+		return NULL;
+	}
+
+	static ComponentFactory* GetInstance()
+	{
+		static ComponentFactory instance;
+		return &instance;
+	}
+
+private:
+	ComponentFactory();
+	static unordered_map<ComponentID, EntityComponentCreationFunc> m_entityCompCreationFunctions;
+	static unordered_map<ItemComponentID, ItemComponentCreationFunc> m_itemCompCreationFunctions;
 };
+
 
 #endif

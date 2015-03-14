@@ -5,6 +5,8 @@ The methods of creating Entities and Components here are temporary
 #include "Debug.h"
 #include "EntityFactory.h"
 
+using tinyxml2::XMLElement;
+
 LevelLoader::LevelLoader(EntityManager& em) : m_entityManager(em)
 {
 	

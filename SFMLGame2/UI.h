@@ -4,8 +4,8 @@
 #include "SFML\Graphics.hpp"
 #include "SFML\Window.hpp"
 
-#include "Inventory.h"
-
+#include<string>
+using std::string;
 class UI
 {
 public:
@@ -55,8 +55,6 @@ private:
 	sf::RectangleShape m_playerHPBarFill;
 	sf::RectangleShape m_playerStaminaBar;
 	sf::RectangleShape m_playerStaminaBarFill;
-
-	Inventory m_playerInventory;
 };
 
 #endif UI_H

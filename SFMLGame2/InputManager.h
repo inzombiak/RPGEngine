@@ -9,7 +9,7 @@ using std::shared_ptr;
 class InputManager
 {
 public:
-	void Update(float dt);
+	void Update(float dt, sf::Event event);
 	static StrongComponentPtr CreateInputComponent();
 private:
 	static vector<shared_ptr<InputComponent>> m_inputComponents;

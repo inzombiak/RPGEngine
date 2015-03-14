@@ -25,9 +25,6 @@
     <Filter Include="Source Files\Utility">
       <UniqueIdentifier>{174ca87b-601c-4ef3-ad95-ff066cdec68d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Old">
-      <UniqueIdentifier>{d079c0ac-64cf-4c8d-aef6-7796ec5ff842}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Old">
       <UniqueIdentifier>{6b385767-940d-4bee-a2c4-bc3358e96d4f}</UniqueIdentifier>
     </Filter>
@@ -42,9 +39,6 @@
     </Filter>
     <Filter Include="Header Files\Entities">
       <UniqueIdentifier>{1d0ff60f-1b13-4077-997d-07da94bc1db3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Components\Item Components">
-      <UniqueIdentifier>{ceb53ee9-4b19-448b-b51c-63800136bd5b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -66,26 +60,8 @@
     <ClCompile Include="Debug.cpp">
       <Filter>Source Files\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="Equipment.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Consumable.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="CollisionComponent.cpp">
       <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="InventoryItem.cpp">
-      <Filter>Source Files\Old</Filter>
-    </ClCompile>
-    <ClCompile Include="VisibleGameObject.cpp">
-      <Filter>Source Files\Old</Filter>
     </ClCompile>
     <ClCompile Include="PlayerObserver.cpp">
       <Filter>Source Files\Entities</Filter>
@@ -104,9 +80,6 @@
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ComponenetFactory.cpp">
       <Filter>Source Files\Components</Filter>
@@ -135,20 +108,23 @@
     <ClCompile Include="ItemManager.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="ItemComponentBase.cpp">
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemComponent.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="RestorationItemComponent.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="InventoryComponent.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="ConsumableItemComponent.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="PickupComponent.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp">
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ItemFactory.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerObserver.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
@@ -176,9 +152,6 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
-    <ClInclude Include="interfaces.h">
-      <Filter>Header Files\Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="MainMenu.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
@@ -187,15 +160,6 @@
     </ClInclude>
     <ClInclude Include="tinyxml2.h">
       <Filter>Header Files\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsumableItem.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Equipment.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="InventoryComponent.h">
       <Filter>Header Files\Components</Filter>
@@ -206,17 +170,11 @@
     <ClInclude Include="Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryItem.h">
-      <Filter>Header Files\Old</Filter>
-    </ClInclude>
     <ClInclude Include="VisibleGameObject.h">
       <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="LevelLoader.h">
       <Filter>Header Files\Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EntityRenderer.h">
       <Filter>Header Files\Systems</Filter>
@@ -242,28 +200,29 @@
     <ClInclude Include="ItemManager.h">
       <Filter>Header Files\Systems</Filter>
     </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="ItemComponentBase.h">
-      <Filter>Header Files\Components\Item Components</Filter>
-    </ClInclude>
-    <ClInclude Include="RestorationItemComponent.h">
-      <Filter>Header Files\Components\Item Components</Filter>
-=======
     <ClInclude Include="custom_defininitions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
       <Filter>Header Files\Actors</Filter>
->>>>>>> 3a4d79cf25455d100c03d851ae957c28a2dfb440
     </ClInclude>
-    <ClInclude Include="ConsumableItemComponent.h">
+    <ClInclude Include="interfaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="interfaces.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EntityComponent.h">
-      <Filter>Header Files\Actors</Filter>
+    <ClInclude Include="ItemComponent.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsManager.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="PickupComponent.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
