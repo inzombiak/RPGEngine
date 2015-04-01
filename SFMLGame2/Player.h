@@ -26,12 +26,12 @@ public:
 	void Move(int, int, float);
 	void End();
 
-	void SetObserver(PlayerObserver*);
+//	void SetObserver(PlayerObserver*);
 
 	sf::Vector2f GetVelocity();
 
 private:
-	PlayerObserver* m_observer;
+	//PlayerObserver* m_observer;
 	int m_maxHp = 100, m_HP = 100;
 	int m_maxStamina = 100, m_stamina = 100;
 	sf::CircleShape m_shape;

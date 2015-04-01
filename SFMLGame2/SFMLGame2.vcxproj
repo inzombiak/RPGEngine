@@ -86,12 +86,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\SFML\SFML-master\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files (x86)\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SFML\SFMLGIT\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files (x86)\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -165,12 +165,14 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="EntityRenderer.cpp" />
+    <ClCompile Include="EquipmentComponent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InventoryComponent.cpp" />
     <ClCompile Include="ItemComponent.cpp" />
+    <ClCompile Include="ItemOptionsMenu.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -180,10 +182,13 @@
     <ClCompile Include="PickupComponent.cpp" />
     <ClCompile Include="PlayerObserver.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
+    <ClCompile Include="StatComponent.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
     <ClCompile Include="TransformManager.cpp" />
-    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="PlayerObserverComponent.cpp" />
+    <ClCompile Include="VitalsComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CollisionComponent.h" />
@@ -194,6 +199,7 @@
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EntityRenderer.h" />
     <ClInclude Include="EntityManager.h" />
+    <ClInclude Include="EquipmentComponent.h" />
     <ClInclude Include="InputComponent.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Algorithms.h" />
@@ -201,19 +207,23 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="InventoryComponent.h" />
     <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="ItemOptionsMenu.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="PickupComponent.h" />
     <ClInclude Include="PlayerObserver.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="StatComponent.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="TransformComponent.h" />
     <ClInclude Include="TransformManager.h" />
-    <ClInclude Include="UI.h" />
+    <ClInclude Include="UIManager.h" />
     <ClInclude Include="ItemComponent.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="PlayerObserverComponent.h" />
     <ClInclude Include="VisibleGameObject.h" />
+    <ClInclude Include="VitalsComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

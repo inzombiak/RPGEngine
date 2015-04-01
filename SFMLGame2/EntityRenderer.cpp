@@ -30,9 +30,15 @@ void EntityRenderer::Update(float dt)
 	ZSortEntities();
 	for (unsigned int i = 0; i < m_renderComponents.size(); ++i)
 	{
-		for (unsigned int j = 0; j < m_renderComponents[i].size(); ++j)
+		for (vector<std::shared_ptr<RenderComponent>>::iterator it = m_renderComponents[i].begin(); it != m_renderComponents[i].end();)
 		{
-			m_renderComponents[i][j]->Update(dt);
+			if (!(*it)->GetInUse())
+				it = m_renderComponents[i].erase(it);
+			else
+			{
+				(*it)->Update(dt);
+				++it;
+			}
 		}
 	}
 }

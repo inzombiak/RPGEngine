@@ -1,6 +1,6 @@
 #include "InputComponent.h"
 #include "TransformComponent.h"
-#include "InventoryComponent.h"
+#include "PlayerObserverComponent.h"
 #include "SFML\Window.hpp"
 #include "Entity.h"
 
@@ -34,10 +34,17 @@ void InputComponent::Update(float dt, sf::Event event)
 	}
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
 	{
-		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(m_owner->GetComponent(GetIDFromName(InventoryComponent::COMPONENT_NAME)));
-		std::shared_ptr<InventoryComponent> invComp = CastComponentToDerived<StrongComponentPtr, InventoryComponent>(compPtr);
-		invComp->ToggleDisplay();
+		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(m_owner->GetComponent(GetIDFromName(PlayerObserverComponent::COMPONENT_NAME)));
+		std::shared_ptr<PlayerObserverComponent> invComp = CastComponentToDerived<StrongComponentPtr, PlayerObserverComponent>(compPtr);
+		invComp->ToggleInventory();
 	}
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E)
+	{
+		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(m_owner->GetComponent(GetIDFromName(PlayerObserverComponent::COMPONENT_NAME)));
+		std::shared_ptr<PlayerObserverComponent> invComp = CastComponentToDerived<StrongComponentPtr, PlayerObserverComponent>(compPtr);
+		invComp->ToggleEquipment();
+	}
+
 
 	transComp->SetSpeed(sf::Vector2f(vx, vy));
 

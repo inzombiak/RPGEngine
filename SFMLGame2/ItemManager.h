@@ -19,36 +19,35 @@ using std::string;
 using std::vector;
 
 using tinyxml2::XMLElement;
-
+class EntityManager;
 class ItemManager
 {
 public:
 	ItemManager();
 	void LoadItemCatalog(string filepath);
+	void SetEntityManager(EntityManager* em)
+	{
+		m_entityManager = em;
+	}
 	static StrongComponentPtr CreateInventoryComponent();
 	static StrongComponentPtr CreateItemPickupComponent();
+	static StrongComponentPtr CreateEquipmentComponent();
 	static bool CreateItemByID(ItemID itemID, Item& item);
-
+	static bool DropItem(ItemID, sf::Vector2f);
 private:
-	//Stores information for an item, not actual item
+	//Stores information for creating an item instance, not actual items TODO: Change from StrongItemCompoenentPtr ot XMLElement*?
 	class ItemDefinition
 	{
 	public:
-		vector<StrongItemComponentPtr> itemComponents;
-		XMLElement* renderComponenetInfo;
+		string name;
+		vector<std::pair<ComponentID, XMLElement*>> itemComponents;
 	};
 
 	tinyxml2::XMLDocument m_xmlFile;
 	bool InitializeItem(XMLElement* node, ItemDefinition& item);
 	StrongItemComponentPtr CreateItemComponent(XMLElement* node);
-	
+	static EntityManager* m_entityManager; //For creating dropped items
 	typedef map<ItemID, ItemDefinition> ItemCatalog;
 	static ItemCatalog m_itemCatalog;
 };
-
-template<class SubClass>
-StrongItemComponentPtr ItemComponentCreationFunction(void)
-{
-	return StrongItemComponentPtr(new SubClass);
-}
 #endif

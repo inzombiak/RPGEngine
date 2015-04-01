@@ -1,4 +1,5 @@
 #include "PickupComponent.h"
+#include "Debug.h"
 
 #include "Entity.h"
 #include "InventoryComponent.h"
@@ -44,6 +45,7 @@ void ItemPickupComponent::Apply(StrongEntityPtr target)
 	//If the target doesn't have an inventory
 	if (weakInventoryPtr.expired())
 		return;
+	Debug::PrintMessage("Adding item");
 	StrongComponentPtr strongInventoryPtr = ConvertToStrongPtr(weakInventoryPtr);
 	std::shared_ptr<InventoryComponent> inventory = CastComponentToDerived<StrongComponentPtr, InventoryComponent>(strongInventoryPtr);
 	inventory->AddItem(m_itemName, m_quantity);

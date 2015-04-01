@@ -11,9 +11,9 @@ void Entity::PostInit()
 
 void Entity::SetInUse(bool inUse)
 {
-	m_inUse = false;
+	m_inUse = inUse;
 	for (ComponentMap::iterator it = m_components.begin(); it != m_components.end(); ++it)
-		it->second->SetInUse(false);
+		it->second->SetInUse(inUse);
 }
 
 WeakComponentPtr Entity::GetComponent(ComponentID compType)

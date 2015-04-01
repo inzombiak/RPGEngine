@@ -1,32 +1,3 @@
-﻿  EntityRenderer.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\entityrenderer.cpp(19): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(16): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(9) : while compiling class template member function 'std::vector<std::shared_ptr<RenderComponent>,std::allocator<_Ty>> Algorithms<std::shared_ptr<RenderComponent>>::MergeSortVector(std::vector<_Ty,std::allocator<_Ty>> &,bool (__cdecl *)(T &,T &))'
-          with
-          [
-              _Ty=std::shared_ptr<RenderComponent>
-  ,            T=std::shared_ptr<RenderComponent>
-          ]
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\entityrenderer.cpp(74) : see reference to function template instantiation 'std::vector<std::shared_ptr<RenderComponent>,std::allocator<_Ty>> Algorithms<std::shared_ptr<RenderComponent>>::MergeSortVector(std::vector<_Ty,std::allocator<_Ty>> &,bool (__cdecl *)(T &,T &))' being compiled
-          with
-          [
-              _Ty=std::shared_ptr<RenderComponent>
-  ,            T=std::shared_ptr<RenderComponent>
-          ]
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\entityrenderer.cpp(74) : see reference to class template instantiation 'Algorithms<std::shared_ptr<RenderComponent>>' being compiled
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(23): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(55): warning C4018: '<' : signed/unsigned mismatch
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(36) : while compiling class template member function 'std::vector<std::shared_ptr<RenderComponent>,std::allocator<_Ty>> Algorithms<std::shared_ptr<RenderComponent>>::Merge(std::vector<_Ty,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,bool (__cdecl *)(T &,T &))'
-          with
-          [
-              _Ty=std::shared_ptr<RenderComponent>
-  ,            T=std::shared_ptr<RenderComponent>
-          ]
-          c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(30) : see reference to function template instantiation 'std::vector<std::shared_ptr<RenderComponent>,std::allocator<_Ty>> Algorithms<std::shared_ptr<RenderComponent>>::Merge(std::vector<_Ty,std::allocator<_Ty>> &,std::vector<_Ty,std::allocator<_Ty>> &,bool (__cdecl *)(T &,T &))' being compiled
-          with
-          [
-              _Ty=std::shared_ptr<RenderComponent>
-  ,            T=std::shared_ptr<RenderComponent>
-          ]
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\algorithms.h(61): warning C4018: '<' : signed/unsigned mismatch
+﻿  ItemManager.cpp
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\itemmanager.cpp(115): warning C4018: '<' : signed/unsigned mismatch
   SFMLGame2.vcxproj -> C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\SFMLGame2.exe

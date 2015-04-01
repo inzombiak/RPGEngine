@@ -6,6 +6,8 @@
 #include "SFML\Graphics.hpp"
 #include "custom_defininitions.h"
 
+#include <string>
+
 using tinyxml2::XMLElement;
 class EntityFactory
 {
@@ -21,20 +23,22 @@ public:
 		static EntityFactory instance;
 		return &instance;
 	}
+	EntityNameID GetEntityNameIDFromName(const std::string& name)
+	{
+		return reinterpret_cast<EntityNameID>(HashedString::hash_name(name.c_str()));
+	}
 private:
 	EntityFactory();
 	EntityFactory(const EntityFactory &) { }
 	EntityFactory &operator=(const EntityFactory &) { return *this; }
-	
-	static EntityID GetNextEntityID()
+	static int GetNextEntityID()
 	{
 		m_lastEntityID++;
 		return m_lastEntityID;
 	}
-
 	StrongComponentPtr CreateComponent(XMLElement* currComponentNode);
-
-	static EntityID m_lastEntityID;
+	
+	static int m_lastEntityID;
 };
 
 #endif

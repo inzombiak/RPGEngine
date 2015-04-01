@@ -11,11 +11,17 @@
 #include "RenderComponent.h"
 #include "CollisionComponent.h"
 #include "TransformComponent.h"
+#include "PlayerObserverComponent.h"
+#include "VitalsComponent.h"
+#include "StatComponent.h"
+#include "EquipmentComponent.h"
 
+#include "UIManager.h"
 #include "TransformManager.h"
 #include "InputManager.h"
 #include "EntityRenderer.h"
 #include "ItemManager.h"
+#include "EntityManager.h"
 #include "PhysicsManager.h"
 
 EntityFactory::EntityFactory()
@@ -24,15 +30,19 @@ EntityFactory::EntityFactory()
 	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME), EntityRenderer::CreateRenderComponent);
 	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(InputComponent::COMPONENT_NAME), InputManager::CreateInputComponent);
 	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(InventoryComponent::COMPONENT_NAME), ItemManager::CreateInventoryComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(EquipmentComponent::COMPONENT_NAME), ItemManager::CreateEquipmentComponent);
 	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(ItemPickupComponent::COMPONENT_NAME), ItemManager::CreateItemPickupComponent);
 	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(CollisionComponent::COMPONENT_NAME), PhysicsManager::CreateCollisionComponent);
-	
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(PlayerObserverComponent::COMPONENT_NAME), UIManager::CreatePlayerObserverComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(VitalsComponent::COMPONENT_NAME), EntityManager::CreateVitalsComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(StatComponent::COMPONENT_NAME), EntityManager::CreateStatComponent);
 }
 
 bool EntityFactory::CreateEntity(XMLElement* currEntityNode, StrongEntityPtr newEntity)
 {
-	std::string entityType = currEntityNode->Attribute("type");;
-	newEntity->Init(GetNextEntityID(), entityType.c_str());
+	std::string entityName = currEntityNode->Attribute("name");
+	EntityNameID id = GetEntityNameIDFromName(entityName);
+	newEntity->Init(GetNextEntityID(), id);
 	XMLElement* currComponentNode = currEntityNode->FirstChildElement("Component");
 
 	while (currComponentNode)
@@ -59,15 +69,6 @@ bool EntityFactory::CreateEntity(XMLElement* currEntityNode, StrongEntityPtr new
 
 	return true;
 }
-
-//Entity EntityFactory::CreateEntityByCopy(XMLElement* currEntityNode)
-//{
-//	std::string entityType = currEntityNode->Attribute("type");
-//	Entity newEntity;
-//	newEntity.Init(GetNextEntityID(), entityType.c_str());
-//	return newEntity;
-//}
-
 bool EntityFactory::CreateTileFromTmx(sf::Vector2f position, sf::Texture& texture, sf::IntRect textureRect,int depth, StrongEntityPtr newEntity)
 {
 	/*
@@ -76,7 +77,7 @@ bool EntityFactory::CreateTileFromTmx(sf::Vector2f position, sf::Texture& textur
 	*/
 
 	//std::string entityType = currEntityNode->Attribute("type");
-	newEntity->Init(GetNextEntityID(), "Tile");
+	newEntity->Init(GetNextEntityID(), GetEntityNameIDFromName("Tile"));
 	StrongComponentPtr newComp = ComponentFactory::CreateEntityComponent(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME));
 	std::shared_ptr<TransformComponent> transComp = std::static_pointer_cast<TransformComponent>(newComp);
 	transComp->SetMovable(false);
@@ -107,7 +108,7 @@ bool EntityFactory::CreateCollisionEntity(sf::Vector2f position, sf::Vector2f di
 	/*Todo
 	Fix this shit
 	*/
-	newEntity->Init(GetNextEntityID(), "Collision");
+	newEntity->Init(GetNextEntityID(), GetEntityNameIDFromName("Collision"));
 
 	StrongComponentPtr newComp = ComponentFactory::CreateEntityComponent(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME));
 	std::shared_ptr<TransformComponent> transComp = std::static_pointer_cast<TransformComponent>(newComp);
@@ -123,11 +124,11 @@ bool EntityFactory::CreateCollisionEntity(sf::Vector2f position, sf::Vector2f di
 	collisionBounds.width = dimensions.x;
 	collisionBounds.height = dimensions.y;
 
-	/*CollisionComponent collComp;
-	collComp.SetBounds(collisionBounds);
-	collComp.SetOwner(newEntity);
-	newComp = std::make_shared<CollisionComponent>(collComp);
-	newEntity->AddComponent(newComp);*/
+	shared_ptr<CollisionComponent> collComp = CastComponentToDerived<StrongComponentPtr, CollisionComponent>(ComponentFactory::CreateEntityComponent(ComponentBase::GetIDFromName(CollisionComponent::COMPONENT_NAME)));
+	collComp->SetBounds(collisionBounds);
+	collComp->SetOwner(newEntity);
+	collComp->SetSolid(true);
+	newEntity->AddComponent(collComp);
 
 	return true;
 }
@@ -140,4 +141,4 @@ StrongComponentPtr EntityFactory::CreateComponent(XMLElement* currComponentNode)
 	return newComponent;
 }
 
-EntityID EntityFactory::m_lastEntityID = 0;
+int EntityFactory::m_lastEntityID = 0;

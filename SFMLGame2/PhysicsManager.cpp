@@ -1,4 +1,5 @@
 #include "PhysicsManager.h"
+#include "Debug.h"
 
 StrongComponentPtr PhysicsManager::CreateCollisionComponent()
 {
@@ -9,23 +10,31 @@ StrongComponentPtr PhysicsManager::CreateCollisionComponent()
 
 void PhysicsManager::Update(float dt)
 {
-	for (int i = 0; i < m_collisionComponents.size(); ++i)
+	for (vector<std::shared_ptr<CollisionComponent>>::iterator it = m_collisionComponents.begin(); it != m_collisionComponents.end();)
 	{
-		m_collisionComponents[i]->Update(dt);
+		if (!(*it)->GetInUse())
+			it = m_collisionComponents.erase(it);
+		else
+		{
+			(*it)->Update(dt);
+			++it;
+		}
+			
 	}
 
 	for (int i = 0; i < m_collisionComponents.size(); ++i)
 	{
-		for (int j = i + 1; j < m_collisionComponents.size(); ++j)
+		for (int j = i; j < m_collisionComponents.size(); ++j)
 		{
-			if (CheckCollision(m_collisionComponents[i]->GetBounds(), m_collisionComponents[j]->GetBounds()))
-			{
-				if (m_collisionComponents[j]->GetIsSolid())
-					ResolveCollision(m_collisionComponents[i], m_collisionComponents[j]);
-				//m_collisionComponents[i]->ApplyCollision(ConvertToStrongPtr(m_collisionComponents[j]->GetOwner()));
-				m_collisionComponents[j]->ApplyCollision(ConvertToStrongPtr(m_collisionComponents[i]->GetOwner()));
-			}
-				
+			if (i != j)
+				if (CheckCollision(m_collisionComponents[i]->GetBounds(), m_collisionComponents[j]->GetBounds()))
+				{
+					if (m_collisionComponents[i]->GetIsSolid() && m_collisionComponents[j]->GetIsSolid())
+						ResolveCollision(m_collisionComponents[i], m_collisionComponents[j]);
+					m_collisionComponents[i]->ApplyCollision(ConvertToStrongPtr(m_collisionComponents[j]->GetOwner()));
+					Debug::PrintMessage("Collision");
+					m_collisionComponents[j]->ApplyCollision(ConvertToStrongPtr(m_collisionComponents[i]->GetOwner()));
+				}
 		}
 	}
 }
@@ -90,7 +99,7 @@ void PhysicsManager::ResolveCollision(std::shared_ptr<CollisionComponent>& obj1,
 			xOverlap *= -1;
 		}
 	}
-	obj1->UpdatePosition(sf::Vector2f(obj1->GetBounds().left + xOverlap, obj1->GetBounds().top + yOverlap));
+ 	obj1->UpdatePosition(sf::Vector2f(obj1->GetBounds().left + xOverlap, obj1->GetBounds().top + yOverlap));
 }
 
 //void PhysicsManager::ResolveCollision(std::shared_ptr<CollisionComponent>& obj1, std::shared_ptr<CollisionComponent>& obj2)

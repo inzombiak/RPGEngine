@@ -1,20 +1,58 @@
 <EntityDoc>
 	<Entities>
-		<Entity type = "Player">
-			<Component name = "TransformComponent" x = "200" y = "200" vx = "0" vy = "0" movable = "0"></Component>
+		<Entity name = "Player">
+			<Component name = "TransformComponent" x = "200" y = "200" vx = "0" vy = "0" movable = "1"></Component>
 			<Component name = "RenderComponent" filepath = "data/player.png"  visible = "1" depth = "1"></Component>
 			<Component name = "CollisionComponent" x = "200" y = "200" width = "" height = "" solid = "1"/>
-			<Component name = "InputComponent"></Component>
+			<Component name = "InputComponent"/>
 			<Component name = "InventoryComponent" drop = "0" maxsize = "100">
-				<Item name = "Mana Potion" quantity = "3"/>
-				<Item name = "Healing Potion" quantity = "5"/>
+				<Items>
+					<Item name = "Mana Potion" quantity = "3"/>
+					<Item name = "Healing Potion" quantity = "5"/>
+					<Item name = "Gold Axe" quantity = "1" />
+				</Items>
 			</Component>
+			<Component name = "EquipmentComponent">
+				<Slots>
+					<Slot name = "Right Hand" itemname = "Axe"/>
+				</Slots>
+			</Component>
+			<Component name = "StatComponent">
+				<Stats>
+					<Stat name = "Damage" value = "0" />
+					<Stat name = "Armor" value = "0"/>
+					<Stat name = "Movement Speed" value = "5"/>
+				</Stats>
+			</Component>			
+			<Component name = "VitalsComponent">
+				<Vitals>
+					<Vital type = "Health" current = "10" max = "100"/>
+					<Vital type = "Stamina" current = "100" max = "100"/>
+				</Vitals>
+			</Component>
+			<Component name = "PlayerObserverComponent"/>
 		</Entity>
-		<Entity type = "Item">
+		<Entity name = "Healing Potion">
 			<Component name = "TransformComponent" x = "300" y = "300" vx = "0" vy = "0" movable = "0"></Component>
 			<Component name = "RenderComponent" filepath = "data/Item Icons/red-potion.png" visible = "1" depth = "1"></Component>
 			<Component name = "CollisionComponent" x = "300" y = "300" width = "" height = "" solid = "0"/>
 			<Component name = "ItemPickupComponent" itemname = "Healing Potion" quantity = "1" persistent = "0"/>
-		</Entity>		
+		</Entity>
+		<Entity name = "Mana Potion">
+			<Component name = "TransformComponent" x = "300" y = "300" vx = "0" vy = "0" movable = "0"></Component>
+			<Component name = "RenderComponent" filepath = "data/Item Icons/blue-potion.png" visible = "1" depth = "1"></Component>
+			<Component name = "CollisionComponent" x = "300" y = "300" width = "" height = "" solid = "0"/>
+			<Component name = "ItemPickupComponent" itemname = "Mana Potion" quantity = "1" persistent = "0"/>
+		</Entity>
+		<Entity name = "White Potion">
+			<Component name = "TransformComponent" x = "400" y = "300" vx = "0" vy = "0" movable = "0"></Component>
+			<Component name = "RenderComponent" filepath = "data/Item Icons/white-potion.png" visible = "1" depth = "1"></Component>
+			<Component name = "CollisionComponent" x = "400" y = "300" width = "" height = "" solid = "0"/>
+			<Component name = "ItemPickupComponent" itemname = "White Potion" quantity = "1" persistent = "0"/>
+		</Entity>
 	</Entities>
 </EntityDoc>
+
+<!--
+General definitions for entities. Level folder contains xmls that are read for creating entities in level
+-->

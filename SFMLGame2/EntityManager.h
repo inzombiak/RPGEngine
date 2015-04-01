@@ -2,14 +2,20 @@
 #define GAME_OBJECT_MANAGER_H
 
 #include <Windows.h>
+
+#include "SFML\Graphics.hpp"
+
 #include "custom_defininitions.h"
 #include "Entity.h"
+#include "tinyxml2.h"
+
 #include <string>
 #include <vector>
 
 using std::vector;
 using std::string;
-
+class StatComponent;
+class VitalsComponent;
 class EntityManager
 {
 public:
@@ -18,17 +24,17 @@ public:
 	//void Draw(sf::RenderWindow&);
 	StrongEntityPtr CreateEntity();
 	void LoadEntities(string filename);
-
+	static StrongComponentPtr CreateVitalsComponent();
+	static StrongComponentPtr CreateStatComponent();
+	bool CreateEntityAtPosition(const string& entityName, sf::Vector2f pos);
 private:
 	void Move(float);
 	void TestForCollision();
-	//void ZSortEntities(); //Z-sorts objects for proper redering. Must be called before passing entities to renderer. Only sorts m_entities
-	//static bool CompareBottom(StrongEntityPtr& entity1, StrongEntityPtr& entity2); //Comparison function for Z-sorting
-	/*
-	Entities are sperated to make certain operations simpler
-	*/
 	vector<StrongEntityPtr> m_entities; //Container for "full" Entities e.g. enemies, items etc.
-	//Used for Z-sort. Sorting is done once every 5 frames.
+	static vector<std::shared_ptr<VitalsComponent>> m_entityVitals; //Container for  VitalsComponents
+	static vector<std::shared_ptr<StatComponent>> m_entityStats; //Container for StatComponent
+	tinyxml2::XMLDocument m_entityDefinitionFile; //File containing entity definitions
+	std::map<EntityNameID, tinyxml2::XMLElement*> m_entityDefinitions; //map that pairs an entity name with its definition
 };
 
 #endif

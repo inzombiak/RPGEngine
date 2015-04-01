@@ -17,17 +17,17 @@ class Entity
 public:
 	Entity() {};
 	
-	void Init(EntityID id, EntityType type)
+	void Init(int id, EntityNameID type)
 	{
 		m_ID = id;
-		m_type = type;
+		m_nameID = type;
 	}
 
-	EntityType GetType() const
+	EntityNameID  GetNameID() const
 	{
-		return m_type;
+		return m_nameID;
 	}
-	EntityID GetID() const
+	int GetID() const
 	{
 		return m_ID;
 	}
@@ -43,8 +43,8 @@ public:
 	void PostInit();
 
 private:
-	EntityID m_ID;
-	EntityType m_type;
+	int m_ID; //Unique to each entity
+	EntityNameID m_nameID; //Unique to each class of entity, used for referencing definition in the XML
 	bool m_inUse;
 	typedef unordered_map<ComponentID, StrongComponentPtr, std::hash<int>> ComponentMap;
 	ComponentMap m_components;

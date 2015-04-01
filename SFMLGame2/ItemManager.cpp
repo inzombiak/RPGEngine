@@ -1,24 +1,33 @@
 #include "ItemManager.h"
+#include "Debug.h"
 #include "tinyxml2.h"
 
 #include "ComponentFactory.h"
 #include "InventoryComponent.h"
+#include "EquipmentComponent.h"
 #include "PickupComponent.h"
-#include "RenderComponent.h"
+#include "EntityManager.h"
 
 using tinyxml2::XMLElement;
 
 ItemManager::ItemManager()
 {
-	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(BaseItemComponent::COMPONENT_NAME), ItemComponentCreationFunction<BaseItemComponent>);
-	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(RestorationItemComponent::COMPONENT_NAME), ItemComponentCreationFunction<RestorationItemComponent>);
-	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(ConsumableItemComponent::COMPONENT_NAME), ItemComponentCreationFunction<ConsumableItemComponent>);
-	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(ItemRenderComponent::COMPONENT_NAME), ItemComponentCreationFunction<ItemRenderComponent>);
+	//Register item component creation functions with the ComponentFactory
+	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(BaseItemComponent::COMPONENT_NAME), GenericDerivedCreationFunction<StrongItemComponentPtr,BaseItemComponent>);
+	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(RestorationItemComponent::COMPONENT_NAME), GenericDerivedCreationFunction<StrongItemComponentPtr, RestorationItemComponent>);
+	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(ConsumableItemComponent::COMPONENT_NAME), GenericDerivedCreationFunction<StrongItemComponentPtr, ConsumableItemComponent>);
+	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(ItemRenderComponent::COMPONENT_NAME), GenericDerivedCreationFunction<StrongItemComponentPtr, ItemRenderComponent>);;
+	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(EquipableItemComponent::COMPONENT_NAME), GenericDerivedCreationFunction<StrongItemComponentPtr, EquipableItemComponent>);;
 }
 
 StrongComponentPtr ItemManager::CreateInventoryComponent()
 {
 	return std::shared_ptr<InventoryComponent>(new InventoryComponent());
+}
+
+StrongComponentPtr ItemManager::CreateEquipmentComponent()
+{
+	return std::shared_ptr<EquipmentComponent>(new EquipmentComponent());
 }
 
 StrongComponentPtr ItemManager::CreateItemPickupComponent()
@@ -28,7 +37,6 @@ StrongComponentPtr ItemManager::CreateItemPickupComponent()
 
 void ItemManager::LoadItemCatalog(string filepath)
 {
-
 	/*
 	Error handling
 	*/
@@ -41,13 +49,14 @@ void ItemManager::LoadItemCatalog(string filepath)
 	{
 		newItem.itemComponents.clear();
 		string itemName = pItem->Attribute("name");
+		newItem.name = itemName;
 		if (InitializeItem(pItem, newItem))
 			m_itemCatalog.insert(std::pair<ItemID, ItemDefinition>(reinterpret_cast<ItemComponentID>(HashedString::hash_name(itemName.c_str())), newItem));
 		pItem = pItem->NextSiblingElement("Item");
 	}
 }
 
-bool ItemManager::InitializeItem(XMLElement* pItem, ItemDefinition& item)
+/*bool ItemManager::InitializeItem(XMLElement* pItem, ItemDefinition& item)
 {
 	XMLElement* pItemComponent = pItem->FirstChildElement("Component");
 	StrongItemComponentPtr newItemComponent;
@@ -65,10 +74,20 @@ bool ItemManager::InitializeItem(XMLElement* pItem, ItemDefinition& item)
 		}
 		pItemComponent = pItemComponent->NextSiblingElement("Component");
 	}
-	XMLElement* pRenderComponent = pItem->FirstChildElement("RenderComponent");
-	if (pRenderComponent)
+	return true;
+}*/
+bool ItemManager::InitializeItem(XMLElement* pItem, ItemDefinition& item)
+{
+	XMLElement* pItemComponent = pItem->FirstChildElement("Component");
+	while (pItemComponent)
 	{
-		item.renderComponenetInfo = pRenderComponent;
+		if (pItemComponent->Attribute("name"))
+		{
+			string componentName = pItemComponent->Attribute("name");
+			ComponentID id = ItemComponent::GetIDFromName(componentName.c_str());
+			item.itemComponents.push_back(std::pair<ComponentID, XMLElement*>(id, pItemComponent));
+		}
+		pItemComponent = pItemComponent->NextSiblingElement("Component");
 	}
 	return true;
 }
@@ -76,10 +95,10 @@ bool ItemManager::InitializeItem(XMLElement* pItem, ItemDefinition& item)
 StrongItemComponentPtr ItemManager::CreateItemComponent(XMLElement* node)
 {
 	StrongItemComponentPtr newComponent;
-	string what = node->Attribute("type");
-	if (node->Attribute("type"))
+
+	if (node->Attribute("name"))
 	{
-		string componentName = node->Attribute("type");
+		string componentName = node->Attribute("name");
 		newComponent = StrongItemComponentPtr(ComponentFactory::CreateItemComponent(ItemComponent::GetIDFromName(componentName.c_str())));
 	}
 
@@ -92,20 +111,30 @@ bool ItemManager::CreateItemByID(ItemID itemID, Item& item)
 	if (it == m_itemCatalog.end())
 		return false;
 	ItemDefinition& itemDef = it->second;
+	StrongItemComponentPtr newComponent;
 	for (int i = 0; i < itemDef.itemComponents.size(); ++i)
 	{
-		string name = itemDef.itemComponents[i]->GetName();
-		item.AddItemComponent(ItemComponent::GetIDFromName(name.c_str()) ,itemDef.itemComponents[i]);
+		ComponentID id = itemDef.itemComponents[i].first;
+		newComponent = StrongItemComponentPtr(ComponentFactory::CreateItemComponent(id));
+		newComponent->Init(itemDef.itemComponents[i].second);
+		item.AddItemComponent(id, newComponent);
 	}
-	//Create Rendercomponent
-	if (!itemDef.renderComponenetInfo)
+	return true;
+}
+
+bool ItemManager::DropItem(ItemID itemId, sf::Vector2f pos)
+{
+	Debug::PrintMessage("Dropping Item");
+	//Error handling
+	if (!m_entityManager)
 		return false;
-	string test = itemDef.renderComponenetInfo->Attribute("filepath");
-	StrongComponentPtr renderComp = ComponentFactory::CreateEntityComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME));
-	if (!renderComp->Init(itemDef.renderComponenetInfo))
+	//Change to force
+	pos.x += 30;
+	pos.y += 40;
+	if (!m_entityManager->CreateEntityAtPosition(m_itemCatalog[itemId].name, pos))
 		return false;
-	item.AddRenderComponent(renderComp);
 	return true;
 }
 
 ItemManager::ItemCatalog ItemManager::m_itemCatalog;
+EntityManager* ItemManager::m_entityManager;

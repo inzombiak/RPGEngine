@@ -6,13 +6,20 @@
 
 using std::vector;
 using std::shared_ptr;
+class UIManager;
 class InputManager
 {
 public:
-	void Update(float dt, sf::Event event);
+	void Update(float dt, sf::Event event, sf::RenderWindow& window);
 	static StrongComponentPtr CreateInputComponent();
+	void SetUI(UIManager* ui)
+	{
+		m_uiManager = ui;
+	}
 private:
 	static vector<shared_ptr<InputComponent>> m_inputComponents;
+	bool m_inventoryOpen = false;
+	UIManager* m_uiManager;
 };
 
 #endif

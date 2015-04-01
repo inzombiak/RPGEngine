@@ -9,7 +9,6 @@
 #include "SFML\Window.hpp"
 #include "tinyxml2.h"
 #include "custom_defininitions.h"
-#include "RenderComponent.h"
 
 using std::map;
 using std::string;
@@ -17,21 +16,14 @@ using std::vector;
 using tinyxml2::XMLElement;
 using tinyxml2::XMLNode;
 
-class RenderComponent;
 class Item
 {
 public:
-	void AddRenderComponent(StrongComponentPtr renderComp);
-	StrongComponentPtr GetRenderComponent();
 	bool AddItemComponent(ItemComponentID itemID, StrongItemComponentPtr compPtr);
 	WeakItemComponentPtr GetItemComponent(ItemComponentID itemID);
-	void ToggleVisible()
-	{
-		m_renderComponent->SetVisible(!m_renderComponent->GetVisible());
-	}
+	void Apply(StrongEntityPtr target);
 private:
 	map<ItemComponentID, StrongItemComponentPtr> m_itemComponents;
-	std::shared_ptr<RenderComponent> m_renderComponent;
 };
 
 class ItemComponent
@@ -49,7 +41,7 @@ public:
 	}
 	static const char* COMPONENT_NAME;
 private:
-	
+	std::shared_ptr<Item> m_item;
 };
 
 class BaseItemComponent : public ItemComponent
@@ -72,7 +64,7 @@ public:
 		return m_quantity;
 	}
 
-	void SetName(string name)
+	void SetItemName(string name)
 	{
 		m_name = name;
 	}
@@ -107,7 +99,7 @@ private:
 class ItemRenderComponent : public ItemComponent
 {
 public:
-	virtual bool Init(const XMLElement* node) override { return true; };
+	virtual bool Init(const XMLElement* node) override;
 	virtual void PostInit() override {};
 	void Update(float dt);
 	virtual const char* GetName() override
@@ -227,6 +219,60 @@ public:
 private:
 	int m_uses;
 	int m_maxStack;
+};
+
+class EquipableItemComponent : public ItemComponent
+{
+public:
+	virtual bool Init(const XMLElement* componentNode) override;
+	virtual void PostInit() override {};
+	void Update(float dt) {};
+	static const char* COMPONENT_NAME;
+	virtual const char* GetName() override
+	{
+		return COMPONENT_NAME;
+	}
+	Equipment::SlotName GetSlot()
+	{
+		return m_slot;
+	}
+
+	//Return false is stat doesn't exist, otherwise true
+	bool GetModifierByStat(Stats::StatName stat, double& value)
+	{
+		auto it = m_modifiers.find(stat);
+		if (it == m_modifiers.end())
+			return false;
+		value = it->second;
+		return true;
+	}
+
+	//Returns copy of map with all modifiers. USE "GetModifierByStat" IF YOU NEED A SPECIFIC STAT MODIFIER
+	std::map<Stats::StatName, double> GetAllModifiers()
+	{
+		return m_modifiers;
+	}
+
+	//Removes stat modifier. If stat doesn't exist, does nothing
+	void RemoveModifier(Stats::StatName effect)
+	{
+		auto it = m_modifiers.find(effect);
+		if (it != m_modifiers.end())
+			m_modifiers.erase(it);
+	}
+
+	//Adds a modifier to the item
+	void AddModifier(Stats::StatName effect, double amount)
+	{
+		auto it = m_modifiers.find(effect);
+		if (it != m_modifiers.end())
+			it->second += amount; //Increase existing modifier
+		else
+			m_modifiers[effect] = amount; //Add new modifier
+	}
+private:
+	Equipment::SlotName m_slot;
+	std::map<Stats::StatName, double> m_modifiers;
 };
 
 #endif

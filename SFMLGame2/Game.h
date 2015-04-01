@@ -17,7 +17,7 @@
 #include "EntityRenderer.h"
 #include "PhysicsManager.h"
 
-#include "UI.h"
+#include "UIManager.h"
 #include "Player.h"
 #include "LevelLoader.h"
 #include "MainMenu.h"
@@ -41,7 +41,7 @@ private:
 	void Update();
 	void Draw();
 
-	enum GameState {Uninitialized, Playing, ShowingMenu, Exiting};
+	enum GameState {Uninitialized, Playing, ShowingMenu, Exiting, Paused};
 
 	int m_windowWidth = 640;
 	int m_windowHeight = 480;
@@ -56,8 +56,8 @@ private:
 	ItemManager* m_itemManager;
 	PhysicsManager* m_physicsManager;
 
-	UI* m_UI;
-	PlayerObserver* m_playerObserver;
+	UIManager* m_UI;
+	//PlayerObserver* m_playerObserver;
 
 	GameState m_gameState = Uninitialized;
 	sf::RenderWindow m_mainWindow;

@@ -9,9 +9,15 @@ StrongComponentPtr TransformManager::CreateTransformComponent()
 
 void TransformManager::Update(float dt)
 {
-	for (unsigned int i = 0; i < m_transformComponents.size(); ++i)
+	for (vector<shared_ptr<TransformComponent>>::iterator it = m_transformComponents.begin(); it != m_transformComponents.end();)
 	{
-		m_transformComponents[i]->Update(dt);
+		if (!(*it)->GetInUse())
+			it = m_transformComponents.erase(it);
+		else
+		{
+			(*it)->Update(dt);
+			++it;
+		}
 	}
 }
 

@@ -36,3 +36,8 @@ void Debug::EndTimer(std::string displayText)
 	
 	std::cout << "CLOCK NOT RUNNING" << std::endl;
 }
+
+void Debug::PrintMessage(std::string message)
+{
+	std::cout << message << std::endl;
+}

@@ -5,6 +5,8 @@
 #include "Algorithms.h"
 #include "RenderComponent.h"
 #include "TransformComponent.h"
+#include "VitalsComponent.h"
+#include "StatComponent.h"
 #include "EntityFactory.h"
 
 EntityManager::EntityManager()
@@ -14,107 +16,86 @@ EntityManager::EntityManager()
 
 void EntityManager::Update(float time)
 {
-	for (int i = 0; i < m_entities.size(); ++i)
+	for (vector<std::shared_ptr<VitalsComponent>>::iterator it = m_entityVitals.begin(); it != m_entityVitals.end();)
 	{
-		if (!m_entities[i]->GetInUse())
-		{
-			m_entities[i].reset();
-			m_entities.erase(m_entities.begin() + i);
-		}	
+		if (!(*it)->GetInUse())
+			it = m_entityVitals.erase(it);
+		else
+			++it;
+	}
+
+	for (vector<std::shared_ptr<Entity>>::iterator it = m_entities.begin(); it != m_entities.end();)
+	{
+		if (!(*it)->GetInUse())
+			it = m_entities.erase(it);
+		else
+			++it;
 	}
 }
 
-void EntityManager::Move(float time)
+StrongComponentPtr EntityManager::CreateVitalsComponent()
 {
-	////m_Player->Move(1, 1, time);
+	std::shared_ptr<VitalsComponent> newVitalsComp(new VitalsComponent());
+	m_entityVitals.push_back(newVitalsComp);
+	return newVitalsComp;
+}
 
-	//for (vector<VisibleEntity*>::iterator it = m_staticEntitys.begin(); it != m_staticEntitys.end(); ++it)
-	//{
-	//	if ((*it)->GetSolid())
-	//	{
-	//		//if (CheckCollision(m_Player->GetGlobalCollisionRectangle(), (*it)->GetGlobalCollisionRectangle()))
-	//		//{
-	//		//	//m_Player->Stop();
-	//		//	int r = ResolveCollision((*m_Player), *(*it));
-	//		//	if (r == 0)
-	//		//		m_Player->SetGrounded(true);
-	//		//	else if (r == 1)
-	//		//		m_Player->SetVelocityY(0);
-	//		//}
-	//	}
-	//}
-
-	////m_Player->Move(1, 0, time);
-
-	//for (vector<VisibleEntity*>::iterator it = m_staticEntitys.begin(); it != m_staticEntitys.end(); ++it)
-	//{
-	//	if ((*it)->GetSolid())
-	//	{
-	//		/*if (CheckCollision(m_Player->GetGlobalCollisionRectangle(), (*it)->GetGlobalCollisionRectangle()))
-	//		{
-	//		ResolveCollision((*m_Player), *(*it));
-	//		m_Player->SetVelocityX(0);
-	//		}*/
-	//	}
-	//}
+StrongComponentPtr EntityManager::CreateStatComponent()
+{
+	std::shared_ptr<StatComponent> newStatComp(new StatComponent());
+	m_entityStats.push_back(newStatComp);
+	return newStatComp;
 }
 
 StrongEntityPtr EntityManager::CreateEntity()
 {
 	StrongEntityPtr entity(new Entity());
+	entity->SetInUse(true);
 	m_entities.push_back(entity);
 	return entity;
 }
 
+bool EntityManager::CreateEntityAtPosition(const string& entityName, sf::Vector2f pos)
+{
+	StrongEntityPtr newEntity = CreateEntity();
+	EntityFactory* entityFactory = EntityFactory::GetInstance();
+	if (entityFactory->CreateEntity(m_entityDefinitions[entityFactory->GetEntityNameIDFromName(entityName)], newEntity))
+	{
+		std::shared_ptr<TransformComponent> newEntityTrans;
+		if (CheckConvertAndCastPtr<ComponentBase, TransformComponent>(newEntity->GetComponent(ComponentBase::GetIDFromName(TransformComponent::COMPONENT_NAME)), newEntityTrans))
+		{
+			newEntityTrans->SetPosition(pos);
+		}
+		else
+			return false;
+	}
+	else
+		return false;
+
+	return true;
+}
+
 void EntityManager::LoadEntities(string filename)
 {
-
 	string f = "data/Entities.xml";
-
-	tinyxml2::XMLDocument file;
-	if (file.LoadFile(f.c_str()) != tinyxml2::XMLError::XML_SUCCESS)
+	if (m_entityDefinitionFile.LoadFile(f.c_str()) != tinyxml2::XMLError::XML_SUCCESS)
 		return;
 
-	tinyxml2::XMLNode* pRoot = file.FirstChild();
+	tinyxml2::XMLNode* pRoot = m_entityDefinitionFile.FirstChild();
 	XMLElement* pEntities = pRoot->FirstChildElement("Entities");
 	XMLElement* pEntity = pEntities->FirstChildElement("Entity");
 	StrongEntityPtr newEntity;
-	EntityFactory* em = EntityFactory::GetInstance();
+	EntityFactory* entityFactory = EntityFactory::GetInstance();
 	while (pEntity != nullptr)
 	{
 		newEntity = CreateEntity();
-		em->CreateEntity(pEntity, newEntity);
+		entityFactory->CreateEntity(pEntity, newEntity);
+		EntityNameID nameID = newEntity->GetNameID();
+		std::pair<EntityNameID, tinyxml2::XMLElement*> newEntry(nameID, pEntity);
+		m_entityDefinitions.insert(newEntry);
 		pEntity = pEntity->NextSiblingElement("Entity");
 	}
 }
-
-//void EntityManager::SetForegroundTiles(vector<StrongEntityPtr>& objects)
-//{
-//	//m_entities.reserve(m_entities.size() + objects.size());
-//	//m_entities.insert(m_entities.end(), objects.begin(), objects.end());
-//}
-//
-//void EntityManager::SetBackgroundTiles(vector<StrongEntityPtr>& objects)
-//{
-//	//m_backgroundTiles = objects;
-//}
-//
-//void EntityManager::SetCollisionBoxes(vector<StrongEntityPtr>& tiles)
-//{
-//	//m_colllisionBoxes = tiles;
-//}
-
-//void EntityManager::ZSortEntities()
-//{
-//	m_framesSinceLastSort++;
-//
-//	if (m_framesSinceLastSort == MAX_SORT_FRAME_INTERVAL)
-//	{
-//		m_entities = Algorithms<StrongEntityPtr>::MergeSortVector(m_entities, CompareBottom);
-//		m_framesSinceLastSort = 0;
-//	}
-//}
-//
 //bool EntityManager::CompareBottom(StrongEntityPtr& entity1, StrongEntityPtr& entity2)
 //{
 //	ComponentID id = ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME);
@@ -128,63 +109,6 @@ void EntityManager::LoadEntities(string filename)
 //	}
 //	else
 //		return false;
-//}
-
-//int EntityManagerNew::ResolveCollision(StrongEntityPtr& obj1, StrongEntityPtr& obj2)
-//{
-//	/*float obj1HalfHeight = obj1.GetCollisionRectangle().height / 2;
-//	float obj2HalfHeight = obj2.GetCollisionRectangle().height / 2;
-//
-//	float obj1HalfWidth = obj1.GetCollisionRectangle().width / 2;
-//	float obj2HalfWidth = obj2.GetCollisionRectangle().width / 2;
-//
-//	float obj1X = obj1.GetPosition().x + obj1.GetCollisionRectangle().left + obj1HalfWidth;
-//	float obj1Y = obj1.GetPosition().y + obj1.GetCollisionRectangle().top + obj1HalfHeight;
-//	float obj2X = obj2.GetPosition().x + obj2.GetCollisionRectangle().left + obj2HalfWidth;
-//	float obj2Y = obj2.GetPosition().y + obj2.GetCollisionRectangle().top + obj2HalfHeight;
-//
-//	float xDistance = abs(obj1X - obj2X);
-//	float yDistance = abs(obj1Y - obj2Y);
-//
-//	float xOverlap = obj1HalfWidth + obj2HalfWidth - xDistance;
-//	float yOverlap = obj1HalfHeight + obj2HalfHeight - yDistance;
-//
-//	if (abs(yOverlap) < 0.001)
-//		yOverlap = 0.001;
-//
-//	int result = -1;
-//
-//	if (abs(xOverlap) > abs(yOverlap))
-//	{
-//		xOverlap = 0;
-//		if (obj1Y < obj2Y)
-//		{
-//			yOverlap *= -1;
-//			result = 0;
-//		}
-//		else
-//			result = 1;
-//	}
-//	else
-//	{
-//		result = 3;
-//		yOverlap = 0;
-//		if (obj1X < obj2X)
-//		{
-//			xOverlap *= -1;
-//		}
-//		else
-//		{
-//		}
-//	}
-//	obj1.SetPosition(obj1.GetPosition().x + xOverlap, obj1.GetPosition().y + yOverlap);
-//	return result;*/
-//}
-
-//bool EntityManagerNew::CheckCollision(sf::Rect<float>& r1, sf::Rect<float>& r2)
-//{
-//	bool result = r1.intersects(r2);
-//	return result;
 //}
 
 //vector<StrongEntityPtr*> EntityManagerNew::GetPossibleCollisions(StrongEntityPtr& object)
@@ -201,27 +125,5 @@ void EntityManager::LoadEntities(string filename)
 //	return result;
 //}
 
-//void EntityManager::Draw(sf::RenderWindow &rw)
-//{
-//	for (int i = 0; i < m_backgroundTiles.size(); ++i)
-//	{
-//		std::shared_ptr<RenderComponent> rc = std::static_pointer_cast<RenderComponent>(StrongComponentPtr(m_backgroundTiles[i]->GetComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME))));
-//		if (!m_backgroundTiles[i]->GetComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME)).expired())
-//		{
-//			sf::Sprite s = rc->GetSprite();
-//			rw.draw(s);
-//		}
-//	}
-//	
-//	for (int j = 0; j < m_entities.size(); ++j)
-//	{
-//		std::shared_ptr<RenderComponent> rc = std::static_pointer_cast<RenderComponent>(StrongComponentPtr(m_entities[j]->GetComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME))));
-//		if (!m_entities[j]->GetComponent(ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME)).expired())
-//		{
-//			sf::Sprite s = rc->GetSprite();
-//			rw.draw(s);
-//		}
-//	}
-//	
-//	//m_renderer.Draw(rw);
-//}
+vector<std::shared_ptr<VitalsComponent>> EntityManager::m_entityVitals;
+vector<std::shared_ptr<StatComponent>> EntityManager::m_entityStats;

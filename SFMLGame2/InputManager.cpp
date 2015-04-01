@@ -1,5 +1,5 @@
 #include "InputManager.h"
-
+#include "UIManager.h"
 StrongComponentPtr InputManager::CreateInputComponent()
 {
 	shared_ptr<InputComponent> newComponent(new InputComponent);
@@ -7,14 +7,26 @@ StrongComponentPtr InputManager::CreateInputComponent()
 	return newComponent;
 }
 
-void InputManager::Update(float dt, sf::Event event)
+void InputManager::Update(float dt, sf::Event event, sf::RenderWindow& window)
 {
-	for (unsigned int i = 0; i < m_inputComponents.size(); ++i)
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
+		m_inventoryOpen = !m_inventoryOpen;
+	if (event.type == sf::Event::MouseButtonPressed)
 	{
-		if (!m_inputComponents[i]->GetInUse())
-			m_inputComponents.erase(m_inputComponents.begin() + i);
+
+		if (m_inventoryOpen)
+			m_uiManager->HandleInput(event, sf::Mouse::getPosition(window));
+	}
+
+	for (vector<shared_ptr<InputComponent>>::iterator it = m_inputComponents.begin(); it != m_inputComponents.end();)
+	{
+		if (!(*it)->GetInUse())
+			it = m_inputComponents.erase(it);
 		else
-			m_inputComponents[i]->Update(dt, event);
+		{
+			(*it)->Update(dt, event);
+			++it;
+		}
 	}
 }
 

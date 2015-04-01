@@ -21,7 +21,8 @@ public:
 	}
 	
 	bool AddItem(string itemName, int quantity);
-
+	bool AddItem(Item newItem, int quantity);
+	const std::map<ItemID, Item>& GetItems();
 	//Setter and Getters
 
 	void SetDroppable(bool droppable)
@@ -46,7 +47,9 @@ public:
 	{
 		return m_heldItems.size() == m_maxSize;
 	}
-
+	void UseItem(ItemID);
+	void DropItem(ItemID);
+	void DeleteItem(ItemID);
 	void ToggleDisplay();
 
 	const static char* COMPONENT_NAME;

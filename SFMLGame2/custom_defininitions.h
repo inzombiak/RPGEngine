@@ -4,6 +4,41 @@
 #include <memory>
 #include <string>
 #include <map>
+using std::string;
+namespace Equipment
+{
+	enum SlotName
+	{
+		RightHand = 0,
+		LeftHand = 1,
+		Armor = 2,
+	};
+	static std::map<string, SlotName> slotMap =
+	{
+		{ "RightHand", SlotName::RightHand },
+		{ "LeftHand", SlotName::LeftHand },
+		{ "Armor", SlotName::Armor },
+	};
+}
+
+
+namespace Stats
+{
+	enum StatName
+	{
+		HP = 0,
+		Damage = 1,
+		Armor = 2,
+		MovementSpeed = 3,
+	};
+	static std::map<string, StatName> statMap = 
+	{ 
+		{ "HP", StatName::HP },
+		{ "Damage", StatName::Damage },
+		{ "Armor", StatName::Armor },
+		{ "Movement Speed", StatName::MovementSpeed }
+	};
+};
 
 class Entity;
 typedef std::shared_ptr<Entity> StrongEntityPtr;
@@ -19,8 +54,24 @@ typedef std::weak_ptr<ItemComponent> WeakItemComponentPtr;
 
 typedef unsigned int ComponentID;
 typedef unsigned int ItemComponentID;
-typedef unsigned int EntityID;
+typedef unsigned int EntityNameID;
 typedef unsigned int ItemID;
+
+template<class Base, class Derived>
+bool CheckConvertAndCastPtr(std::weak_ptr<Base> weakPtr, std::shared_ptr<Derived>& result)//ConvertToStrongPtr and CastComponentToDerived in one function!
+{
+	if (weakPtr.expired())
+		return false;
+	result = CastComponentToDerived<std::shared_ptr<Base>, Derived>(ConvertToStrongPtr(weakPtr));
+	if (!result)
+		return false;
+	return true;
+}
+template<class Ptr, class SubClass>
+Ptr GenericDerivedCreationFunction(void)
+{
+	return Ptr(new SubClass);
+}
 
 template <class T>
 std::shared_ptr<T> ConvertToStrongPtr(std::weak_ptr<T> weakPtr)

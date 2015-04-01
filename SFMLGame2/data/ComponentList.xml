@@ -1,0 +1,82 @@
+<ComponentList>
+    <Entities>
+        <Component name="TransformComponent">
+            <Field name="x" type="float"/>
+            <Field name="y" type="float"/>
+            <Field name="vx" type="float"/>
+            <Field name="vy" type="float"/>
+            <Field name="movable" type="bool"/>
+        </Component>
+        <Component name="RenderComponent">
+            <Field name="filepath" type="path"/>
+            <Field name="visible" type="bool"/>
+            <Field name="depth" type="int"/>
+        </Component>
+        <Component name="CollisionComponent">
+            <Field name="x" type="float"/>
+            <Field name="y" type="float"/>
+            <Field name="width" type="float"/>
+            <Field name="height" type="float"/>
+            <Field name="solid" type="bool"/>
+        </Component>
+        <Component name="InputComponent"/>
+        <Component name="InventoryComponent">
+            <Field name="drop" type="bool"/>
+            <Field name="maxsize" type="int"/>
+            <List name="Items" entryname="Item">
+                <Field name="name" type="item"/>
+                <Field name="quantity" type="int"/>
+            </List>
+        </Component>
+        <Component name="EquipmentComponent">
+            <List name="Slots" entryname="Slot">
+                <Field name="name" type="slot"/>
+                <Field name="itemname" type="item"/>
+            </List>
+        </Component>
+        <Component name="StatComponent">
+            <List name="Stats" entryname="Stat">
+                <Field name="name" type="stat"/>
+                <Field name="value" type="float"/>
+            </List>
+        </Component>
+        <Component name="VitalsComponent">
+            <List name="Vitals" entryname="Vital">
+                <Field name="type" type="vital"/>
+                <Field name="current" type="int"/>
+                <Field name="max" type="int"/>
+            </List>
+        </Component>
+        <Component name="ItemPickupComponent">
+            <Field name="itemname" type="item"/>
+            <Field name="quantity" type="int"/>
+            <Field name="persistent" type="bool"/>
+        </Component>
+    </Entities>
+    <Items>
+        <Component name="BaseItemComponent">
+            <Field name="itemname" type="string"/>
+            <Field name="description" type="longstring"/>
+        </Component>
+        <Component name="ConsumableItemComponent">
+            <Field name="uses" type="int"/>
+            <Field name="maxstack" type="int"/>
+        </Component>
+        <Component name="RestorationItemComponent">
+            <Field name="effect" type="vital"/>
+            <Field name="amount" type="int"/>
+        </Component>
+        <Component name="ItemRenderComponent">
+            <Field name="filepath" type="path"/>
+            <Field name="visible" type="bool"/>
+            <Field name="depth" type="int"/>
+        </Component>
+        <Component name="EquipableItemComponent">
+            <Field name="slot" value="slot"/>
+            <List name="Modifiers" entryname="Modifier">
+                <Field name="name" type="stat"/>
+                <Field name="effect" type="float"/>
+            </List>
+        </Component>
+    </Items>
+</ComponentList>

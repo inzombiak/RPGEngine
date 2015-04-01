@@ -36,7 +36,7 @@ public:
 		return NULL;
 	}
 
-	static bool RegisterItemComponent(ComponentID id, StrongItemComponentPtr(*CreationFunction)())
+	static bool RegisterItemComponent(ItemComponentID id, StrongItemComponentPtr(*CreationFunction)())
 	{
 		auto find = m_itemCompCreationFunctions.find(id);
 		if (find == m_itemCompCreationFunctions.end())

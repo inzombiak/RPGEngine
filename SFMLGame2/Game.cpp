@@ -10,19 +10,14 @@ void Game::Start()
 		return;
 	m_mainWindow.create(sf::VideoMode(m_windowWidth, m_windowHeight, 32), "SFML works!");
 
-	m_playerObserver = new PlayerObserver();
+//	m_playerObserver = new PlayerObserver();
 	m_renderer = new EntityRenderer(m_mainWindow);
 	m_inputManager = new InputManager();
 	m_transformManager = new TransformManager();
 	m_itemManager = new ItemManager();
 	m_physicsManager = new PhysicsManager();
-
-	m_UI = new UI();
-	m_UI->SetPlayerMaxHP(100);
-	m_UI->SetPlayerCurrentHP(70);
-	m_UI->SetPlayerMaxStamina(60);
-	m_UI->SetPlayerCurrentStamina(50);
-
+	m_itemManager->SetEntityManager(&m_entityManager);
+	m_UI = new UIManager();
 	m_gameState = ShowingMenu;
 
 	while (m_gameState != Exiting)
@@ -46,12 +41,13 @@ void Game::ChangeLevel(int levelNumber)
 	levelLoader.CreateLevel(levelNumber);
 	m_itemManager->LoadItemCatalog("data/MainItemCatalog.xml");
 	m_entityManager.LoadEntities("");
-	
-	m_playerObserver->SetUI(m_UI);
+	m_inputManager->SetUI(m_UI);
+//	m_playerObserver->SetUI(m_UI);
 	
 	m_gameClock.restart();
 
 	m_renderer->DivideIntoLayers();
+	m_UI->PostInit();
 }
 
 float Game::GetTime()
@@ -64,23 +60,18 @@ void Game::GameLoop()
 	m_mainWindow.clear();
 	switch (m_gameState)
 	{
-
 		case Game::Playing:
 		{
 			Update();
-			Draw();
-					
+			Draw();					
 			break;
 		}
-
 		case Game::ShowingMenu:
 		{
 			ShowMenu();
 			break;
 		}
 	}
-	
-
 	m_mainWindow.display();
 }
 
@@ -98,28 +89,17 @@ void Game::Update()
 	{
 		while (m_mainWindow.pollEvent(event))
 		{
-			m_inputManager->Update(m_minTimestep, event);
+			m_inputManager->Update(m_minTimestep, event, m_mainWindow);
 			if (event.type == sf::Event::Closed)
 			{
 				m_gameState = Exiting;
-			}
-			else if (event.type == sf::Event::KeyPressed)
-			{
-				if (event.key.code == sf::Keyboard::I)
-				{
-					if (!m_IDown)
-					{
-						//m_UI->ToggleInventory();
-						//m_IDown = true;
-					}
-
-				}
 			}
 		}
 		m_transformManager->Update(m_minTimestep);
 		m_physicsManager->Update(m_minTimestep);
 		m_renderer->Update(m_minTimestep);
 		m_entityManager.Update(m_minTimestep);
+		m_UI->Update(m_minTimestep);
 		remainingTime -= m_minTimestep;
 		frames++;
 	}
@@ -145,8 +125,8 @@ void Game::Destroy()
 		delete m_physicsManager;
 	if (m_UI)
 		delete m_UI;
-	if (m_playerObserver)
-		delete m_playerObserver;
+//	if (m_playerObserver)
+//		delete m_playerObserver;
 }
 
 void Game::ShowMenu()

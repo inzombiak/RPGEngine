@@ -1,0 +1,23 @@
+﻿  UI.cpp
+c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(115): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(131): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(141): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(172): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(201): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(212): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(258): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(266): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(271): warning C4018: '<' : signed/unsigned mismatch
+  ComponentList.cpp
+c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(118): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(125): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(130): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(153): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(160): warning C4018: '<' : signed/unsigned mismatch
+c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(165): warning C4018: '<' : signed/unsigned mismatch
+  Generating Code...
+c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(33): warning C4715: 'ComponentList::LoadComponents' : not all control paths return a value
+  Compiling...
+  Main.cpp
+  Generating Code...
+  DevTool.vcxproj -> C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\DevTool.exe

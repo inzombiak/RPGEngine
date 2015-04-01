@@ -7,7 +7,7 @@ class Debug
 public:
 	static void StartTimer(std::string);
 	static void EndTimer(std::string);
-
+	static void PrintMessage(std::string);
 private:
 	Debug();
 	static std::clock_t m_clock;
