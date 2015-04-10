@@ -14,9 +14,9 @@ bool ComponentList::LoadComponents(string filename)
 	{
 		Component newComp;
 		newComp.xmlElement = pComp;
+		newComp.isItemComponent = false;
 		if (ParseComponent(pComp, newComp))
 			m_components[reinterpret_cast<int>(HashedString::hash_name(newComp.name.c_str()))] = newComp;
-		newComp.isItemComponent = false;
 		pComp = pComp->NextSiblingElement("Component");
 	}
 	tinyxml2::XMLElement* pItemComponents = pBase->FirstChildElement("Items");
@@ -25,9 +25,10 @@ bool ComponentList::LoadComponents(string filename)
 	{
 		Component newComp;
 		newComp.xmlElement = pComp;
+		newComp.isItemComponent = true;
 		if (ParseComponent(pComp, newComp))
 			m_components[reinterpret_cast<int>(HashedString::hash_name(newComp.name.c_str()))] = newComp;
-		newComp.isItemComponent = true;
+		
 		pComp = pComp->NextSiblingElement("Component");
 	}
 }
@@ -59,6 +60,7 @@ bool ComponentList::ParseComponent(XMLElement* pComp, Component& newComp)
 		if (pList->Attribute("name") && pList->Attribute("entryname"))
 		{
 			List newList;
+			ListEntry newListEntries;
 			newList.name = pList->Attribute("name");
 			newList.entryName = pList->Attribute("entryname");
 			pField = pList->FirstChildElement("Field");
@@ -69,11 +71,12 @@ bool ComponentList::ParseComponent(XMLElement* pComp, Component& newComp)
 				{
 					newField.name = pField->Attribute("name");
 					newField.valueType = pField->Attribute("type");
-					newList.fields.push_back(newField);
+					newListEntries.fields.push_back(newField);
 				}
 
 				pField = pField->NextSiblingElement("Field");
 			}
+			newList.entries.push_back(newListEntries);
 			newComp.lists.push_back(newList);
 		}
 		pList = pList->NextSiblingElement("List");
@@ -127,11 +130,11 @@ void ComponentList::AddEntryToXML(Component& component)
 		XMLElement* newList = m_componentXMLDocument.NewElement("List");
 		newList->SetAttribute("name", component.lists[i].name.c_str());
 		newList->SetAttribute("entryname", component.lists[i].entryName.c_str());
-		for (int j = 0; j < component.lists[i].fields.size(); ++j)
+		for (int j = 0; j < component.lists[i].entries[0].fields.size(); ++j)
 		{
 			XMLElement* newField = m_componentXMLDocument.NewElement("Field");
-			newField->SetAttribute("name", component.lists[i].fields[j].name.c_str());
-			newField->SetAttribute("type", component.lists[i].fields[j].valueType.c_str());
+			newField->SetAttribute("name", component.lists[i].entries[0].fields[j].name.c_str());
+			newField->SetAttribute("type", component.lists[i].entries[0].fields[j].valueType.c_str());
 			component.xmlElement->InsertEndChild(newField);
 		}
 		component.xmlElement->InsertEndChild(newList);
@@ -162,12 +165,12 @@ void ComponentList::EditEntryInXML(Component& component)
 		XMLElement* newList = m_componentXMLDocument.NewElement("List");
 		newList->SetAttribute("name", component.lists[i].name.c_str());
 		newList->SetAttribute("entryname", component.lists[i].entryName.c_str());
-		for (int j = 0; j < component.lists[i].fields.size(); ++j)
+		for (int j = 0; j < component.lists[i].entries[0].fields.size(); ++j)
 		{
 			XMLElement* newField = m_componentXMLDocument.NewElement("Field");
-			newField->SetAttribute("name", component.lists[i].fields[j].name.c_str());
-			newField->SetAttribute("type", component.lists[i].fields[j].valueType.c_str());
-			component.xmlElement->InsertEndChild(newField);
+			newField->SetAttribute("name", component.lists[i].entries[0].fields[j].name.c_str());
+			newField->SetAttribute("type", component.lists[i].entries[0].fields[j].valueType.c_str());
+			newList->InsertEndChild(newField);
 		}
 		component.xmlElement->InsertEndChild(newList);
 	}

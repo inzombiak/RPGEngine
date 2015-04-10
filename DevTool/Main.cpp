@@ -9,15 +9,14 @@
 
 #include "ComponentList.h"
 #include "SFML/Graphics.hpp"
-#include "UI.h"
+#include "UIMain.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
 	window.resetGLStates();
-	UI m_UI;
+	UIMain m_UI;
 
-	m_UI.LoadLists();
 	sf::Clock clock;
 
 	while (window.isOpen())

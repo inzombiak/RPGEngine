@@ -4,7 +4,130 @@
 #include <memory>
 #include <string>
 #include <map>
+#include "Component.h"
+#include "SFGUI\sfgui.hpp"
 
+using std::string;
+namespace Slots
+{
+	enum SlotName
+	{
+		RightHand = 0,
+		LeftHand = 1,
+		Armor = 2,
+		NaN = 3,
+	};
+	static std::map<string, SlotName> slotStringtoEnumMap =
+	{
+		{ "Right Hand", SlotName::RightHand },
+		{ "Left Hand", SlotName::LeftHand },
+		{ "Armor", SlotName::Armor },
+		{ "NaN", SlotName::NaN }
+	};
+	static std::map<SlotName, string> slotEnumtoStringMap =
+	{
+		{ SlotName::RightHand, "Right Hand" },
+		{ SlotName::LeftHand, "Left Hand" },
+		{ SlotName::Armor, "Armor" },
+		{ SlotName::NaN, "NaN" }
+	};
+};
+namespace Stats
+{
+
+	enum StatName
+	{
+		HP = 0,
+		Damage = 1,
+		Armor = 2,
+		MovementSpeed = 3,
+	};
+	static std::map<string, StatName> statStringtoEnumMap =
+	{
+		{ "HP", StatName::HP },
+		{ "Damage", StatName::Damage },
+		{ "Armor", StatName::Armor },
+		{ "Movement Speed", StatName::MovementSpeed }
+	};
+	static std::map<StatName, string> statEnumtoStringMap =
+	{
+		{ StatName::HP, "HP" },
+		{ StatName::Damage, "Damage" },
+		{ StatName::Armor, "Armor" },
+		{ StatName::MovementSpeed, "Movement Speed" }
+	};
+};
+
+namespace UtilityFormFunctions
+{
+	/*
+	Creates a widget based on valueType, value. Optional vector used for widgets that are made up of a dynamic list(entities/items)
+	*/
+	inline sfg::Widget::Ptr AddComponentWidgetToBox(string& valueType, string& value, sfg::Box::Ptr fieldBox, std::vector<string>& valueList = std::vector<string>())
+	{
+		//TODO: Use a template or something instead of if
+		if (valueType.compare("stat") == 0)
+		{
+			sfg::ComboBox::Ptr statBox = sfg::ComboBox::Create();
+
+			for (auto it = Stats::statEnumtoStringMap.begin(); it != Stats::statEnumtoStringMap.end(); ++it)
+			{
+				statBox->AppendItem(it->second);
+			}
+			statBox->SelectItem(Stats::statStringtoEnumMap[value]);
+			fieldBox->Pack(statBox);
+			return statBox;
+		}
+		else if (valueType.compare("slot") == 0)
+		{
+			sfg::ComboBox::Ptr slotBox = sfg::ComboBox::Create();
+
+			for (auto it = Slots::slotEnumtoStringMap.begin(); it != Slots::slotEnumtoStringMap.end(); ++it)
+			{
+				slotBox->AppendItem(it->second);
+			}
+			slotBox->SelectItem(Slots::slotStringtoEnumMap[value]);
+			fieldBox->Pack(slotBox);
+			return slotBox;
+		}
+		else if (valueType.compare("item") == 0)
+		{
+			sfg::ComboBox::Ptr itemBox = sfg::ComboBox::Create();
+
+			for (int i = 0; i < valueList.size(); ++i)
+			{
+				itemBox->AppendItem(valueList[i]);
+				if (value.compare(valueList[i]) == 0)
+					itemBox->SelectItem(i);
+			}
+			
+			fieldBox->Pack(itemBox);
+			return itemBox;
+		}
+
+		sfg::Entry::Ptr entry = sfg::Entry::Create();
+		entry->SetText(value);
+		fieldBox->Pack(entry);
+		return entry;
+	};
+	inline string GetTextFromWidget(sfg::Widget::Ptr widget)
+	{
+		string widgetClass = widget->GetName();
+		if (widgetClass.compare("ComboBox") == 0)
+		{
+			return std::dynamic_pointer_cast<sfg::ComboBox, sfg::Widget>(widget)->GetSelectedText();
+		}
+		else if (widgetClass.compare("Entry") == 0)
+		{
+			return std::dynamic_pointer_cast<sfg::Entry, sfg::Widget>(widget)->GetText();
+		}
+		else if (widgetClass.compare("Label") == 0)
+		{
+			return std::dynamic_pointer_cast<sfg::Label, sfg::Widget>(widget)->GetText();
+		}
+		return "";
+	}
+}
 
 //Taken from GCC4 - https://code.google.com/p/gamecode4/source/browse/trunk/Source/GCC4/Utilities/String.h
 class HashedString
@@ -123,6 +246,7 @@ private:
 	void *             m_ident;
 	std::string                m_identStr;
 };
+
 
 
 #endif

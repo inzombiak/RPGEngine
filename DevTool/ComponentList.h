@@ -14,8 +14,6 @@ using std::vector;
 using std::string;
 using tinyxml2::XMLElement;
 
-typedef  std::map< int, Component > ComponentMap;
-
 class ComponentList
 {
 public:

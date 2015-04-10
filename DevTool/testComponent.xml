@@ -24,7 +24,7 @@
             <Field name="drop" type="bool"/>
             <Field name="maxsize" type="int"/>
             <List name="Items" entryname="Item">
-                <Field name="name" type="item"/>
+                <Field name="itemname" type="item"/>
                 <Field name="quantity" type="int"/>
             </List>
         </Component>
@@ -52,6 +52,7 @@
             <Field name="quantity" type="int"/>
             <Field name="persistent" type="bool"/>
         </Component>
+		<Component name = "PlayerObserverComponent"/>
     </Entities>
     <Items>
         <Component name="BaseItemComponent">
@@ -72,7 +73,7 @@
             <Field name="depth" type="int"/>
         </Component>
         <Component name="EquipableItemComponent">
-            <Field name="slot" value="slot"/>
+            <Field name="slot" type="slot"/>
             <List name="Modifiers" entryname="Modifier">
                 <Field name="name" type="stat"/>
                 <Field name="effect" type="float"/>

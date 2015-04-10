@@ -1,23 +1,50 @@
-﻿  UI.cpp
-c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(115): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(131): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(141): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(172): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(201): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(212): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(258): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(266): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\ui.cpp(271): warning C4018: '<' : signed/unsigned mismatch
-  ComponentList.cpp
-c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(118): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(125): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(130): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(153): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(160): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(165): warning C4018: '<' : signed/unsigned mismatch
-  Generating Code...
-c:\users\zareh\documents\github\sfmlgame2\devtool\componentlist.cpp(33): warning C4715: 'ComponentList::LoadComponents' : not all control paths return a value
-  Compiling...
-  Main.cpp
-  Generating Code...
+﻿  LINK : C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\DevTool.exe not found or not built by the last incremental link; performing full link
+sfml-graphics-s-d.lib(BlendMode.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(BlendMode.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Color.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(Color.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Font.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(Font.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(GLCheck.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(GLCheck.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(GLExtensions.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(GLExtensions.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Image.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(Image.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(ImageLoader.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(ImageLoader.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(RenderTexture.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(RenderTexture.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(RenderTarget.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(RenderTarget.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(RenderWindow.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(RenderWindow.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Shader.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(Shader.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Texture.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(Texture.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(TextureSaver.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(TextureSaver.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Transform.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(Transform.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Transformable.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(Transformable.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(View.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(View.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Vertex.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(Vertex.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(Text.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(Text.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(VertexArray.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(VertexArray.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(RenderTextureImpl.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(RenderTextureImpl.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(RenderTextureImplFBO.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(RenderTextureImplFBO.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-graphics-s-d.lib(RenderTextureImplDefault.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-graphics-s-d.lib(RenderTextureImplDefault.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(Clock.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(Clock.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(Err.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(Err.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(Lock.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(Lock.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(Mutex.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(Mutex.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(Sleep.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(Sleep.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(String.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(String.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(ThreadLocal.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(ThreadLocal.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(Time.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(Time.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(ClockImpl.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(ClockImpl.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(MutexImpl.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(MutexImpl.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(SleepImpl.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(SleepImpl.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-system-s-d.lib(ThreadLocalImpl.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-system-s-d.lib(ThreadLocalImpl.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(Context.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(Context.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(GlContext.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(GlContext.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(GlResource.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(GlResource.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(Joystick.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(Joystick.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(JoystickManager.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(JoystickManager.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(SensorManager.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(SensorManager.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(VideoMode.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(VideoMode.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(Window.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(Window.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(WindowImpl.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(WindowImpl.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(WglContext.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(WglContext.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(JoystickImpl.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(JoystickImpl.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(SensorImpl.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(SensorImpl.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(VideoModeImpl.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(VideoModeImpl.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
+sfml-window-s-d.lib(WindowImplWin32.cpp.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'sfml-window-s-d.lib(WindowImplWin32.cpp.obj)' or at 'C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\vc120.pdb'; linking object as if no debug info
   DevTool.vcxproj -> C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\DevTool.exe

@@ -159,7 +159,9 @@
   <ItemGroup>
     <ClCompile Include="ComponentList.cpp" />
     <ClCompile Include="EntityList.cpp" />
+    <ClCompile Include="EntityPageUI.cpp" />
     <ClCompile Include="ItemList.cpp" />
+    <ClCompile Include="ItemPageUI.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="ComponentPageUI.cpp" />
@@ -170,7 +172,9 @@
     <ClInclude Include="ComponentList.h" />
     <ClInclude Include="custom_defininitions.h" />
     <ClInclude Include="EntityList.h" />
+    <ClInclude Include="EntityPageUI.h" />
     <ClInclude Include="ItemList.h" />
+    <ClInclude Include="ItemPageUI.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="ComponentPageUI.h" />
     <ClInclude Include="UIMain.h" />

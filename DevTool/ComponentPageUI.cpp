@@ -13,11 +13,11 @@ ComponentPageUI::ComponentPageUI()
 	m_addListBtn = sfg::Button::Create();
 	m_addListFieldButton = sfg::Button::Create();
 	m_isItemComponentCheckBtn = sfg::CheckButton::Create("Is Item Component?");
-	m_componentListCombo = sfg::ComboBox::Create();
+	m_componentComboBox = sfg::ComboBox::Create();
 	
 	auto comboText = sfg::Label::Create();
 	comboText->SetText("Select a Component to edit or click New to create a new component");
-	m_componentListCombo->GetSignal(sfg::ComboBox::OnSelect).Connect(std::bind(&ComponentPageUI::OnComponentComboSelect, this));
+	m_componentComboBox->GetSignal(sfg::ComboBox::OnSelect).Connect(std::bind(&ComponentPageUI::OnComponentComboSelect, this));
 	m_saveComponentBtn->SetLabel("Save");
 	m_saveComponentBtn->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&ComponentPageUI::OnSaveComponentClick, this));
 	m_addNewComponent->SetLabel("Add New Component");
@@ -30,7 +30,10 @@ ComponentPageUI::ComponentPageUI()
 	m_addListFieldButton->GetSignal(sfg::Widget::OnLeftClick).Connect(std::bind(&ComponentPageUI::OnAddListFieldClick, this));
 
 	m_componentSelectBox->Pack(comboText);
-	m_componentSelectBox->Pack(m_componentListCombo, false);
+	m_componentSelectBox->Pack(m_componentComboBox, false);
+	m_componentMainBox->Pack(m_componentSelectBox, false);
+	m_componentMainBox->Pack(m_addNewComponent,false);
+	m_componentMainBox->Pack(m_componentEditBox, false);
 }
 
 sfg::Box::Ptr ComponentPageUI::GetPage()
@@ -38,14 +41,13 @@ sfg::Box::Ptr ComponentPageUI::GetPage()
 	return m_componentMainBox;
 }
 
-void ComponentPageUI::HandleEvent(sf::Event event)
+void ComponentPageUI::Update(float dt)
 {
-	m_guiWindow->HandleEvent(event);
 	if (m_clearForm)
 	{
 		m_componentEditBox->RemoveAll();
 		m_fieldTable->RemoveAll();
-		m_listTable->RemoveAll(); 
+		m_listTable->RemoveAll();
 		m_clearForm = false;
 	}
 	if (m_updateForm)
@@ -55,35 +57,18 @@ void ComponentPageUI::HandleEvent(sf::Event event)
 	}
 }
 
-void ComponentPageUI::Update(float dt)
-{
-	m_guiWindow->Update(dt);
-}
-
-void ComponentPageUI::Draw(sf::RenderWindow& rw)
-{
-	sfgui.Display(rw);
-}
-
-bool ComponentPageUI::LoadList(string filepath)
-{
-	m_componentList.LoadComponents(filepath);
-	PopulateTable();
-	return true;
-}
-
-void ComponentPageUI::PopulateTable()
+void ComponentPageUI::PopulateComboBox()
 {
 	ComponentMap components;
-	m_componentList.GetComponents(components);
+	m_componentList->GetComponents(components);
 	
 	for (ComponentMap::iterator i = components.begin(); i != components.end(); ++i)
 	{
-		m_componentListCombo->AppendItem(i->second.name);
+		m_componentComboBox->AppendItem(i->second.name);
 	}
 	
 	m_saveComponentBtn->Show(false);
-	m_componentMainBox->Pack(m_saveComponentBtn);
+	m_componentMainBox->Pack(m_saveComponentBtn, false);
 }
 
 void ComponentPageUI::GenerateForm(Component& comp)
@@ -127,12 +112,12 @@ void ComponentPageUI::GenerateForm(Component& comp)
 		m_listEntries.push_back(std::pair<sfg::Entry::Ptr, sfg::Entry::Ptr>(listNameEntry, listEntryNameEntry));
 
 		vector<std::pair<sfg::Entry::Ptr, sfg::Entry::Ptr>> listFields;
-		for (int i = 0; i < currList.fields.size(); ++i)
+		for (int i = 0; i < currList.entries[0].fields.size(); ++i)
 		{
 			auto fieldNameLabel = sfg::Label::Create("Name");
 			auto fieldTypeLabel = sfg::Label::Create("Type");
-			auto fieldNameEntry = sfg::Entry::Create(currList.fields[i].name);
-			auto fieldTypeEntry = sfg::Entry::Create(currList.fields[i].valueType);
+			auto fieldNameEntry = sfg::Entry::Create(currList.entries[0].fields[i].name);
+			auto fieldTypeEntry = sfg::Entry::Create(currList.entries[0].fields[i].valueType);
 			listFields.push_back(std::pair<sfg::Entry::Ptr, sfg::Entry::Ptr>(fieldNameEntry, fieldTypeEntry));
 		}
 		m_listFieldEntries.push_back(listFields);
@@ -156,7 +141,7 @@ void ComponentPageUI::AddFormToPage()
 	auto fieldsBox = sfg::Box::Create();
 	fieldsBox->Pack(sfg::Label::Create("Fields"));
 	fieldsBox->Pack(m_addFieldBtn);
-	m_componentEditBox->Pack(fieldsBox);
+	m_componentEditBox->Pack(fieldsBox, false);
 
 	for (i = 0; i < m_fieldEntries.size(); ++i)
 	{
@@ -180,12 +165,12 @@ void ComponentPageUI::AddFormToPage()
 	if (m_listEntries.size() == 0)
 	{
 		listBox->Pack(m_addListBtn);
-		m_componentEditBox->Pack(listBox);
+		m_componentEditBox->Pack(listBox, false);
 		return;
 	}
 	
 	listBox->Pack(m_addListFieldButton);
-	m_componentEditBox->Pack(listBox);
+	m_componentEditBox->Pack(listBox, false);
 
 	for (i = 0; i < m_listEntries.size(); ++i)
 	{
@@ -219,10 +204,10 @@ void ComponentPageUI::AddFormToPage()
 
 void ComponentPageUI::OnComponentComboSelect()
 {
-	string compName = m_componentListCombo->GetSelectedText();
+	string compName = m_componentComboBox->GetSelectedText();
 	int id = reinterpret_cast<int>(HashedString::hash_name(compName.c_str()));
 	Component selectedComp;
-	if (!m_componentList.GetComponentByID(id, selectedComp))
+	if (!m_componentList->GetComponentByID(id, selectedComp))
 		return;
 	GenerateForm(selectedComp);
 	m_saveComponentBtn->Show(true);
@@ -251,25 +236,28 @@ void ComponentPageUI::OnSaveComponentClick()
 		newField.valueType = m_fieldEntries[i].second->GetText();
 		component.fields.push_back(newField);
 	}
-
+	
+	
 	for (int i = 0; i < m_listEntries.size(); ++i)
 	{
 		List newList;
 		newList.name = m_listEntries[i].first->GetText();
 		newList.entryName = m_listEntries[i].second->GetText();
+		ListEntry newListEntry;
 		for (int j = 0; j < m_listFieldEntries[i].size(); ++j)
 		{
 			Field newField;
 			newField.name = m_listFieldEntries[i][j].first->GetText();
 			newField.valueType = m_listFieldEntries[i][j].second->GetText();
-			newList.fields.push_back(newField);
+			newListEntry.fields.push_back(newField);
 		}
+		newList.entries.push_back(newListEntry);
 		component.lists.push_back(newList);
 	}
-	m_componentList.SetComponentByID(reinterpret_cast<int>(HashedString::hash_name(component.name.c_str())), component);
-	while (m_componentListCombo->GetItemCount() > 0)
-		m_componentListCombo->RemoveItem(0);
-	PopulateTable();
+	m_componentList->SetComponentByID(reinterpret_cast<int>(HashedString::hash_name(component.name.c_str())), component);
+	while (m_componentComboBox->GetItemCount() > 0)
+		m_componentComboBox->RemoveItem(0);
+	PopulateComboBox();
 	m_saveComponentBtn->Show(true);
 }
 

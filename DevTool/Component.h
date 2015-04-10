@@ -11,23 +11,31 @@ using std::vector;
 using tinyxml2::XMLElement;
 
 /*
-Defines XML attribute
+Defines XMLElement attribute
 */
 struct Field
 {
 	string name;
 	string valueType;
+	string value;
 };
+
+struct ListEntry
+{
+	vector<Field> fields;
+};
+
 /*
 Used for defining components that have lists, i.e. InventoryComponent or EquipmentComponent
 */
-
 struct List
 {
 	string name; //Name of the list
 	string entryName; // Name of entries in the list
-	vector<Field> fields; //Entries fields;
+	vector<ListEntry> entries; //Entries fields;
 };
+
+
 
 struct Component
 {
@@ -38,3 +46,5 @@ struct Component
 	vector<List> lists;
 };
 
+
+typedef  std::map< int, Component > ComponentMap;
