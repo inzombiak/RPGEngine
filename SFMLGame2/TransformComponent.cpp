@@ -38,7 +38,8 @@ void TransformComponent::Update(double dt)
 	StrongComponentPtr strongCollisionPtr = ConvertToStrongPtr(weakCollisionPtr);
 	std::shared_ptr<CollisionComponent> collisionBox = CastComponentToDerived<StrongComponentPtr, CollisionComponent>(strongCollisionPtr);
 	sf::FloatRect oldBounds = collisionBox->GetBounds();
-	collisionBox->SetBounds(sf::FloatRect(m_position.x, m_position.y, oldBounds.width, oldBounds.height));
+	collisionBox->SetBounds(sf::FloatRect(oldBounds.left + dt*m_speed.x, oldBounds.top+ dt*m_speed.y, oldBounds.width, oldBounds.height));
+	return;
 }
 
 void TransformComponent::SetPosition(const sf::Vector2f position)

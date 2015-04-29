@@ -19,12 +19,14 @@ public:
 	//Returns true if slot exists otherwise returns false;
 	bool HasSlot(Equipment::SlotName slot);
 	/*
-	Returns true if slot exists and an item was equiped and places it in the provided arguement, otherwise returns false if slot doesn't exist or no item was equipped
+	Returns true if slot exists and an item was equiped and places it in the provided arguement, 
+	otherwise returns false if slot doesn't exist or no item was equipped
 	*/
 	bool Equip(Equipment::SlotName slot, Item item, Item& prevItem);
 	/*
 	Recommend using HasSlot before calling
-	Returns true if slot exists and an item was equiped and places ID of item in the provided arguement, otherwise returns false if slot does not exist
+	Returns true if slot exists and an item was equiped and places ID of item in the provided arguement, 
+	otherwise returns false if slot does not exist
 	*/
 	bool Unequip(Equipment::SlotName slot, Item& item);
 

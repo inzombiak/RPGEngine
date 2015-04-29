@@ -158,6 +158,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Algorithms.cpp" />
+    <ClCompile Include="AnimationComponent.cpp" />
+    <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="ComponenetFactory.cpp" />
     <ClCompile Include="ComponentBase.cpp" />
@@ -170,11 +172,15 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="IScriptComponent.cpp" />
+    <ClCompile Include="MovementScriptComponent.cpp" />
+    <ClCompile Include="ScriptExports.cpp" />
     <ClCompile Include="InventoryComponent.cpp" />
     <ClCompile Include="ItemComponent.cpp" />
     <ClCompile Include="ItemOptionsMenu.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
+    <ClCompile Include="LuaStateManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
@@ -182,6 +188,7 @@
     <ClCompile Include="PickupComponent.cpp" />
     <ClCompile Include="PlayerObserver.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
+    <ClCompile Include="ScriptManager.cpp" />
     <ClCompile Include="StatComponent.cpp" />
     <ClCompile Include="tinyxml2.cpp" />
     <ClCompile Include="TransformComponent.cpp" />
@@ -191,6 +198,8 @@
     <ClCompile Include="VitalsComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationComponent.h" />
+    <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="ComponentBase.h" />
@@ -205,15 +214,20 @@
     <ClInclude Include="Algorithms.h" />
     <ClInclude Include="Debug.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="IScriptComponent.h" />
+    <ClInclude Include="MovementScriptComponent.h" />
+    <ClInclude Include="ScriptExports.h" />
     <ClInclude Include="InventoryComponent.h" />
     <ClInclude Include="ItemManager.h" />
     <ClInclude Include="ItemOptionsMenu.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="LuaStateManager.h" />
     <ClInclude Include="PhysicsManager.h" />
     <ClInclude Include="PickupComponent.h" />
     <ClInclude Include="PlayerObserver.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="ScriptManager.h" />
     <ClInclude Include="StatComponent.h" />
     <ClInclude Include="tinyxml2.h" />
     <ClInclude Include="TransformComponent.h" />

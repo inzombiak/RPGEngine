@@ -34,7 +34,7 @@ private:
 	bool LoadLevel();
 	void CreateTile(int, int, string);
 	void CreateTile(int, int, int, int, string);
-	void GenerateObject(string, int[]);
+	void GenerateObject(tinyxml2::XMLElement*, string);
 
 	enum LayerType { ObjectLayer, TileLayer };
 

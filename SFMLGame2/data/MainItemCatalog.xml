@@ -11,8 +11,8 @@
 		<Component name  = "RestorationItemComponent" effect = "Mana" amount = "10"/>
 		<Component name  = "ItemRenderComponent" filepath = "data/Item Icons/blue-potion.png" visible = "1" depth = "2"/>
 	</Item>
-	<Item name = "derp Potion">
-		<Component name  = "BaseItemComponent" itemname = "derp Potion" description = "Recover derp" />
+	<Item name = "White Potion">
+		<Component name  = "BaseItemComponent" itemname = "White Potion" description = "Recover derp" />
 		<Component name  = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
 		<Component name  = "RestorationItemComponent" effect = "Mana" amount = "10"/>
 		<Component name  = "ItemRenderComponent" filepath = "data/Item Icons/white-potion.png" visible = "1" depth = "2"/>

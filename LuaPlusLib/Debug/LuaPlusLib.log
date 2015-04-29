@@ -1,0 +1,54 @@
+﻿  LuaTableIterator.cpp
+  LuaState_DumpObject.cpp
+  LuaStateOutFile.cpp
+  LuaState.cpp
+  LuaPlus_Libs.cpp
+  LuaPlusFunctions.cpp
+  LuaPlus.cpp
+  LuaObject.cpp
+  Generating Code...
+  print.c
+  lzio.c
+  lvm.c
+  lundump.c
+  ltm.c
+  ltablib.c
+  ltable.c
+  lstrlib.c
+  lstring.c
+  lstate.c
+  lparser.c
+  loslib.c
+  lopcodes.c
+  lobject.c
+  loadlib.c
+c:\users\zareh\documents\github\sfmlgame2\luapluslib\src\loadlib.c(190): warning C4996: 'access': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _access. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\io.h(323) : see declaration of 'access'
+c:\users\zareh\documents\github\sfmlgame2\luapluslib\src\loadlib.c(272): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(253) : see declaration of 'stricmp'
+  lmem.c
+  lmathlib.c
+  llex.c
+  liolib.c
+  linit.c
+  Generating Code...
+  Compiling...
+  lgc.c
+  lfunc.c
+  ldump.c
+  ldo.c
+  ldebug.c
+  ldblib.c
+  lcode.c
+  lbaselib.c
+  lauxlib.c
+  lapi.c
+  popen.c
+c:\users\zareh\documents\github\sfmlgame2\luapluslib\popen.c(109): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strlwr. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(254) : see declaration of 'strlwr'
+c:\users\zareh\documents\github\sfmlgame2\luapluslib\popen.c(167): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strlwr. See online help for details.
+          c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(254) : see declaration of 'strlwr'
+  lwstrlib.c
+  LuaPlusAddons.c
+  Generating Code...
+  LuaPlusLib.vcxproj -> C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\LUAPlus.lib

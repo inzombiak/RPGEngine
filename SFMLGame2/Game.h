@@ -16,6 +16,8 @@
 #include "ItemManager.h"
 #include "EntityRenderer.h"
 #include "PhysicsManager.h"
+#include "ScriptManager.h"
+#include "AnimationManager.h"
 
 #include "UIManager.h"
 #include "Player.h"
@@ -55,6 +57,8 @@ private:
 	TransformManager* m_transformManager;
 	ItemManager* m_itemManager;
 	PhysicsManager* m_physicsManager;
+	ScriptManager* m_scriptManager;
+	AnimationManager* m_animationManager;
 
 	UIManager* m_UI;
 	//PlayerObserver* m_playerObserver;

@@ -18,24 +18,25 @@ void PhysicsManager::Update(float dt)
 		{
 			(*it)->Update(dt);
 			++it;
-		}
-			
+		}	
 	}
 
 	for (int i = 0; i < m_collisionComponents.size(); ++i)
 	{
-		for (int j = i; j < m_collisionComponents.size(); ++j)
-		{
-			if (i != j)
-				if (CheckCollision(m_collisionComponents[i]->GetBounds(), m_collisionComponents[j]->GetBounds()))
-				{
-					if (m_collisionComponents[i]->GetIsSolid() && m_collisionComponents[j]->GetIsSolid())
-						ResolveCollision(m_collisionComponents[i], m_collisionComponents[j]);
-					m_collisionComponents[i]->ApplyCollision(ConvertToStrongPtr(m_collisionComponents[j]->GetOwner()));
-					Debug::PrintMessage("Collision");
-					m_collisionComponents[j]->ApplyCollision(ConvertToStrongPtr(m_collisionComponents[i]->GetOwner()));
-				}
-		}
+		if (m_collisionComponents[i]->GetInUse())
+			for (int j = 0; j < m_collisionComponents.size(); ++j)
+			{
+				if(m_collisionComponents[j]->GetInUse())
+					if (i != j)
+						if (CheckCollision(m_collisionComponents[i]->GetBounds(), m_collisionComponents[j]->GetBounds()))
+						{
+							if (m_collisionComponents[i]->GetIsSolid() && m_collisionComponents[j]->GetIsSolid())
+								ResolveCollision(m_collisionComponents[i], m_collisionComponents[j]);
+							m_collisionComponents[i]->ApplyCollision(ConvertToStrongPtr(m_collisionComponents[j]->GetOwner()));
+							Debug::PrintMessage("Collision");
+							m_collisionComponents[j]->ApplyCollision(ConvertToStrongPtr(m_collisionComponents[i]->GetOwner()));
+						}
+			}
 	}
 }
 
@@ -99,7 +100,7 @@ void PhysicsManager::ResolveCollision(std::shared_ptr<CollisionComponent>& obj1,
 			xOverlap *= -1;
 		}
 	}
- 	obj1->UpdatePosition(sf::Vector2f(obj1->GetBounds().left + xOverlap, obj1->GetBounds().top + yOverlap));
+ 	obj1->UpdatePosition(sf::Vector2f(xOverlap,yOverlap));
 }
 
 //void PhysicsManager::ResolveCollision(std::shared_ptr<CollisionComponent>& obj1, std::shared_ptr<CollisionComponent>& obj2)

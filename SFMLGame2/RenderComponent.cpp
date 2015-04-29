@@ -84,6 +84,7 @@ const sf::Sprite& RenderComponent::GetSprite() const
 void RenderComponent::SetTextureRect(const sf::Rect<int> textureBounds)
 {
 	m_textureBounds = textureBounds;
+	m_sprite.setTextureRect(m_textureBounds);
 }
 const sf::Rect<int> RenderComponent::GetTextureRect() const
 {

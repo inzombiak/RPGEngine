@@ -1,6 +1,7 @@
 #include "InputComponent.h"
 #include "TransformComponent.h"
 #include "PlayerObserverComponent.h"
+#include "AnimationComponent.h"
 #include "SFML\Window.hpp"
 #include "Entity.h"
 

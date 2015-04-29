@@ -613,6 +613,10 @@
  </layer>
  <objectgroup name="Collision" width="20" height="15">
   <object name="1" x="247" y="229" width="15" height="24"/>
+  <object name="2" x="192" y="342" width="321" height="10"/>
+  <object name="3" x="114" y="65">
+   <polyline points="0,0 30,12 38,27 36,45 44,71 44,93 24,120 -5,127 -28,118 -51,121 -71,114 -77,96 -81,76 -76,62 -79,48 -71,21 -55,6 -41,7 -26,7 -10,0 0,0"/>
+  </object>
  </objectgroup>
  <objectgroup name="Interactive" width="20" height="15">
   <object name="Door1" x="459" y="123" width="42" height="35"/>

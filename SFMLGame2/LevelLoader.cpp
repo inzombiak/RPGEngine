@@ -122,14 +122,8 @@ bool LevelLoader::LoadLevel()
 
 		while (pObject != nullptr)
 		{
-			values[0] = pObject->IntAttribute("x");
-			values[1] = pObject->IntAttribute("y");
-			values[2] = pObject->IntAttribute("width");
-			values[3] = pObject->IntAttribute("height");
-
-			GenerateObject(layerName, values);
-
-			pObject = pObjectGroup->NextSiblingElement("object");
+			GenerateObject(pObject, layerName);
+			pObject = pObject->NextSiblingElement("object");
 		}
 
 		pObjectGroup = pRoot->NextSiblingElement("objectGroup");
@@ -198,13 +192,21 @@ void LevelLoader::CreateTile(int worldIndex, int tileIndex, int width, int heigh
 	newEntity->PostInit();
 }
 
-void LevelLoader::GenerateObject(string layerName, int values[])
+void LevelLoader::GenerateObject(XMLElement* pObject, string layerName)
 {
 	StrongEntityPtr newObject;
+	int values[4];
+	values[0] = pObject->IntAttribute("x");
+	values[1] = pObject->IntAttribute("y");
+	values[2] = pObject->IntAttribute("width");
+	values[3] = pObject->IntAttribute("height");
 
 	if (layerName == "Collision")
 	{
-		EntityFactory::GetInstance()->CreateCollisionEntity(sf::Vector2f(values[0], values[1]), sf::Vector2f(values[2], values[3]), 1, m_entityManager.CreateEntity());
+		auto pPolyline = pObject->FirstChildElement("polyline");
+		if (!pPolyline)
+			EntityFactory::GetInstance()->CreateCollisionEntity(sf::Vector2f(values[0], values[1]), sf::Vector2f(values[2], values[3]), 1, m_entityManager.CreateEntity());
+
 	}
 
 	return;

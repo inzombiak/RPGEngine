@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 #include <map>
 using std::string;
 namespace Equipment
@@ -215,5 +216,29 @@ private:
 	std::string                m_identStr;
 };
 
+
+
+//Based on GCC4 implementation
+inline void SplitString(const string& str, std::vector<string>& targetVec, char delimeter)
+{
+	targetVec.clear();
+	size_t strLength = str.size();
+
+	if (strLength == 0)
+		return;
+	
+	size_t startIndex = 0;
+	size_t delimIndex = str.find_first_of(delimeter, startIndex);
+	while (delimIndex != string::npos)
+	{
+		targetVec.push_back(str.substr(startIndex, delimIndex-startIndex));
+		startIndex = delimIndex + 1;
+		if (startIndex > strLength)
+			break;
+		delimIndex = str.find_first_of(delimeter, startIndex);
+	}
+	if (startIndex < strLength)
+		targetVec.push_back(str.substr(startIndex));
+}
 
 #endif

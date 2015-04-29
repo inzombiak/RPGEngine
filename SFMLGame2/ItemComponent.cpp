@@ -89,15 +89,12 @@ bool ItemRenderComponent::Init(const XMLElement* componentNode)
 
 bool BaseItemComponent::Init(const XMLElement* componentNode)
 {
-	if (!componentNode->Attribute("name"))
+	if (!componentNode->Attribute("itemname"))
 		return false;
-	m_name = componentNode->Attribute("name");
+	m_name = componentNode->Attribute("itemname");
 	if (!componentNode->Attribute("description"))
 		return false;
 	m_description = componentNode->Attribute("description");
-	/*if (!componentNode->Attribute("iconfilepath"))
-		return false;
-		m_iconFilepath = componentNode->Attribute("iconfilepath");*/
 	return true;
 
 }

@@ -44,9 +44,6 @@ void CollisionComponent::Update(float dt)
 	if (weakCompPtr.expired())
 		return;
 	StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(weakCompPtr);
-	std::shared_ptr<TransformComponent> transComp = CastComponentToDerived<StrongComponentPtr, TransformComponent>(compPtr);
-	m_bounds.left = transComp->GetPosition().x;
-	m_bounds.top = transComp->GetPosition().y;
 }
 
 void CollisionComponent::UpdatePosition(sf::Vector2f newPosition)
@@ -60,9 +57,10 @@ void CollisionComponent::UpdatePosition(sf::Vector2f newPosition)
 	std::shared_ptr<TransformComponent> transComp = CastComponentToDerived<StrongComponentPtr, TransformComponent>(compPtr);
 	if (!transComp->GetMovable())
 		return;
-	transComp->SetPosition(newPosition);
-	m_bounds.left = newPosition.x;
-	m_bounds.top = newPosition.y;
+	auto oldTransform = transComp->GetPosition();
+	transComp->SetPosition(sf::Vector2f(oldTransform.x + newPosition.x, oldTransform.y + newPosition.y));
+	m_bounds.left += newPosition.x;
+	m_bounds.top += newPosition.y;
 
 	
 }

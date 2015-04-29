@@ -15,6 +15,8 @@
 #include "VitalsComponent.h"
 #include "StatComponent.h"
 #include "EquipmentComponent.h"
+#include "MovementScriptComponent.h"
+#include "AnimationComponent.h"
 
 #include "UIManager.h"
 #include "TransformManager.h"
@@ -23,6 +25,8 @@
 #include "ItemManager.h"
 #include "EntityManager.h"
 #include "PhysicsManager.h"
+#include "ScriptManager.h"
+#include "AnimationManager.h"
 
 EntityFactory::EntityFactory()
 {
@@ -36,6 +40,8 @@ EntityFactory::EntityFactory()
 	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(PlayerObserverComponent::COMPONENT_NAME), UIManager::CreatePlayerObserverComponent);
 	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(VitalsComponent::COMPONENT_NAME), EntityManager::CreateVitalsComponent);
 	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(StatComponent::COMPONENT_NAME), EntityManager::CreateStatComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(MovementScriptComponent::COMPONENT_NAME), ScriptManager::CreateMovementScriptComponent);
+	ComponentFactory::RegisterEntityComponent(ComponentBase::GetIDFromName(AnimationComponent::COMPONENT_NAME), AnimationManager::CreateAnimationComponent);
 }
 
 bool EntityFactory::CreateEntity(XMLElement* currEntityNode, StrongEntityPtr newEntity)

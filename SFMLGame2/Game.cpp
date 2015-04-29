@@ -1,4 +1,5 @@
 #include "game.h"
+#include "LuaStateManager.h"
 #include <iostream>
 
 using std::cout;
@@ -9,13 +10,15 @@ void Game::Start()
 	if (m_gameState != Uninitialized)
 		return;
 	m_mainWindow.create(sf::VideoMode(m_windowWidth, m_windowHeight, 32), "SFML works!");
-
+	LuaStateManager::Create();
 //	m_playerObserver = new PlayerObserver();
 	m_renderer = new EntityRenderer(m_mainWindow);
 	m_inputManager = new InputManager();
 	m_transformManager = new TransformManager();
 	m_itemManager = new ItemManager();
 	m_physicsManager = new PhysicsManager();
+	m_scriptManager = new ScriptManager();
+	m_animationManager - new AnimationManager();
 	m_itemManager->SetEntityManager(&m_entityManager);
 	m_UI = new UIManager();
 	m_gameState = ShowingMenu;
@@ -97,7 +100,9 @@ void Game::Update()
 		}
 		m_transformManager->Update(m_minTimestep);
 		m_physicsManager->Update(m_minTimestep);
+		m_animationManager->Update(m_minTimestep);
 		m_renderer->Update(m_minTimestep);
+		m_scriptManager->Update(m_minTimestep);
 		m_entityManager.Update(m_minTimestep);
 		m_UI->Update(m_minTimestep);
 		remainingTime -= m_minTimestep;
@@ -125,6 +130,10 @@ void Game::Destroy()
 		delete m_physicsManager;
 	if (m_UI)
 		delete m_UI;
+	if (m_scriptManager)
+		delete m_scriptManager;
+	if (m_animationManager)
+		delete m_animationManager;
 //	if (m_playerObserver)
 //		delete m_playerObserver;
 }

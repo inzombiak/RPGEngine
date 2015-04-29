@@ -2,8 +2,8 @@
 	<Entities>
 		<Entity name = "Player">
 			<Component name = "TransformComponent" x = "200" y = "200" vx = "0" vy = "0" movable = "1"></Component>
-			<Component name = "RenderComponent" filepath = "data/player.png"  visible = "1" depth = "1"></Component>
-			<Component name = "CollisionComponent" x = "200" y = "200" width = "" height = "" solid = "1"/>
+			<Component name = "RenderComponent" filepath = "data/playerAnimTest.png" visible = "1" depth = "1"/>
+			<Component name = "CollisionComponent" x = "200" y = "240" width = "24" height = "20" solid = "1"/>
 			<Component name = "InputComponent"/>
 			<Component name = "InventoryComponent" drop = "0" maxsize = "100">
 				<Items>
@@ -30,18 +30,24 @@
 					<Vital type = "Stamina" current = "100" max = "100"/>
 				</Vitals>
 			</Component>
+			<Component name = "AnimationComponent" sprites = "data/playerN_NW.sprites" animations = "data/playerN_NWAnim.anim">
+				<Animations>
+					<Animation name = "N" message = "Idle" />
+					<Animation name = "NW" message = "Walk" />
+				</Animations>
+			</Component>
 			<Component name = "PlayerObserverComponent"/>
 		</Entity>
 		<Entity name = "Healing Potion">
-			<Component name = "TransformComponent" x = "300" y = "300" vx = "0" vy = "0" movable = "0"></Component>
+			<Component name = "TransformComponent" x = "200" y = "300" vx = "0" vy = "0" movable = "0"></Component>
 			<Component name = "RenderComponent" filepath = "data/Item Icons/red-potion.png" visible = "1" depth = "1"></Component>
-			<Component name = "CollisionComponent" x = "300" y = "300" width = "" height = "" solid = "0"/>
+			<Component name = "CollisionComponent" x = "200" y = "300" width = "" height = "" solid = "0"/>
 			<Component name = "ItemPickupComponent" itemname = "Healing Potion" quantity = "1" persistent = "0"/>
 		</Entity>
 		<Entity name = "Mana Potion">
-			<Component name = "TransformComponent" x = "300" y = "300" vx = "0" vy = "0" movable = "0"></Component>
+			<Component name = "TransformComponent" x = "300" y = "200" vx = "0" vy = "0" movable = "0"></Component>
 			<Component name = "RenderComponent" filepath = "data/Item Icons/blue-potion.png" visible = "1" depth = "1"></Component>
-			<Component name = "CollisionComponent" x = "300" y = "300" width = "" height = "" solid = "0"/>
+			<Component name = "CollisionComponent" x = "300" y = "200" width = "" height = "" solid = "0"/>
 			<Component name = "ItemPickupComponent" itemname = "Mana Potion" quantity = "1" persistent = "0"/>
 		</Entity>
 		<Entity name = "White Potion">
@@ -49,6 +55,13 @@
 			<Component name = "RenderComponent" filepath = "data/Item Icons/white-potion.png" visible = "1" depth = "1"></Component>
 			<Component name = "CollisionComponent" x = "400" y = "300" width = "" height = "" solid = "0"/>
 			<Component name = "ItemPickupComponent" itemname = "White Potion" quantity = "1" persistent = "0"/>
+		</Entity>
+		<Entity name = "Enemy">
+			<Component name = "TransformComponent" x = "300" y = "300" vx = "0" vy = "0" movable = "1"></Component>
+			<Component name = "RenderComponent" filepath = "data/enemy.png"  visible = "1" depth = "1"></Component>
+			<Component name = "CollisionComponent" x = "300" y = "340" width = "24" height = "20" solid = "1"/>
+			<Component name = "MovementScriptComponent" filepath = "data/scripts/movementTest.lua" />
+			<Component name = "AIScriptComponent" scriptpath = "data/scripts/AITest.lua" />
 		</Entity>
 	</Entities>
 </EntityDoc>
