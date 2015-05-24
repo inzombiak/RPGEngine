@@ -1,0 +1,21 @@
+<UI>
+	<Inventory>
+	</Inventory>
+	<CharacterWindow>
+		<Window x  = "100", y = "100", width = "300", height = "400" />
+		<CharaterModel filepath = "data\UI\CharacterWindow\character.png" x = "150" y = "88"/>
+		<Equipment>
+			<Slot name = "Head" x = "61" y = "65" />
+			<Slot name = "Armor" x = "61" y = "129" />
+			<Slot name = "Right Hand" x = "240" y = "129" />
+			<Slot name = "Left Hand" x = "240" y = "65" />
+		</Equipment>
+		<Stats>
+			<Stat name = "Damage" labelX = "46" labelY = "260" valueX = "216" valueY = "260" />
+			<Stat name = "Armor" labelX = "46" labelY = "289" valueX = "216" valueY = "289" />
+			<Stat name = "Movement Speed" labelX = "46" labelY = "312" valueX = "216" valueY = "312" />
+		<Stats>
+	</CharacterWindow>
+	<Vitals>
+	</Vitals>
+</UI>

@@ -28,26 +28,34 @@ bool TransformComponent:: Init(XMLElement* data)
 
 void TransformComponent::Update(double dt)
 {
-	m_position.x += dt*m_speed.x;
-	m_position.y += dt*m_speed.y;
-	WeakComponentPtr weakCollisionPtr = m_owner->GetComponent(ComponentBase::GetIDFromName(CollisionComponent::COMPONENT_NAME));
-	//If the entity doesn't have a collision box
-	if (weakCollisionPtr.expired())
+	SetPosition(sf::Vector2f(m_position.x + dt*m_speed.x, m_position.y + dt*m_speed.y));
+	//m_position.x += dt*m_speed.x;
+	//m_position.y += dt*m_speed.y;
+
+	/*if (!m_owner)
 		return;
-	//Otherwise, update the box
-	StrongComponentPtr strongCollisionPtr = ConvertToStrongPtr(weakCollisionPtr);
-	std::shared_ptr<CollisionComponent> collisionBox = CastComponentToDerived<StrongComponentPtr, CollisionComponent>(strongCollisionPtr);
+
+	std::shared_ptr<CollisionComponent> collisionBox;
+
+	if (!CheckConvertAndCastPtr(m_owner->GetComponent(ComponentBase::GetIDFromName(CollisionComponent::COMPONENT_NAME)), collisionBox))
+		return;
 	sf::FloatRect oldBounds = collisionBox->GetBounds();
 	collisionBox->SetBounds(sf::FloatRect(oldBounds.left + dt*m_speed.x, oldBounds.top+ dt*m_speed.y, oldBounds.width, oldBounds.height));
-	return;
+	return;*/
 }
 
 void TransformComponent::SetPosition(const sf::Vector2f position)
 {
-	//TODO
-	//UPDATE SPRITE POSITION
+	std::shared_ptr<CollisionComponent> collisionBox;
+	if (m_owner && CheckConvertAndCastPtr(m_owner->GetComponent(ComponentBase::GetIDFromName(CollisionComponent::COMPONENT_NAME)), collisionBox))
+	{
+		sf::FloatRect oldBounds = collisionBox->GetBounds();
+		collisionBox->SetBounds(sf::FloatRect(oldBounds.left + (position.x - m_position.x), oldBounds.top + (position.y - m_position.y), oldBounds.width, oldBounds.height));
+	}
+
 	m_position = position;
 }
+
 const sf::Vector2f TransformComponent::GetPosition() const
 {
 	return m_position;

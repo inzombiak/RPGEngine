@@ -20,7 +20,6 @@
 #include "AnimationManager.h"
 
 #include "UIManager.h"
-#include "Player.h"
 #include "LevelLoader.h"
 #include "MainMenu.h"
 #include "ItemCatalog.h"

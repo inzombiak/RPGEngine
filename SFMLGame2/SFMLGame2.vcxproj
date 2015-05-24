@@ -160,6 +160,7 @@
     <ClCompile Include="Algorithms.cpp" />
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="CharacterWindow.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="ComponenetFactory.cpp" />
     <ClCompile Include="ComponentBase.cpp" />
@@ -200,6 +201,7 @@
   <ItemGroup>
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="CharacterWindow.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="ComponentFactory.h" />
     <ClInclude Include="ComponentBase.h" />
@@ -236,8 +238,10 @@
     <ClInclude Include="ItemComponent.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="PlayerObserverComponent.h" />
-    <ClInclude Include="VisibleGameObject.h" />
     <ClInclude Include="VitalsComponent.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\scripts\movementTest.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

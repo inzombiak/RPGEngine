@@ -99,10 +99,10 @@ void Game::Update()
 			}
 		}
 		m_transformManager->Update(m_minTimestep);
+		m_scriptManager->Update(m_minTimestep);
 		m_physicsManager->Update(m_minTimestep);
 		m_animationManager->Update(m_minTimestep);
 		m_renderer->Update(m_minTimestep);
-		m_scriptManager->Update(m_minTimestep);
 		m_entityManager.Update(m_minTimestep);
 		m_UI->Update(m_minTimestep);
 		remainingTime -= m_minTimestep;

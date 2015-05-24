@@ -20,6 +20,12 @@ namespace Equipment
 		{ "LeftHand", SlotName::LeftHand },
 		{ "Armor", SlotName::Armor },
 	};
+	static std::map<SlotName, string> slotEnumtoStringMap =
+	{
+		{ SlotName::RightHand, "Right Hand" },
+		{ SlotName::LeftHand, "Left Hand" },
+		{ SlotName::Armor, "Armor" },
+	};
 }
 
 
@@ -38,6 +44,13 @@ namespace Stats
 		{ "Damage", StatName::Damage },
 		{ "Armor", StatName::Armor },
 		{ "Movement Speed", StatName::MovementSpeed }
+	};
+	static std::map<StatName, string> statEnumtoStringMap =
+	{
+		{ StatName::HP, "HP" },
+		{ StatName::Damage, "Damage" },
+		{ StatName::Armor, "Armor" },
+		{ StatName::MovementSpeed, "Movement Speed" }
 	};
 };
 

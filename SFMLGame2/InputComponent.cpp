@@ -28,11 +28,22 @@ void InputComponent::Update(float dt, sf::Event event)
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)))
 	{
 		vy = -100.0f;
+		
 	}
 	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
 	{
 		vy = 100.0f;
 	}
+
+	if (vx == 0 && vy == 0)
+	{
+		SwitchAnimation("Idle");
+	}
+	else if (vx < 0 && vy < 0)
+	{
+		SwitchAnimation("WalkNW");
+	}
+
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
 	{
 		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(m_owner->GetComponent(GetIDFromName(PlayerObserverComponent::COMPONENT_NAME)));
@@ -50,6 +61,15 @@ void InputComponent::Update(float dt, sf::Event event)
 	transComp->SetSpeed(sf::Vector2f(vx, vy));
 
 	return;
+}
+
+void InputComponent::SwitchAnimation(const string& message)
+{
+	std::shared_ptr<AnimationComponent> animComponent;
+	if (!CheckConvertAndCastPtr(m_owner->GetComponent(ComponentBase::GetIDFromName(AnimationComponent::COMPONENT_NAME)), animComponent))
+		return;
+	
+	animComponent->SetAnimation(message);
 }
 
 const char* InputComponent::COMPONENT_NAME = "InputComponent";

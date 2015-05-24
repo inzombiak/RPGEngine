@@ -9,6 +9,7 @@
 #include "EquipmentComponent.h"
 #include "ItemComponent.h"
 #include "VitalsComponent.h"
+#include "CharacterWindow.h"
 
 UIManager::UIManager()
 {
@@ -47,6 +48,7 @@ UIManager::UIManager()
 	m_font.loadFromFile("data/arial.ttf");
 
 	newOpMenu = std::shared_ptr<ItemOptionsMenu>(new ItemOptionsMenu(m_font));
+	m_characterWindow = std::shared_ptr<CharacterWindow>(new CharacterWindow(m_font, 18));
 }
 
 StrongItemComponentPtr UIManager::CreateItemRenderComponent()

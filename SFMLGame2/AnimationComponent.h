@@ -84,6 +84,8 @@ public:
 		auto it = m_messageToAnimation.find(message);
 		if (it == m_messageToAnimation.end())
 			return false;
+		if (it->second.compare(m_currentAnimation.name) == 0)
+			return true;
 		//Check if corresponding animaiton exists
 		auto it2 = m_animations.find(it->second);
 		if (it2 == m_animations.end())

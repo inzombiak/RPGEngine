@@ -27,7 +27,7 @@ bool AnimationComponent::Init(XMLElement* node)
 		message = currAnimation->Attribute("message");
 		m_messageToAnimation[message] = animationName;
 
-		currAnimation = currAnimation->NextSiblingElement("Animations");
+		currAnimation = currAnimation->NextSiblingElement("Animation");
 	}
 
 	SetAnimation("Idle");
@@ -83,7 +83,6 @@ bool AnimationComponent::ReadSpriteFile(const string& filename)
 bool AnimationComponent::ReadAnimationFile(const string& filename)
 {
 	//TODO FILE NOT FOUND
-
 	tinyxml2::XMLDocument animationFile;
 	if (animationFile.LoadFile(filename.c_str()) != tinyxml2::XMLError::XML_SUCCESS)
 		return false;

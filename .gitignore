@@ -48,3 +48,11 @@ SFMLGame2.opensdf
 SFMLGame2/Debug/ComponentBase.obj
 *.obj
 *.tlog
+Debug/SFMLGame2.exe
+*.ilk
+Debug/SFMLGame2.pdb
+*.tlog
+SFMLGame2/Debug/TransformComponent.obj
+*.obj
+SFMLGame2/data/UI/CharacterWindow/PlayerWindowLayout.psd
+*.suo

@@ -89,9 +89,10 @@ bool EntityRenderer::CompareBottom(std::shared_ptr<RenderComponent>& rc1, std::s
 	int depth2 = rc2->GetDepth();
 	if (depth1 == depth2)
 	{
-		bool result = (rc1->GetSprite().getPosition().y + rc1->GetSprite().getGlobalBounds().height) < (rc2->GetSprite().getPosition().y + rc2->GetSprite().getGlobalBounds().height);
-
-		return result;
+		if ((rc1->GetSprite().getPosition().y + rc1->GetSprite().getGlobalBounds().height) == (rc2->GetSprite().getPosition().y + rc2->GetSprite().getGlobalBounds().height))
+			return false;
+		
+		return rc1->GetSprite().getPosition().y + rc1->GetSprite().getGlobalBounds().height < rc2->GetSprite().getPosition().y + rc2->GetSprite().getGlobalBounds().height;
 	}
 	else
 		return depth1 < depth2;

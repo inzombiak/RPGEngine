@@ -25,9 +25,6 @@
     <Filter Include="Source Files\Utility">
       <UniqueIdentifier>{174ca87b-601c-4ef3-ad95-ff066cdec68d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Old">
-      <UniqueIdentifier>{6b385767-940d-4bee-a2c4-bc3358e96d4f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Systems">
       <UniqueIdentifier>{a70e6b56-2929-4ce3-b823-82e8ddfdcf48}</UniqueIdentifier>
     </Filter>
@@ -169,10 +166,13 @@
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
     <ClCompile Include="AnimationComponent.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="AnimationManager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterWindow.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,9 +214,6 @@
     </ClInclude>
     <ClInclude Include="CollisionComponent.h">
       <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="VisibleGameObject.h">
-      <Filter>Header Files\Old</Filter>
     </ClInclude>
     <ClInclude Include="LevelLoader.h">
       <Filter>Header Files\Systems</Filter>
@@ -302,5 +299,13 @@
     <ClInclude Include="AnimationComponent.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="CharacterWindow.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="data\scripts\movementTest.lua">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

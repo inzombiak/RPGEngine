@@ -17,7 +17,7 @@ public:
 	const static char* COMPONENT_NAME;
 
 private:
-	
+	void SwitchAnimation(const string& message);
 };
 
 #endif
