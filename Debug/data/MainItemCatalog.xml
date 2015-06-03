@@ -19,7 +19,7 @@
 	</Item>
 	<Item name = "Axe">
 		<Component name  = "BaseItemComponent" itemname = "Axe" description = "Basic axe" />
-		<Component name  = "EquipableItemComponent" slot = "Right Hand">
+		<Component name  = "EquipableItemComponent" slot = "RightHand">
 			<Modifiers>
 				<Modifier name = "HP" effect = "-10"/>
 				<Modifier name = "Damage" effect = "5"/>
@@ -30,7 +30,7 @@
 	</Item>
 	<Item name = "Gold Axe">
 		<Component name = "BaseItemComponent" itemname = "Gold Axe" description = "Basic axe" />
-		<Component name = "EquipableItemComponent" slot = "Right Hand">
+		<Component name = "EquipableItemComponent" slot = "RightHand">
 			<Modifiers>
 				<Modifier name = "HP" effect = "+5"/>
 				<Modifier name = "Damage" effect = "10"/>
@@ -38,5 +38,16 @@
 			</Modifiers>
 		</Component>
 		<Component name = "ItemRenderComponent" filepath = "data/Item Icons/GoldAxe.PNG" visible = "1" depth = "2"/>
+	</Item>
+	<Item name = "Small Shield">
+		<Component name = "BaseItemComponent" itemname = "Small Shield" description = "Defensive Shield" />
+		<Component name = "EquipableItemComponent" slot = "LeftHand">
+			<Modifiers>
+				<Modifier name = "Armor" effect = "+10"/>
+				<Modifier name = "Damage" effect = "0"/>
+				<Modifier name = "Movement Speed" effect = "-1.0"/>
+			</Modifiers>
+		</Component>
+		<Component name = "ItemRenderComponent" filepath = "data/Item Icons/ShieldWoodSmall.PNG" visible = "1" depth = "2"/>
 	</Item>
 </ItemCatalog>

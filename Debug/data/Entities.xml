@@ -10,11 +10,15 @@
 					<Item name = "Mana Potion" quantity = "3"/>
 					<Item name = "Healing Potion" quantity = "5"/>
 					<Item name = "Gold Axe" quantity = "1" />
+					<Item name = "Small Shield" quantity = "1" />
 				</Items>
 			</Component>
 			<Component name = "EquipmentComponent">
 				<Slots>
-					<Slot name = "Right Hand" itemname = "Axe"/>
+					<Slot name = "RightHand" itemname = "Axe"/>
+					<Slot name = "LeftHand"/>
+					<Slot name = "Armor"/>
+					<Slot name = "Head"/>
 				</Slots>
 			</Component>
 			<Component name = "StatComponent">
@@ -33,7 +37,7 @@
 			<Component name = "AnimationComponent" sprites = "data/playerN_NW.sprites" animations = "data/playerN_NWAnim.anim">
 				<Animations>
 					<Animation name = "N" message = "Idle" />
-					<Animation name = "NW" message = "Walk" />
+					<Animation name = "NW" message = "WalkNW" />
 				</Animations>
 			</Component>
 			<Component name = "PlayerObserverComponent"/>
@@ -57,9 +61,9 @@
 			<Component name = "ItemPickupComponent" itemname = "White Potion" quantity = "1" persistent = "0"/>
 		</Entity>
 		<Entity name = "Enemy">
-			<Component name = "TransformComponent" x = "300" y = "300" vx = "0" vy = "0" movable = "1"></Component>
+			<Component name = "TransformComponent" x = "300" y = "200" vx = "0" vy = "0" movable = "1"></Component>
 			<Component name = "RenderComponent" filepath = "data/enemy.png"  visible = "1" depth = "1"></Component>
-			<Component name = "CollisionComponent" x = "300" y = "340" width = "24" height = "20" solid = "1"/>
+			<Component name = "CollisionComponent" x = "300" y = "240" width = "24" height = "20" solid = "1"/>
 			<Component name = "MovementScriptComponent" filepath = "data/scripts/movementTest.lua" />
 			<Component name = "AIScriptComponent" scriptpath = "data/scripts/AITest.lua" />
 		</Entity>
@@ -68,4 +72,6 @@
 
 <!--
 General definitions for entities. Level folder contains xmls that are read for creating entities in level
+
+
 -->
