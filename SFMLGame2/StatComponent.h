@@ -35,7 +35,7 @@ public:
 		auto it = m_stats.find(stat);
 		if (it == m_stats.end())
 			return false;
-		it->second += value;
+		it->second = value;
 		return true;
 	}
 

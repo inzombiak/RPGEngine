@@ -56,3 +56,6 @@ SFMLGame2/Debug/TransformComponent.obj
 *.obj
 SFMLGame2/data/UI/CharacterWindow/PlayerWindowLayout.psd
 *.suo
+*.pdb
+*.obj
+*.tlog

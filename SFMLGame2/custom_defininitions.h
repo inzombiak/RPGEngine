@@ -22,8 +22,8 @@ namespace Equipment
 	};
 	static std::map<SlotName, string> slotEnumtoStringMap =
 	{
-		{ SlotName::RightHand, "Right Hand" },
-		{ SlotName::LeftHand, "Left Hand" },
+		{ SlotName::RightHand, "RightHand" },
+		{ SlotName::LeftHand, "LeftHand" },
 		{ SlotName::Armor, "Armor" },
 	};
 }

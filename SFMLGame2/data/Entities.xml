@@ -10,11 +10,15 @@
 					<Item name = "Mana Potion" quantity = "3"/>
 					<Item name = "Healing Potion" quantity = "5"/>
 					<Item name = "Gold Axe" quantity = "1" />
+					<Item name = "Small Shield" quantity = "1" />
 				</Items>
 			</Component>
 			<Component name = "EquipmentComponent">
 				<Slots>
-					<Slot name = "Right Hand" itemname = "Axe"/>
+					<Slot name = "RightHand" itemname = "Axe"/>
+					<Slot name = "LeftHand"/>
+					<Slot name = "Armor"/>
+					<Slot name = "Head"/>
 				</Slots>
 			</Component>
 			<Component name = "StatComponent">

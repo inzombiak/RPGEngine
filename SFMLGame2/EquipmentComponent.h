@@ -28,7 +28,7 @@ public:
 	Returns true if slot exists and an item was equiped and places ID of item in the provided arguement, 
 	otherwise returns false if slot does not exist
 	*/
-	bool Unequip(Equipment::SlotName slot, Item& item);
+	bool Unequip(ItemID itemID, Item& item);
 
 	//Returns equipment. Temporary until I move inventory management to playerobserver
 	const std::map<Equipment::SlotName, Item>& GetEquipment()
@@ -41,7 +41,10 @@ private:
 	void ApplyModifiers(Item& newItem);
 	//Called when an item is unequipped
 	void RemoveModifiers(Item& oldItem);
+
+	//Maps for Slot->Item, Slot->Bool, ItemID->Slot
 	std::map<Equipment::SlotName, Item> m_equipment;
 	std::map<Equipment::SlotName, bool> m_availableSlots;
+	std::map<ItemID, Equipment::SlotName> m_itemIDtoSlot;
 };
 

@@ -9,12 +9,18 @@ StrongComponentPtr InputManager::CreateInputComponent()
 
 void InputManager::Update(float dt, sf::Event event, sf::RenderWindow& window)
 {
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::I)
-		m_inventoryOpen = !m_inventoryOpen;
+	if (event.type == sf::Event::KeyPressed)
+	{
+		if (event.key.code == sf::Keyboard::I)
+			m_inventoryOpen = !m_inventoryOpen;
+		else if (event.key.code == sf::Keyboard::E)
+			m_equipmentOpen = !m_equipmentOpen;
+	}
+		
 	if (event.type == sf::Event::MouseButtonPressed)
 	{
 
-		if (m_inventoryOpen)
+		if (m_inventoryOpen || m_equipmentOpen)
 			m_uiManager->HandleInput(event, sf::Mouse::getPosition(window));
 	}
 

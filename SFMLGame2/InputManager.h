@@ -19,6 +19,7 @@ public:
 private:
 	static vector<shared_ptr<InputComponent>> m_inputComponents;
 	bool m_inventoryOpen = false;
+	bool m_equipmentOpen = false;
 	UIManager* m_uiManager;
 };
 

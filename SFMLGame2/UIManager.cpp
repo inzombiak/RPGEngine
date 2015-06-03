@@ -9,6 +9,7 @@
 #include "EquipmentComponent.h"
 #include "ItemComponent.h"
 #include "VitalsComponent.h"
+#include "StatComponent.h"
 #include "CharacterWindow.h"
 
 UIManager::UIManager()
@@ -49,6 +50,7 @@ UIManager::UIManager()
 
 	newOpMenu = std::shared_ptr<ItemOptionsMenu>(new ItemOptionsMenu(m_font));
 	m_characterWindow = std::shared_ptr<CharacterWindow>(new CharacterWindow(m_font, 18));
+	m_characterWindow->Init();
 }
 
 StrongItemComponentPtr UIManager::CreateItemRenderComponent()
@@ -60,18 +62,17 @@ StrongItemComponentPtr UIManager::CreateItemRenderComponent()
 
 void UIManager::PostInit()
 {
+	//Get the components the UI needs
 	StrongEntityPtr player = ConvertToStrongPtr(m_playerObserver->GetOwner());
 	if (player)
 	{
-		WeakComponentPtr wInventoryPtr = player->GetComponent(ComponentBase::GetIDFromName(InventoryComponent::COMPONENT_NAME));
-		if (!wInventoryPtr.expired())
+		//Get players inventory
+		CheckConvertAndCastPtr(player->GetComponent(ComponentBase::GetIDFromName(InventoryComponent::COMPONENT_NAME)), m_playerInventory);
+
+		//Get players vitals
+		std::shared_ptr<VitalsComponent> playerVitals;
+		if (CheckConvertAndCastPtr(player->GetComponent(ComponentBase::GetIDFromName(VitalsComponent::COMPONENT_NAME)), playerVitals))
 		{
-			m_playerInventory = CastComponentToDerived<StrongComponentPtr,InventoryComponent>(ConvertToStrongPtr(wInventoryPtr));
-		}
-		WeakComponentPtr wVitalsPtr = player->GetComponent(ComponentBase::GetIDFromName(VitalsComponent::COMPONENT_NAME));
-		if (!wVitalsPtr.expired())
-		{
-			std::shared_ptr<VitalsComponent> playerVitals = CastComponentToDerived<StrongComponentPtr, VitalsComponent>(ConvertToStrongPtr(wVitalsPtr));
 			VitalsComponent::Vital hp, stamina;
 			if (playerVitals->GetVital(VitalsComponent::VitalType::Health, hp))
 			{
@@ -83,6 +84,12 @@ void UIManager::PostInit()
 			}
 		}
 
+		//Get players stats
+		std::shared_ptr<StatComponent> playerStats;
+		if (CheckConvertAndCastPtr(player->GetComponent(ComponentBase::GetIDFromName(StatComponent::COMPONENT_NAME)), playerStats))
+			m_characterWindow->SetStats(playerStats);
+
+		//Get player equipment
 		CheckConvertAndCastPtr<ComponentBase, EquipmentComponent>(player->GetComponent(ComponentBase::GetIDFromName(EquipmentComponent::COMPONENT_NAME)), m_playerEquipment);
 	}
 }
@@ -96,6 +103,8 @@ StrongComponentPtr UIManager::CreatePlayerObserverComponent()
 void UIManager::Update(float dt)
 {
 	UpdatePlayerVitals();
+	if (m_playerObserver->EquipmentOpen())
+		m_characterWindow->Update(dt);
 }
 
 void UIManager::UpdatePlayerVitals()
@@ -178,16 +187,22 @@ void UIManager::DrawInventory(sf::RenderWindow& rw)
 
 void UIManager::DrawEquipment(sf::RenderWindow& rw)
 {
+	//Get equipment
 	const std::map<Equipment::SlotName, Item> equipment = m_playerEquipment->GetEquipment();
+
+	//Create map of equipment render components, FIX THIS
+	std::map<Equipment::SlotName, std::shared_ptr<ItemRenderComponent>> equipmentRenderComponents;
 	Item nextItem;
+	std::shared_ptr<ItemRenderComponent> renderComp;
 	for (auto it = equipment.begin(); it != equipment.end(); ++it)
 	{
 		nextItem = it->second;
-		StrongItemComponentPtr renderStrComp = ConvertToStrongPtr(nextItem.GetItemComponent(ItemComponent::GetIDFromName(ItemRenderComponent::COMPONENT_NAME)));
-		std::shared_ptr<ItemRenderComponent> renderComp = CastComponentToDerived<StrongItemComponentPtr, ItemRenderComponent>(renderStrComp);
-		renderComp->SetPosition(m_slotDisplayCoordinates[it->first]);
-		rw.draw(renderComp->GetSprite());
+		if (CheckConvertAndCastPtr(nextItem.GetItemComponent(ItemComponent::GetIDFromName(ItemRenderComponent::COMPONENT_NAME)), renderComp))
+			equipmentRenderComponents[it->first] = renderComp;
 	}
+
+	m_characterWindow->Draw(equipmentRenderComponents, rw);
+	
 }
 
 void UIManager::Draw(sf::RenderWindow& rw)
@@ -208,22 +223,51 @@ void UIManager::Draw(sf::RenderWindow& rw)
 
 void UIManager::HandleInput(sf::Event event, sf::Vector2i mousePos)
 {
+	Item nextItem;
+	//If right click, open options menus
 	if (event.mouseButton.button == sf::Mouse::Right)
 	{
-		const std::map<ItemID, Item>& items = m_playerInventory->GetItems();
-		Item nextItem;
-		for (std::map<ItemID, Item>::const_iterator it = items.begin(); it != items.end(); ++it)
+		sf::Vector2f mousePosFloat(mousePos.x, mousePos.y);
+
+		//Check if mouse is in character window or inventory
+		if (m_characterWindow->GetBounds().contains(mousePosFloat))
 		{
-			nextItem = it->second;
-			StrongItemComponentPtr renderStrComp = ConvertToStrongPtr(nextItem.GetItemComponent(ItemComponent::GetIDFromName(ItemRenderComponent::COMPONENT_NAME)));
-			std::shared_ptr<ItemRenderComponent> renderComp = CastComponentToDerived<StrongItemComponentPtr, ItemRenderComponent>(renderStrComp);
-			sf::Vector2f mousePosFloat(mousePos.x, mousePos.y);
-			sf::FloatRect spriteBounds = renderComp->GetSprite().getGlobalBounds();
-			if (spriteBounds.contains(mousePosFloat))
+			const  std::map<Equipment::SlotName, Item>& items = m_playerEquipment->GetEquipment();
+			for (auto it = items.begin(); it != items.end(); ++it)
 			{
-				newOpMenu->SetPosition(mousePosFloat);
-				newOpMenu->SetOpen(true);
-				newOpMenu->AttachItem(it->first);
+				nextItem = it->second;
+				StrongItemComponentPtr renderStrComp = ConvertToStrongPtr(nextItem.GetItemComponent(ItemComponent::GetIDFromName(ItemRenderComponent::COMPONENT_NAME)));
+				std::shared_ptr<ItemRenderComponent> renderComp = CastComponentToDerived<StrongItemComponentPtr, ItemRenderComponent>(renderStrComp);
+				sf::FloatRect spriteBounds = renderComp->GetSprite().getGlobalBounds();
+				if (spriteBounds.contains(mousePosFloat))
+				{
+					StrongItemComponentPtr baseItemComp = ConvertToStrongPtr(nextItem.GetItemComponent(ItemComponent::GetIDFromName(BaseItemComponent::COMPONENT_NAME)));
+					std::shared_ptr<BaseItemComponent> baseItemCompShared = CastComponentToDerived<StrongItemComponentPtr, BaseItemComponent>(baseItemComp);
+
+					ItemID id = reinterpret_cast<ItemID>(HashedString::hash_name(baseItemCompShared->GetItemName().c_str()));
+
+					newOpMenu->SetPosition(mousePosFloat);
+					newOpMenu->SetOpen(true);
+					newOpMenu->AttachItem(id);
+				}
+			}
+		}
+		else
+		{
+			const std::map<ItemID, Item>& items = m_playerInventory->GetItems();
+			Item nextItem;
+			for (std::map<ItemID, Item>::const_iterator it = items.begin(); it != items.end(); ++it)
+			{
+				nextItem = it->second;
+				StrongItemComponentPtr renderStrComp = ConvertToStrongPtr(nextItem.GetItemComponent(ItemComponent::GetIDFromName(ItemRenderComponent::COMPONENT_NAME)));
+				std::shared_ptr<ItemRenderComponent> renderComp = CastComponentToDerived<StrongItemComponentPtr, ItemRenderComponent>(renderStrComp);
+				sf::FloatRect spriteBounds = renderComp->GetSprite().getGlobalBounds();
+				if (spriteBounds.contains(mousePosFloat))
+				{
+					newOpMenu->SetPosition(mousePosFloat);
+					newOpMenu->SetOpen(true);
+					newOpMenu->AttachItem(it->first);
+				}
 			}
 		}
 	}
@@ -237,14 +281,25 @@ void UIManager::HandleInput(sf::Event event, sf::Vector2i mousePos)
 				newOpMenu->SetOpen(false);
 			else
 			{
-				//Implement drop and delete
-				if (response == 1)
-					m_playerInventory->UseItem(newOpMenu->GetAttachedItem());
-				else if (response == 2)
-					m_playerInventory->DropItem(newOpMenu->GetAttachedItem());
-				else if (response == 3)
-					m_playerInventory->DeleteItem(newOpMenu->GetAttachedItem());
+				if (m_characterWindow->GetBounds().contains(mousePosFloat))
+				{
+					if (response == 1)
+						m_playerEquipment->Unequip(newOpMenu->GetAttachedItem(), nextItem);
 
+					m_playerInventory->AddItem(nextItem, 1);
+				}
+				else
+				{
+					if (response == 1)
+						m_playerInventory->UseItem(newOpMenu->GetAttachedItem());
+					else if (response == 2)
+						m_playerInventory->DropItem(newOpMenu->GetAttachedItem());
+					else if (response == 3)
+						m_playerInventory->DeleteItem(newOpMenu->GetAttachedItem());
+
+				}
+
+				newOpMenu->SetOpen(false);
 			}
 		}
 	}

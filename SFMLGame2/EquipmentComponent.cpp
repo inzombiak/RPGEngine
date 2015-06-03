@@ -48,6 +48,13 @@ bool EquipmentComponent::Equip(Equipment::SlotName slot, Item newItem, Item& pre
 	if (!HasSlot(slot))
 		return false;
 
+	StrongItemComponentPtr baseItemComp = ConvertToStrongPtr(newItem.GetItemComponent(ItemComponent::GetIDFromName(BaseItemComponent::COMPONENT_NAME)));
+	std::shared_ptr<BaseItemComponent> baseItemCompShared = CastComponentToDerived<StrongItemComponentPtr, BaseItemComponent>(baseItemComp);
+
+	ItemID id = reinterpret_cast<ItemID>(HashedString::hash_name(baseItemCompShared->GetItemName().c_str()));
+
+	m_itemIDtoSlot[id] = slot;
+
 	bool response = false;
 	auto it = m_equipment.find(slot);
 	if (it != m_equipment.end())
@@ -60,8 +67,10 @@ bool EquipmentComponent::Equip(Equipment::SlotName slot, Item newItem, Item& pre
 	return response;
 }
 
-bool EquipmentComponent::Unequip(Equipment::SlotName slot, Item& item)
+bool EquipmentComponent::Unequip(ItemID id, Item& item)
 {
+	auto slot = m_itemIDtoSlot[id];
+
 	if (!HasSlot(slot))
 		return false;
 

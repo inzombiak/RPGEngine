@@ -49,6 +49,35 @@ bool InventoryComponent::AddItem(string itemName, int quantity)
 	return true;
 }
 
+bool InventoryComponent::AddItem(ItemID newItemID, int quantity)
+{
+	std::map<ItemID, Item>::iterator it = m_heldItems.find(newItemID);
+	if (it == m_heldItems.end())
+	{
+		Item newItem;
+		if (!ItemManager::CreateItemByID(newItemID, newItem))
+			return false;
+		ItemComponentID itemCompID = ItemComponent::GetIDFromName(BaseItemComponent::COMPONENT_NAME);
+		StrongItemComponentPtr itemComp = ConvertToStrongPtr<ItemComponent>(newItem.GetItemComponent(itemCompID));
+		if (!itemComp)
+			return false;
+		std::shared_ptr<BaseItemComponent> strongItemComp = CastComponentToDerived<StrongItemComponentPtr, BaseItemComponent>(itemComp);
+		strongItemComp->SetQuantity(quantity);
+		m_heldItems.insert(std::pair<ItemID, Item>(newItemID, newItem));
+	}
+	else
+	{
+		WeakItemComponentPtr weakPtr = (it)->second.GetItemComponent(ItemComponent::GetIDFromName(BaseItemComponent::COMPONENT_NAME));
+		if (weakPtr.expired())
+			return false;
+		StrongItemComponentPtr itemComp = ConvertToStrongPtr<ItemComponent>(weakPtr);
+		std::shared_ptr<BaseItemComponent> strongItemComp = CastComponentToDerived<StrongItemComponentPtr, BaseItemComponent>(itemComp);
+		strongItemComp->SetQuantity(strongItemComp->GetQuantity() + quantity);
+	}
+
+	return true;
+}
+
 bool InventoryComponent::AddItem(Item newItem, int quantity)
 {
 	std::shared_ptr<BaseItemComponent> strongItemComp;

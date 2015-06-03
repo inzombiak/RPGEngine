@@ -17,18 +17,6 @@ public:
 		m_fontSize = fontSize;
 	}
 
-	//Toggles closed/open
-	void ToggleOpen()
-	{
-		m_open = !m_open;
-	}
-
-	//Check if open
-	bool IsOpen() const
-	{
-		return m_open;
-	}
-
 	//Initialize the variables of the window from the XML
 	bool Init();
 
@@ -38,11 +26,11 @@ public:
 		m_stats = stats;
 	}
 
-	////Pass a pointer to the players vitals, if this isn't called window will not funciton properly.
-	//void SetVitals(std::shared_ptr<VitalsComponenet> vitals)
-	//{
-	//	m_vitals = vitals;
-	//}
+	//Returns bounds of the window
+	sf::FloatRect GetBounds() const
+	{
+		return m_window.getGlobalBounds();
+	}
 
 	void Update(float dt);
 
@@ -50,12 +38,11 @@ public:
 	void Draw(const std::map < Equipment::SlotName, std::shared_ptr<ItemRenderComponent>>& , sf::RenderWindow&);
 
 private:
-	//Flag for opened/closed
-	bool m_open;
 
 	//Text font and size
 	sf::Font m_font;
 	int m_fontSize;
+
 
 	struct StatField
 	{

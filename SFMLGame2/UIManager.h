@@ -69,7 +69,7 @@ private:
 	static std::vector<std::shared_ptr<ItemRenderComponent>> m_itemRenderComponents;
 	sf::Font m_font;
 
-	std::shared_ptr<CharaterWindow> m_characterWindow;
+	std::shared_ptr<CharacterWindow> m_characterWindow;
 	std::shared_ptr<ItemOptionsMenu> newOpMenu;
 
 	static std::map<Equipment::SlotName, sf::Vector2f> m_slotDisplayCoordinates;

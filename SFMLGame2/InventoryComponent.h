@@ -22,6 +22,7 @@ public:
 	
 	bool AddItem(string itemName, int quantity);
 	bool AddItem(Item newItem, int quantity);
+	bool AddItem(ItemID newItem, int quantity);
 	const std::map<ItemID, Item>& GetItems();
 	//Setter and Getters
 

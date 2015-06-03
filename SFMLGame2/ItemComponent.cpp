@@ -122,6 +122,7 @@ bool EquipableItemComponent::Init(const XMLElement* componentNode)
 {
 	if (!componentNode->Attribute("slot"))
 		return false;
+
 	m_slot = Equipment::slotMap[componentNode->Attribute("slot")];
 	const XMLElement* pModifiers = componentNode->FirstChildElement("Modifiers");
 	const XMLElement* pModifier = pModifiers->FirstChildElement("Modifier");

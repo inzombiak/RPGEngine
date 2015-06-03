@@ -34,21 +34,25 @@ bool CharacterWindow::Init()
 	if (!pStats)
 		return false;
 
+	double windowX, windowY, windowWidth, windowHeight;
 	double x, y, w, h;
 
+	
 	//Create window
-	if (pWindow->QueryDoubleAttribute("x", &x) != tinyxml2::XMLError::XML_SUCCESS)
+	if (pWindow->QueryDoubleAttribute("x", &windowX) != tinyxml2::XMLError::XML_SUCCESS)
 		return false; 
-	if (pWindow->QueryDoubleAttribute("y", &y) != tinyxml2::XMLError::XML_SUCCESS)
+	if (pWindow->QueryDoubleAttribute("y", &windowY) != tinyxml2::XMLError::XML_SUCCESS)
 		return false; 
-	if (pWindow->QueryDoubleAttribute("width", &w) != tinyxml2::XMLError::XML_SUCCESS)
+	if (pWindow->QueryDoubleAttribute("width", &windowWidth) != tinyxml2::XMLError::XML_SUCCESS)
 		return false; 
-	if (pWindow->QueryDoubleAttribute("height", &h) != tinyxml2::XMLError::XML_SUCCESS)
+	if (pWindow->QueryDoubleAttribute("height", &windowHeight) != tinyxml2::XMLError::XML_SUCCESS)
 		return false;
-	m_window.setSize(sf::Vector2f(w, h));
-	m_window.setPosition(sf::Vector2f(x, y));
+	m_window.setSize(sf::Vector2f(windowWidth, windowHeight));
+	m_window.setPosition(sf::Vector2f(windowX, windowY));
+	m_window.setFillColor(sf::Color::Black);
 
 	//Load character model
+	string temp = pCharacterModel->Attribute("filepath");
 	if (!m_characterTexture.loadFromFile(pCharacterModel->Attribute("filepath")))
 		return false;
 	if (pCharacterModel->QueryDoubleAttribute("x", &x) != tinyxml2::XMLError::XML_SUCCESS)
@@ -56,10 +60,11 @@ bool CharacterWindow::Init()
 	if (pCharacterModel->QueryDoubleAttribute("y", &y) != tinyxml2::XMLError::XML_SUCCESS)
 		return false;
 	m_characterSprite.setTexture(m_characterTexture);
-	m_characterSprite.setPosition(sf::Vector2f(x, y));
+	m_characterSprite.setPosition(sf::Vector2f(windowX + x, windowY + y));
 
 	//Load equipment slots
 	XMLElement* pSlot = pEquipment->FirstChildElement("Slot");
+
 	while (pSlot)
 	{
 		if (pSlot->Attribute("name") &&
@@ -69,7 +74,7 @@ bool CharacterWindow::Init()
 			auto it = Equipment::slotMap.find(pSlot->Attribute("name"));
 			if (it != Equipment::slotMap.end())
 			{
-				m_equipmentSlotPositions[it->second] = sf::Vector2f(x, y);
+				m_equipmentSlotPositions[it->second] = sf::Vector2f(windowX + x, windowY + y);
 			}
 		}
 		pSlot = pSlot->NextSiblingElement("Slot");
@@ -81,12 +86,14 @@ bool CharacterWindow::Init()
 	StatField newStatField;
 	newStatField.name.setFont(m_font);
 	newStatField.name.setCharacterSize(m_fontSize);
+	newStatField.value.setFont(m_font);
+	newStatField.value.setCharacterSize(m_fontSize);
 	while (pStat)
 	{
 		if (pStat->Attribute("name"))
 		{
 			newStatField.name.setString(pStat->Attribute("name"));
-			auto it = Stats::statMap.find(pStats->Attribute("name"));
+			auto it = Stats::statMap.find(pStat->Attribute("name"));
 			if (it != Stats::statMap.end())
 			{
 				if (pStat->QueryDoubleAttribute("labelX", &x) == tinyxml2::XMLError::XML_SUCCESS &&
@@ -94,30 +101,26 @@ bool CharacterWindow::Init()
 					pStat->QueryDoubleAttribute("valueX", &valueX) == tinyxml2::XMLError::XML_SUCCESS &&
 					pStat->QueryDoubleAttribute("valueY", &valueY) == tinyxml2::XMLError::XML_SUCCESS)
 				{	
-					newStatField.labelPosition = sf::Vector2f(x, y);
-					newStatField.valuePosition = sf::Vector2f(valueX, valueY);
-					newStatField.name.setPosition(sf::Vector2f(x, y));
-					newStatField.value.setPosition(sf::Vector2f(valueX, valueY));
+					newStatField.labelPosition = sf::Vector2f(windowX + x, windowY + y);
+					newStatField.valuePosition = sf::Vector2f(windowX + valueX, windowY + valueY);
+					newStatField.name.setPosition(sf::Vector2f(windowX + x, windowY + y));
+					newStatField.value.setPosition(sf::Vector2f(windowX + valueX, windowY + valueY));
 
 					m_statFields[it->second] = newStatField;
 				}
 			}
 		}
 
-		pStat->NextSiblingElement("Stat");
+		pStat = pStat->NextSiblingElement("Stat");
 	}
 
 }
 
 void CharacterWindow::Update(float dt)
 {
-	//Dont update if closed, not sure if good idea !EDIT
-	if (!m_open)
-		return;
-
 	//Update stats !EDIT maybe set to update message
 	double statValue;
-	for (auto it = m_statFields.begin(); it != m_statFields.end(); ++it)
+	for (std::map<Stats::StatName, StatField>::iterator it = m_statFields.begin(); it != m_statFields.end(); ++it)
 	{
 		if (m_stats->HasStat(it->first))
 		{
@@ -129,8 +132,6 @@ void CharacterWindow::Update(float dt)
 
 void CharacterWindow::Draw(const std::map < Equipment::SlotName, std::shared_ptr<ItemRenderComponent>>& equipmentMap, sf::RenderWindow& rw)
 {
-	if (!m_open)
-		return;
 
 	//Draw background window
 	rw.draw(m_window);
@@ -152,3 +153,4 @@ void CharacterWindow::Draw(const std::map < Equipment::SlotName, std::shared_ptr
 		rw.draw(it->second.value);
 	}
 }
+

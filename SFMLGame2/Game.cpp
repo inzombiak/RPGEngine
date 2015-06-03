@@ -82,11 +82,10 @@ void Game::Update()
 {
 	sf::Event event;
 	
-	int frames;
+	int frames = 0;
 	m_time = GetTime();
 
 	remainingTime += m_time;
-	frames = 0;
 
 	while ((remainingTime > m_minTimestep) && (frames < m_maxFrames))
 	{

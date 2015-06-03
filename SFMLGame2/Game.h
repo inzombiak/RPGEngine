@@ -67,7 +67,7 @@ private:
 	static sf::Clock m_gameClock;
 	const float m_minTimestep = sf::seconds(1.f/60.f).asSeconds();
 	const int m_maxFrames = 5;
-	float remainingTime;
+	float remainingTime = 0;
 	float m_time;
 
 	const string ENTITIES_FILE = "data/Entities.xml";

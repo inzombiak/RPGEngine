@@ -1,9 +1,10 @@
-﻿  Main.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\collisioncomponent.h(62): warning C4018: '<' : signed/unsigned mismatch
-  Game.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\collisioncomponent.h(62): warning C4018: '<' : signed/unsigned mismatch
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\game.cpp(21): warning C4552: '-' : operator has no effect; expected operator with side-effect
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\game.cpp(42): warning C4101: 'px' : unreferenced local variable
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\game.cpp(42): warning C4101: 'py' : unreferenced local variable
-  Generating Code...
+﻿  UIManager.cpp
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\uimanager.cpp(137): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\uimanager.cpp(143): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\uimanager.cpp(153): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\uimanager.cpp(159): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\uimanager.cpp(179): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\uimanager.cpp(181): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\uimanager.cpp(230): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\uimanager.cpp(276): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
   SFMLGame2.vcxproj -> C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\SFMLGame2.exe
