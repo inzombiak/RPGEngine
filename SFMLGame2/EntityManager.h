@@ -21,15 +21,14 @@ class EntityManager
 public:
 	EntityManager();
 	void Update(float);
-	//void Draw(sf::RenderWindow&);
 	StrongEntityPtr CreateEntity();
 	void LoadEntities(string filename);
 	static StrongComponentPtr CreateVitalsComponent();
 	static StrongComponentPtr CreateStatComponent();
 	bool CreateEntityAtPosition(const string& entityName, sf::Vector2f pos);
 private:
-	void Move(float);
-	void TestForCollision();
+	//void Move(float);
+	//void TestForCollision();
 	vector<StrongEntityPtr> m_entities; //Container for "full" Entities e.g. enemies, items etc.
 	static vector<std::shared_ptr<VitalsComponent>> m_entityVitals; //Container for  VitalsComponents
 	static vector<std::shared_ptr<StatComponent>> m_entityStats; //Container for StatComponent

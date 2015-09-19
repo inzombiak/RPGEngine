@@ -5,6 +5,9 @@ The methods of creating Entities and Components here are temporary
 #include "Debug.h"
 #include "EntityFactory.h"
 
+#include <string>
+#include <sstream>
+
 using tinyxml2::XMLElement;
 
 LevelLoader::LevelLoader(EntityManager& em) : m_entityManager(em)
@@ -203,10 +206,50 @@ void LevelLoader::GenerateObject(XMLElement* pObject, string layerName)
 
 	if (layerName == "Collision")
 	{
+		std::vector<sf::Vector2f> points;
+		string type;
 		auto pPolyline = pObject->FirstChildElement("polyline");
 		if (!pPolyline)
-			EntityFactory::GetInstance()->CreateCollisionEntity(sf::Vector2f(values[0], values[1]), sf::Vector2f(values[2], values[3]), 1, m_entityManager.CreateEntity());
+		{
+			points =
+			{
+				sf::Vector2f(values[0], values[1]),
+				sf::Vector2f(values[0], values[1] + values[3]),
+				sf::Vector2f(values[0] + values[2], values[1] + values[3]),
+				sf::Vector2f(values[0] + values[2], values[1]),
+			};
+			type = "Rectangle";
+		}
+		else
+		{
+			type = "Polygon";
+			sf::Vector2f point;
+			//Stream for parsing the polyline
+			std::stringstream polyStream(pPolyline->Attribute("points"));
+			//Contains comma delimited valueso f the points
+			std::vector<string> tokenVector;
+			string token;
+			while (polyStream >> token)
+			{
+				tokenVector.clear();
+				std::size_t prev = 0, pos;
+				while ((pos = token.find_first_of(",", prev)) != std::string::npos)
+				{
+					if (pos > prev)
+						tokenVector.push_back(token.substr(prev, pos - prev));
+					prev = pos + 1;
+				}
+				if (prev < token.length())
+					tokenVector.push_back(token.substr(prev, std::string::npos));
 
+				point.x = values[0] + std::stof(tokenVector[0]);
+				point.y = values[1] + std::stof(tokenVector[1]);
+				points.push_back(point);
+			}
+		}
+		EntityFactory::GetInstance()->CreateCollisionEntity(sf::Vector2f(values[0], values[1]),
+			points, type, 1, m_entityManager.CreateEntity());
+			
 	}
 
 	return;

@@ -120,12 +120,18 @@ void CharacterWindow::Update(float dt)
 {
 	//Update stats !EDIT maybe set to update message
 	double statValue;
+
+	std::stringstream ss;
+	ss << std::fixed << std::setprecision(2);
 	for (std::map<Stats::StatName, StatField>::iterator it = m_statFields.begin(); it != m_statFields.end(); ++it)
 	{
 		if (m_stats->HasStat(it->first))
 		{
 			statValue = m_stats->GetStat(it->first);
-			it->second.value.setString(std::to_string(statValue));
+			ss << statValue;
+			it->second.value.setString(ss.str());
+
+			ss.str(std::string());
 		}
 	}
 }

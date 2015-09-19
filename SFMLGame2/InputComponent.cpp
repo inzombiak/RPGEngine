@@ -28,17 +28,17 @@ void InputComponent::Update(float dt, sf::Event event)
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W)))
 	{
 		vy = -100.0f;
-		
 	}
 	else if ((sf::Keyboard::isKeyPressed(sf::Keyboard::S)))
 	{
 		vy = 100.0f;
 	}
-
+	
 	if (vx == 0 && vy == 0)
 	{
 		SwitchAnimation("Idle");
 	}
+
 	else if (vx < 0 && vy < 0)
 	{
 		SwitchAnimation("WalkNW");
@@ -50,6 +50,7 @@ void InputComponent::Update(float dt, sf::Event event)
 		std::shared_ptr<PlayerObserverComponent> invComp = CastComponentToDerived<StrongComponentPtr, PlayerObserverComponent>(compPtr);
 		invComp->ToggleInventory();
 	}
+
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E)
 	{
 		StrongComponentPtr compPtr = ConvertToStrongPtr<ComponentBase>(m_owner->GetComponent(GetIDFromName(PlayerObserverComponent::COMPONENT_NAME)));

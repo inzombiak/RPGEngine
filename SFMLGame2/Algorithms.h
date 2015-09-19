@@ -12,18 +12,9 @@ public:
 			return list;
 		}
 
-		std::vector<T> left, right, result;
-		int middle = floor((list.size() + 1) / 2);
+		auto middle = list.begin() + list.size() / 2;
 
-		for (int i = 0; i < middle; ++i)
-		{
-			left.push_back(list[i]);
-		}
-
-		for (int i = middle; i < list.size(); ++i)
-		{
-			right.push_back(list[i]);
-		}
+		std::vector<T> left (list.begin(), middle), right(middle, list.end()), result;
 
 		left = MergeSortVector(left, comparator);
 		right = MergeSortVector(right, comparator);
@@ -32,38 +23,33 @@ public:
 	};
 private:
 	Algorithms();
-	static std::vector<T> Algorithms<T>::Merge(std::vector<T>& left, std::vector<T>& right, bool (*comparator)(T&, T&))
+	static std::vector<T> Algorithms<T>::Merge(std::vector<T>& left, std::vector<T>& right, bool(*comparator)(T&, T&))
 	{
 		std::vector<T> result;
-		while (left.size() > 0 || right.size() > 0)
+		unsigned int leftIndex = 0, rightIndex = 0;
+		while (leftIndex < left.size() && rightIndex < right.size())
 		{
-			if (left.size() > 0 && right.size() > 0)
+			if (comparator(left[leftIndex], right[rightIndex]))
 			{
-				if (comparator(left.front(), right.front()))
-				{
-					result.push_back(left.front());
-					left.erase(left.begin());
-				}
-				else
-				{
-					result.push_back(right.front());
-					right.erase(right.begin());
-				}
+				result.push_back(left[leftIndex]);
+				leftIndex++;
 			}
-			else if (left.size() > 0)
+			else
 			{
-				for (int i = 0; i < left.size(); i++)
-					result.push_back(left[i]);
-				break;
-			}
-			else if (right.size() > 0)
-			{
-				for (int i = 0; i < right.size(); i++)
-					result.push_back(right[i]);
-				break;
+				result.push_back(right[rightIndex]);
+				rightIndex++;
 			}
 		}
-
+		while (leftIndex < left.size())
+		{
+			result.push_back(left[leftIndex]);
+			leftIndex++;
+		}
+		while (rightIndex < right.size())
+		{
+			result.push_back(right[rightIndex]);
+			rightIndex++;
+		}
 		return result;
 	}
 };

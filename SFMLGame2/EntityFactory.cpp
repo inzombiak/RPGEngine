@@ -109,7 +109,7 @@ bool EntityFactory::CreateTileFromTmx(sf::Vector2f position, sf::Texture& textur
 	
 }
 
-bool EntityFactory::CreateCollisionEntity(sf::Vector2f position, sf::Vector2f dimensions,int depth, StrongEntityPtr newEntity)
+bool EntityFactory::CreateCollisionEntity(sf::Vector2f position, std::vector<sf::Vector2f> points, string type,int depth, StrongEntityPtr newEntity)
 {
 	/*Todo
 	Fix this shit
@@ -124,14 +124,10 @@ bool EntityFactory::CreateCollisionEntity(sf::Vector2f position, sf::Vector2f di
 	transComp->SetOwner(newEntity);
 	newEntity->AddComponent(newComp);
 
-	sf::FloatRect collisionBounds;
-	collisionBounds.left = position.x;
-	collisionBounds.top = position.y;
-	collisionBounds.width = dimensions.x;
-	collisionBounds.height = dimensions.y;
+	CollisionShape::CollisionShape collShape = CollisionShape::collisionShapeStringToEnumMap.find(type)->second;
 
 	shared_ptr<CollisionComponent> collComp = CastComponentToDerived<StrongComponentPtr, CollisionComponent>(ComponentFactory::CreateEntityComponent(ComponentBase::GetIDFromName(CollisionComponent::COMPONENT_NAME)));
-	collComp->SetBounds(collisionBounds);
+	collComp->SetBounds(points);
 	collComp->SetOwner(newEntity);
 	collComp->SetSolid(true);
 	newEntity->AddComponent(collComp);

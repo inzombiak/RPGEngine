@@ -16,7 +16,8 @@ public:
 	//Entity CreateEntityByCopy(XMLElement* currEntityNode);
 	bool CreateTileFromTmx(sf::Vector2f position, sf::Texture& texture, sf::IntRect textureRect,int depth, StrongEntityPtr entity);//For use with Tiled map files to creates tiles
 	//Entity CreateTileFromTmxByCopy(sf::Vector2f position, sf::Texture& texture, sf::IntRect textureRect);
-	bool CreateCollisionEntity(sf::Vector2f position, sf::Vector2f dimensions,int depth, StrongEntityPtr entity); //For use with Tiles map files to create collision boxes
+	//For use with Tiles map files to create collision boxes
+	bool CreateCollisionEntity(sf::Vector2f position, std::vector<sf::Vector2f> points, string type, int depth, StrongEntityPtr newEntity);
 	//Entity CreateCollisionEntityByCopy(sf::Vector2f position, sf::Vector2f dimensions);
 	static EntityFactory* GetInstance()
 	{

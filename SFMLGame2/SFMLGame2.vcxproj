@@ -160,6 +160,8 @@
     <ClCompile Include="Algorithms.cpp" />
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
+    <ClCompile Include="AttackComponent.cpp" />
+    <ClCompile Include="AttackManager.cpp" />
     <ClCompile Include="CharacterWindow.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="ComponenetFactory.cpp" />
@@ -201,6 +203,8 @@
   <ItemGroup>
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="AnimationManager.h" />
+    <ClInclude Include="AttackComponent.h" />
+    <ClInclude Include="AttackManager.h" />
     <ClInclude Include="CharacterWindow.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="ComponentFactory.h" />

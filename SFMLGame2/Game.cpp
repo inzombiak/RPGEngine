@@ -113,6 +113,7 @@ void Game::Draw()
 {
 	m_renderer->Draw();
 	m_UI->Draw(m_mainWindow);
+	m_physicsManager->Draw(m_mainWindow);
 }
 
 void Game::Destroy()

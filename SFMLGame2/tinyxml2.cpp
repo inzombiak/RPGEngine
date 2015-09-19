@@ -724,9 +724,6 @@ XMLNode* XMLNode::InsertAfterChild( XMLNode* afterThis, XMLNode* addThis )
     return addThis;
 }
 
-
-
-
 const XMLElement* XMLNode::FirstChildElement( const char* value ) const
 {
     for( XMLNode* node=_firstChild; node; node=node->_next ) {
@@ -739,7 +736,6 @@ const XMLElement* XMLNode::FirstChildElement( const char* value ) const
     }
     return 0;
 }
-
 
 const XMLElement* XMLNode::LastChildElement( const char* value ) const
 {

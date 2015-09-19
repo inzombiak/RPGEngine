@@ -84,15 +84,13 @@ void EntityRenderer::ZSortEntities()
 
 bool EntityRenderer::CompareBottom(std::shared_ptr<RenderComponent>& rc1, std::shared_ptr<RenderComponent>& rc2)
 {
-	ComponentID id = ComponentBase::GetIDFromName(RenderComponent::COMPONENT_NAME);
 	int depth1 = rc1->GetDepth();
 	int depth2 = rc2->GetDepth();
+	float y1 = std::floor(rc1->GetSprite().getPosition().y + rc1->GetSprite().getGlobalBounds().height),
+		  y2 = std::floor(rc2->GetSprite().getPosition().y + rc2->GetSprite().getGlobalBounds().height);
 	if (depth1 == depth2)
 	{
-		if ((rc1->GetSprite().getPosition().y + rc1->GetSprite().getGlobalBounds().height) == (rc2->GetSprite().getPosition().y + rc2->GetSprite().getGlobalBounds().height))
-			return false;
-		
-		return rc1->GetSprite().getPosition().y + rc1->GetSprite().getGlobalBounds().height < rc2->GetSprite().getPosition().y + rc2->GetSprite().getGlobalBounds().height;
+		return y1 <= y2;
 	}
 	else
 		return depth1 < depth2;

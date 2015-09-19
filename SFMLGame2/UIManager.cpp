@@ -296,7 +296,6 @@ void UIManager::HandleInput(sf::Event event, sf::Vector2i mousePos)
 						m_playerInventory->DropItem(newOpMenu->GetAttachedItem());
 					else if (response == 3)
 						m_playerInventory->DeleteItem(newOpMenu->GetAttachedItem());
-
 				}
 
 				newOpMenu->SetOpen(false);

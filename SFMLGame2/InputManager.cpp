@@ -1,5 +1,6 @@
 #include "InputManager.h"
 #include "UIManager.h"
+
 StrongComponentPtr InputManager::CreateInputComponent()
 {
 	shared_ptr<InputComponent> newComponent(new InputComponent);

@@ -363,10 +363,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="486"/>
-   <tile gid="487"/>
-   <tile gid="803"/>
-   <tile gid="804"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -383,10 +379,14 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="829"/>
-   <tile gid="830"/>
-   <tile gid="843"/>
-   <tile gid="844"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -401,12 +401,6 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="721"/>
-   <tile gid="722"/>
-   <tile gid="869"/>
-   <tile gid="870"/>
-   <tile gid="883"/>
-   <tile gid="884"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -421,12 +415,10 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="761"/>
-   <tile gid="762"/>
    <tile gid="0"/>
+   <tile gid="849"/>
+   <tile gid="850"/>
    <tile gid="0"/>
-   <tile gid="923"/>
-   <tile gid="924"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -464,6 +456,8 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
+   <tile gid="929"/>
+   <tile gid="930"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -495,7 +489,13 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="895"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="0"/>
+   <tile gid="893"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -515,15 +515,15 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="935"/>
-   <tile gid="936"/>
-   <tile gid="936"/>
-   <tile gid="936"/>
-   <tile gid="936"/>
-   <tile gid="936"/>
-   <tile gid="936"/>
-   <tile gid="936"/>
-   <tile gid="855"/>
+   <tile gid="933"/>
+   <tile gid="934"/>
+   <tile gid="934"/>
+   <tile gid="934"/>
+   <tile gid="934"/>
+   <tile gid="934"/>
+   <tile gid="934"/>
+   <tile gid="934"/>
+   <tile gid="934"/>
    <tile gid="856"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -612,10 +612,19 @@
   </data>
  </layer>
  <objectgroup name="Collision" width="20" height="15">
-  <object name="1" x="247" y="229" width="15" height="24"/>
-  <object name="2" x="192" y="342" width="321" height="10"/>
-  <object name="3" x="114" y="65">
-   <polyline points="0,0 30,12 38,27 36,45 44,71 44,93 24,120 -5,127 -28,118 -51,121 -71,114 -77,96 -81,76 -76,62 -79,48 -71,21 -55,6 -41,7 -26,7 -10,0 0,0"/>
+  <object name="1" x="247" y="229" width="17" height="24"/>
+  <object name="2" x="193" y="344" width="318" height="7"/>
+  <object x="40" y="169">
+   <polyline points="0,0 11,13 25,18 38,14 2,-39 -8,-33 -6,-12 -1,-1"/>
+  </object>
+  <object x="36" y="129">
+   <polyline points="0,0 0,-1 -5,-22 5,-40 17,-56 25,-59 42,-57 2,2"/>
+  </object>
+  <object x="80" y="73">
+   <polyline points="0,0 26,-9 42,-7 57,0 71,13 73,27 70,39 0,2"/>
+  </object>
+  <object x="149" y="113">
+   <polyline points="0,0 12,36 3,51 -12,69 -36,76 -56,73 -69,68 0,-1"/>
   </object>
  </objectgroup>
  <objectgroup name="Interactive" width="20" height="15">

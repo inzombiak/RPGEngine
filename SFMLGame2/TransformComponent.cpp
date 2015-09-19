@@ -49,8 +49,7 @@ void TransformComponent::SetPosition(const sf::Vector2f position)
 	std::shared_ptr<CollisionComponent> collisionBox;
 	if (m_owner && CheckConvertAndCastPtr(m_owner->GetComponent(ComponentBase::GetIDFromName(CollisionComponent::COMPONENT_NAME)), collisionBox))
 	{
-		sf::FloatRect oldBounds = collisionBox->GetBounds();
-		collisionBox->SetBounds(sf::FloatRect(oldBounds.left + (position.x - m_position.x), oldBounds.top + (position.y - m_position.y), oldBounds.width, oldBounds.height));
+		collisionBox->UpdateBounds(position - m_position);
 	}
 
 	m_position = position;

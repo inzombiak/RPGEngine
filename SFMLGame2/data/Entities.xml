@@ -3,7 +3,7 @@
 		<Entity name = "Player">
 			<Component name = "TransformComponent" x = "200" y = "200" vx = "0" vy = "0" movable = "1"></Component>
 			<Component name = "RenderComponent" filepath = "data/playerAnimTest.png" visible = "1" depth = "1"/>
-			<Component name = "CollisionComponent" x = "200" y = "240" width = "24" height = "20" solid = "1"/>
+			<Component name = "CollisionComponent" x = "210" y = "254" width = "20" height = "10" solid = "1"/>
 			<Component name = "InputComponent"/>
 			<Component name = "InventoryComponent" drop = "0" maxsize = "100">
 				<Items>
@@ -64,14 +64,12 @@
 			<Component name = "TransformComponent" x = "300" y = "200" vx = "0" vy = "0" movable = "1"></Component>
 			<Component name = "RenderComponent" filepath = "data/enemy.png"  visible = "1" depth = "1"></Component>
 			<Component name = "CollisionComponent" x = "300" y = "240" width = "24" height = "20" solid = "1"/>
-			<Component name = "MovementScriptComponent" filepath = "data/scripts/movementTest.lua" />
-			<Component name = "AIScriptComponent" scriptpath = "data/scripts/AITest.lua" />
 		</Entity>
 	</Entities>
 </EntityDoc>
 
 <!--
-General definitions for entities. Level folder contains xmls that are read for creating entities in level
-
-
+General definitions for entities. Level folder contains xmls that are read for creating entities in level	
+<Component name = "MovementScriptComponent" filepath = "data/scripts/movementTest.lua" />
+			<Component name = "AIScriptComponent" scriptpath = "data/scripts/AITest.lua" />	
 -->

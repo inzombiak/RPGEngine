@@ -3,6 +3,8 @@
 
 #include "SFML\Graphics.hpp"
 #include "custom_defininitions.h"
+#include <sstream>
+#include <iomanip>
 
 class StatComponent;
 class VitalsComponenet;
