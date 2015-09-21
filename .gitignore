@@ -59,3 +59,9 @@ SFMLGame2/data/UI/CharacterWindow/PlayerWindowLayout.psd
 *.pdb
 *.obj
 *.tlog
+*.vcxproj
+LuaPlusLib/LuaPlusLib.vcxproj
+*.sdf
+SFMLGame2/Debug/vc140.idb
+*.log
+SFMLGame2/SFMLGame2.vcxproj
