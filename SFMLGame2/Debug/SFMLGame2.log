@@ -1,13 +1,62 @@
-﻿  CharacterWindow.cpp
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(50): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(51): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(63): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(77): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(104): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(105): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(106): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(107): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(38): warning C4101: 'w' : unreferenced local variable
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(38): warning C4101: 'h' : unreferenced local variable
-c:\users\zareh\documents\github\sfmlgame2\sfmlgame2\characterwindow.cpp(117): warning C4715: 'CharacterWindow::Init' : not all control paths return a value
-  SFMLGame2.vcxproj -> C:\Users\Zareh\Documents\GitHub\SFMLGame2\Debug\SFMLGame2.exe
+﻿Build started 3/25/2016 3:27:41 PM.
+     1>Project "C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\SFMLGame2\SFMLGame2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\GLM\include" /I"C:\Development Libraries\SFML\SFML-2.3.2\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Physics\BoxShape.cpp
+         BoxShape.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\physicshelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Debug\SFMLGame2.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Development Libraries\SFML\SFML-2.3.2\lib" "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Debug\SFMLGame2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Debug\SFMLGame2.lib" /MACHINE:X86 Debug\AnimationComponent.obj
+         Debug\AttackComponent.obj
+         Debug\CollisionComponent.obj
+         Debug\ComponenetFactory.obj
+         Debug\EquipmentComponent.obj
+         Debug\IComponent.obj
+         Debug\InputComponent.obj
+         Debug\InventoryComponent.obj
+         Debug\IScriptComponent.obj
+         Debug\ItemComponent.obj
+         Debug\MovementScriptComponent.obj
+         Debug\PickupComponent.obj
+         Debug\PlayerObserverComponent.obj
+         Debug\RenderComponent.obj
+         Debug\StatComponent.obj
+         Debug\TransformComponent.obj
+         Debug\VitalsComponent.obj
+         Debug\Entity.obj
+         Debug\Level.obj
+         Debug\BoxShape.obj
+         Debug\PhysicsHelpers.obj
+         Debug\PhysicsManager.obj
+         Debug\PolyShape.obj
+         Debug\CircleShape.obj
+         Debug\PlayerObserver.obj
+         Debug\AnimationManager.obj
+         Debug\RenderManager.obj
+         Debug\AttackManager.obj
+         Debug\EntityFactory.obj
+         Debug\EntityManager.obj
+         Debug\EventManager.obj
+         Debug\Game.obj
+         Debug\InputManager.obj
+         Debug\ItemFactroy.obj
+         Debug\ItemManager.obj
+         Debug\LevelManager.obj
+         Debug\LuaStateManager.obj
+         Debug\Main.obj
+         Debug\ScriptManager.obj
+         Debug\TransformManager.obj
+         Debug\CharacterWindow.obj
+         Debug\Inventory.obj
+         Debug\InventoryItem.obj
+         Debug\ItemOptionsMenu.obj
+         Debug\MainMenu.obj
+         Debug\UIManager.obj
+         Debug\Algorithms.obj
+         Debug\Debug.obj
+         Debug\tinyxml2.obj
+         SFMLGame2.vcxproj -> C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Debug\SFMLGame2.exe
+     1>Done Building Project "C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\SFMLGame2\SFMLGame2.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.48

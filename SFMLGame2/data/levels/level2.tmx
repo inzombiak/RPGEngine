@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="20" height="15" tilewidth="32" tileheight="32">
- <tileset firstgid="1" name="Main" tilewidth="32" tileheight="32">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="32" tileheight="32" nextobjectid="19">
+ <tileset firstgid="1" name="Main" tilewidth="32" tileheight="32" tilecount="1040" columns="40">
   <image source="RPGpack_sheet.png" width="1280" height="832"/>
  </tileset>
  <layer name="Background" width="20" height="15">
@@ -611,23 +611,24 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Collision" width="20" height="15">
-  <object name="1" x="247" y="229" width="17" height="24"/>
-  <object name="2" x="193" y="344" width="318" height="7"/>
-  <object x="40" y="169">
-   <polyline points="0,0 11,13 25,18 38,14 2,-39 -8,-33 -6,-12 -1,-1"/>
+ <objectgroup name="Collision" offsetx="-1" offsety="1">
+  <object id="1" name="1" x="247" y="229" width="17" height="24"/>
+  <object id="2" name="2" x="193" y="344" width="318" height="7"/>
+  <object id="3" x="39.8261" y="165.155">
+   <polyline points="10.7609,11.7183 29.3478,16.8451 37.1739,12.6197 1.95652,-35.1549 -1.82609,-35.7465 -5.86957,-10.8169"/>
   </object>
-  <object x="36" y="129">
+  <object id="4" x="36" y="129">
    <polyline points="0,0 0,-1 -5,-22 5,-40 17,-56 25,-59 42,-57 2,2"/>
   </object>
-  <object x="80" y="73">
+  <object id="5" x="80" y="73">
    <polyline points="0,0 26,-9 42,-7 57,0 71,13 73,27 70,39 0,2"/>
   </object>
-  <object x="149" y="113">
+  <object id="6" x="149" y="113">
    <polyline points="0,0 12,36 3,51 -12,69 -36,76 -56,73 -69,68 0,-1"/>
   </object>
  </objectgroup>
- <objectgroup name="Interactive" width="20" height="15">
-  <object name="Door1" x="459" y="123" width="42" height="35"/>
+ <objectgroup name="Interactive">
+  <object id="7" name="Door1" x="459" y="123" width="42" height="35"/>
  </objectgroup>
+ <objectgroup name="Foreground"/>
 </map>

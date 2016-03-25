@@ -119,7 +119,7 @@ LUAPLUS_INLINE LuaStackObject LuaCall::operator<<(const LuaRun& run) {
             luaplus_throw(lua_tostring(L, -1));
         } else {
             char buf[200];
-            sprintf(buf, "unknown lua error, code: %d", err);
+            sprintf_s(buf, "unknown lua error, code: %d", err);
             luaplus_throw(buf);
         }
 	}

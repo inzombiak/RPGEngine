@@ -1,4 +1,168 @@
-﻿  Inventory.cpp
-  Generating code
-  Finished generating code
-  SFMLGame2.vcxproj -> C:\Users\Zareh\documents\visual studio 2013\Projects\SFMLGame2\Release\SFMLGame2.exe
+﻿Build started 3/10/2016 3:27:42 PM.
+     1>Project "C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\SFMLGame2\SFMLGame2.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\GLM\include" /I"C:\Development Libraries\SFML\SFML-2.3.2\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source\Components\CollisionComponent.cpp Source\Components\PickupComponent.cpp Source\Components\TransformComponent.cpp Source\Physics\BoxShape.cpp Source\Physics\CircleShape.cpp Source\Physics\PhysicsHelpers.cpp Source\Physics\PhysicsManager.cpp Source\Physics\PolyShape.cpp Source\Systems\EntityFactory.cpp Source\Systems\EntityManager.cpp Source\Systems\Game.cpp Source\Systems\InputManager.cpp Source\Systems\LevelManager.cpp Source\Systems\Main.cpp Source\UI\UIManager.cpp
+         CollisionComponent.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\CollisionComponent.h(15): warning C4150: deletion of pointer to incomplete type 'ICollisionShape'; no destructor called
+                 c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(11) : see declaration of 'ICollisionShape'
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\CollisionComponent.h(78): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Components\CollisionComponent.cpp(110): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Components\CollisionComponent.cpp(127): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\Components\CollisionComponent.cpp(140): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\Components\CollisionComponent.cpp(143): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         PickupComponent.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\CollisionComponent.h(15): warning C4150: deletion of pointer to incomplete type 'ICollisionShape'; no destructor called
+                 c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(11) : see declaration of 'ICollisionShape'
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\CollisionComponent.h(78): warning C4018: '<' : signed/unsigned mismatch
+         TransformComponent.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\CollisionComponent.h(15): warning C4150: deletion of pointer to incomplete type 'ICollisionShape'; no destructor called
+                 c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(11) : see declaration of 'ICollisionShape'
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\CollisionComponent.h(78): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Components\TransformComponent.cpp(31): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         BoxShape.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+         CircleShape.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+         PhysicsHelpers.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>Source\Physics\PhysicsHelpers.cpp(49): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\Physics\PhysicsHelpers.cpp(50): warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\Physics\PhysicsHelpers.cpp(63): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Physics\PhysicsHelpers.cpp(70): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Physics\PhysicsHelpers.cpp(78): warning C4244: '/=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\Physics\PhysicsHelpers.cpp(79): warning C4244: '/=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\Physics\PhysicsHelpers.cpp(113): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Physics\PhysicsHelpers.cpp(139): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Physics\PhysicsHelpers.cpp(190): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Physics\PhysicsHelpers.cpp(243): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Physics\PhysicsHelpers.cpp(253): warning C4244: '/=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\Physics\PhysicsHelpers.cpp(254): warning C4244: '/=' : conversion from 'double' to 'float', possible loss of data
+     1>Source\Physics\PhysicsHelpers.cpp(300): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>Source\Physics\PhysicsHelpers.cpp(308): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+         PhysicsManager.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\..\Components\CollisionComponent.h(15): warning C4150: deletion of pointer to incomplete type 'ICollisionShape'; no destructor called
+                 c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(11) : see declaration of 'ICollisionShape'
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\..\Components\CollisionComponent.h(78): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\PhysicsManager.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>Source\Physics\PhysicsManager.cpp(34): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Physics\PhysicsManager.cpp(37): warning C4018: '<' : signed/unsigned mismatch
+         PolyShape.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>Source\Physics\PolyShape.cpp(29): warning C4018: '<' : signed/unsigned mismatch
+     1>Source\Physics\PolyShape.cpp(41): warning C4018: '<' : signed/unsigned mismatch
+         EntityFactory.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Physics\PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Components\CollisionComponent.h(15): warning C4150: deletion of pointer to incomplete type 'ICollisionShape'; no destructor called
+                 c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Physics\PhysicsHelpers.h(11) : see declaration of 'ICollisionShape'
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Components\CollisionComponent.h(78): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Components\AnimationComponent.h(56): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Systems\EntityManager.h(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Physics\PhysicsManager.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+         EntityManager.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Systems\EntityManager.h(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Physics\PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+         Game.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\EntityManager.h(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\..\Components\CollisionComponent.h(15): warning C4150: deletion of pointer to incomplete type 'ICollisionShape'; no destructor called
+                 c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(11) : see declaration of 'ICollisionShape'
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\..\Components\CollisionComponent.h(78): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Physics\PhysicsManager.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>Source\Systems\Game.cpp(45): warning C4101: 'px' : unreferenced local variable
+     1>Source\Systems\Game.cpp(45): warning C4101: 'py' : unreferenced local variable
+         InputManager.cpp
+         LevelManager.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\EntityManager.h(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Physics\PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>Source\Systems\LevelManager.cpp(97): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>Source\Systems\LevelManager.cpp(118): warning C4101: 'values' : unreferenced local variable
+     1>Source\Systems\LevelManager.cpp(143): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>Source\Systems\LevelManager.cpp(146): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>Source\Systems\LevelManager.cpp(169): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\Systems\LevelManager.cpp(176): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>Source\Systems\LevelManager.cpp(179): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
+     1>Source\Systems\LevelManager.cpp(196): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\Systems\LevelManager.cpp(215): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Source\Systems\LevelManager.cpp(216): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>Source\Systems\LevelManager.cpp(219): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\Systems\LevelManager.cpp(249): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+         Main.cpp
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\EntityManager.h(8): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(23): warning C4091: 'typedef ' : ignored on left of 'PhysicsDefs::AABB' when no variable is declared
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\..\Components\CollisionComponent.h(15): warning C4150: deletion of pointer to incomplete type 'ICollisionShape'; no destructor called
+                 c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\components\../Physics/PhysicsHelpers.h(11) : see declaration of 'ICollisionShape'
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\..\Components\CollisionComponent.h(78): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\systems\..\Physics\PhysicsManager.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+         UIManager.cpp
+     1>Source\UI\UIManager.cpp(137): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Source\UI\UIManager.cpp(143): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Source\UI\UIManager.cpp(153): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Source\UI\UIManager.cpp(159): warning C4244: '=' : conversion from 'const int' to 'float', possible loss of data
+     1>Source\UI\UIManager.cpp(179): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\UI\UIManager.cpp(181): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\UI\UIManager.cpp(230): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>Source\UI\UIManager.cpp(276): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Release\SFMLGame2.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Development Libraries\SFML\SFML-2.3.2\lib" "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Release\SFMLGame2.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Release\SFMLGame2.lib" /MACHINE:X86 /SAFESEH Release\AnimationComponent.obj
+         Release\AttackComponent.obj
+         Release\CollisionComponent.obj
+         Release\ComponenetFactory.obj
+         Release\EquipmentComponent.obj
+         Release\IComponent.obj
+         Release\InputComponent.obj
+         Release\InventoryComponent.obj
+         Release\IScriptComponent.obj
+         Release\ItemComponent.obj
+         Release\MovementScriptComponent.obj
+         Release\PickupComponent.obj
+         Release\PlayerObserverComponent.obj
+         Release\RenderComponent.obj
+         Release\StatComponent.obj
+         Release\TransformComponent.obj
+         Release\VitalsComponent.obj
+         Release\Entity.obj
+         Release\Level.obj
+         Release\BoxShape.obj
+         Release\PhysicsHelpers.obj
+         Release\PhysicsManager.obj
+         Release\PolyShape.obj
+         Release\CircleShape.obj
+         Release\PlayerObserver.obj
+         Release\AnimationManager.obj
+         Release\RenderManager.obj
+         Release\AttackManager.obj
+         Release\EntityFactory.obj
+         Release\EntityManager.obj
+         Release\EventManager.obj
+         Release\Game.obj
+         Release\InputManager.obj
+         Release\ItemFactroy.obj
+         Release\ItemManager.obj
+         Release\LevelManager.obj
+         Release\LuaStateManager.obj
+         Release\Main.obj
+         Release\ScriptManager.obj
+         Release\TransformManager.obj
+         Release\CharacterWindow.obj
+         Release\Inventory.obj
+         Release\InventoryItem.obj
+         Release\ItemOptionsMenu.obj
+         Release\MainMenu.obj
+         Release\UIManager.obj
+         Release\Algorithms.obj
+         Release\Debug.obj
+         Release\tinyxml2.obj
+         Generating code
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\physics\physicshelpers.cpp(293): warning C4715: 'ShapeFactory::CreateShape' : not all control paths return a value
+     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\sfmlgame2\source\ui\characterwindow.cpp(117): warning C4715: 'CharacterWindow::Init' : not all control paths return a value
+         Finished generating code
+         SFMLGame2.vcxproj -> C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Release\SFMLGame2.exe
+     1>Done Building Project "C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\SFMLGame2\SFMLGame2.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:01:19.66

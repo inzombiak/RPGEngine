@@ -68,15 +68,19 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\..\Source\Components;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Static|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>..\..\Source\Components;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>..\..\Source\Components;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Static|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>..\..\Source\Components;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -86,12 +90,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\SFML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\GLM\include;C:\Development Libraries\SFML\SFML-2.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\SFML\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Development Libraries\SFML\SFML-2.3.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -123,7 +127,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\SFML\SFML-2.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\GLM\include;C:\Development Libraries\SFML\SFML-2.3.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +135,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\SFML\SFML-2.1\Libs\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Development Libraries\SFML\SFML-2.3.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Static|Win32'">
@@ -157,95 +161,110 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Algorithms.cpp" />
-    <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="AnimationManager.cpp" />
-    <ClCompile Include="AttackComponent.cpp" />
-    <ClCompile Include="AttackManager.cpp" />
-    <ClCompile Include="CharacterWindow.cpp" />
-    <ClCompile Include="CollisionComponent.cpp" />
-    <ClCompile Include="ComponenetFactory.cpp" />
-    <ClCompile Include="ComponentBase.cpp" />
-    <ClCompile Include="Debug.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EntityFactory.cpp" />
-    <ClCompile Include="EntityRenderer.cpp" />
-    <ClCompile Include="EquipmentComponent.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="EntityManager.cpp" />
-    <ClCompile Include="InputComponent.cpp" />
-    <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="IScriptComponent.cpp" />
-    <ClCompile Include="MovementScriptComponent.cpp" />
-    <ClCompile Include="ScriptExports.cpp" />
-    <ClCompile Include="InventoryComponent.cpp" />
-    <ClCompile Include="ItemComponent.cpp" />
-    <ClCompile Include="ItemOptionsMenu.cpp" />
-    <ClCompile Include="Level.cpp" />
-    <ClCompile Include="LevelLoader.cpp" />
-    <ClCompile Include="LuaStateManager.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainMenu.cpp" />
-    <ClCompile Include="PhysicsManager.cpp" />
-    <ClCompile Include="ItemManager.cpp" />
-    <ClCompile Include="PickupComponent.cpp" />
-    <ClCompile Include="PlayerObserver.cpp" />
-    <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="ScriptManager.cpp" />
-    <ClCompile Include="StatComponent.cpp" />
-    <ClCompile Include="tinyxml2.cpp" />
-    <ClCompile Include="TransformComponent.cpp" />
-    <ClCompile Include="TransformManager.cpp" />
-    <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="PlayerObserverComponent.cpp" />
-    <ClCompile Include="VitalsComponent.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AnimationComponent.h" />
-    <ClInclude Include="AnimationManager.h" />
-    <ClInclude Include="AttackComponent.h" />
-    <ClInclude Include="AttackManager.h" />
-    <ClInclude Include="CharacterWindow.h" />
-    <ClInclude Include="CollisionComponent.h" />
-    <ClInclude Include="ComponentFactory.h" />
-    <ClInclude Include="ComponentBase.h" />
-    <ClInclude Include="custom_defininitions.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="EntityFactory.h" />
-    <ClInclude Include="EntityRenderer.h" />
-    <ClInclude Include="EntityManager.h" />
-    <ClInclude Include="EquipmentComponent.h" />
-    <ClInclude Include="InputComponent.h" />
-    <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Algorithms.h" />
-    <ClInclude Include="Debug.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="IScriptComponent.h" />
-    <ClInclude Include="MovementScriptComponent.h" />
-    <ClInclude Include="ScriptExports.h" />
-    <ClInclude Include="InventoryComponent.h" />
-    <ClInclude Include="ItemManager.h" />
-    <ClInclude Include="ItemOptionsMenu.h" />
-    <ClInclude Include="Level.h" />
-    <ClInclude Include="LevelLoader.h" />
-    <ClInclude Include="LuaStateManager.h" />
-    <ClInclude Include="PhysicsManager.h" />
-    <ClInclude Include="PickupComponent.h" />
-    <ClInclude Include="PlayerObserver.h" />
-    <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="ScriptManager.h" />
-    <ClInclude Include="StatComponent.h" />
-    <ClInclude Include="tinyxml2.h" />
-    <ClInclude Include="TransformComponent.h" />
-    <ClInclude Include="TransformManager.h" />
-    <ClInclude Include="UIManager.h" />
-    <ClInclude Include="ItemComponent.h" />
-    <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="PlayerObserverComponent.h" />
-    <ClInclude Include="VitalsComponent.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="data\scripts\movementTest.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Components\AnimationComponent.cpp" />
+    <ClCompile Include="Source\Components\AttackComponent.cpp" />
+    <ClCompile Include="Source\Components\CollisionComponent.cpp" />
+    <ClCompile Include="Source\Components\ComponenetFactory.cpp" />
+    <ClCompile Include="Source\Components\EquipmentComponent.cpp" />
+    <ClCompile Include="Source\Components\IComponent.cpp" />
+    <ClCompile Include="Source\Components\InputComponent.cpp" />
+    <ClCompile Include="Source\Components\InventoryComponent.cpp" />
+    <ClCompile Include="Source\Components\IScriptComponent.cpp" />
+    <ClCompile Include="Source\Components\ItemComponent.cpp" />
+    <ClCompile Include="Source\Components\MovementScriptComponent.cpp" />
+    <ClCompile Include="Source\Components\PickupComponent.cpp" />
+    <ClCompile Include="Source\Components\PlayerObserverComponent.cpp" />
+    <ClCompile Include="Source\Components\RenderComponent.cpp" />
+    <ClCompile Include="Source\Components\StatComponent.cpp" />
+    <ClCompile Include="Source\Components\TransformComponent.cpp" />
+    <ClCompile Include="Source\Components\VitalsComponent.cpp" />
+    <ClCompile Include="Source\Entity.cpp" />
+    <ClCompile Include="Source\Level.cpp" />
+    <ClCompile Include="Source\Physics\BoxShape.cpp" />
+    <ClCompile Include="Source\Physics\PhysicsHelpers.cpp" />
+    <ClCompile Include="Source\Physics\PhysicsManager.cpp" />
+    <ClCompile Include="Source\Physics\PolyShape.cpp" />
+    <ClCompile Include="Source\Physics\CircleShape.cpp" />
+    <ClCompile Include="Source\PlayerObserver.cpp" />
+    <ClCompile Include="Source\Rendering\AnimationManager.cpp" />
+    <ClCompile Include="Source\Rendering\RenderManager.cpp" />
+    <ClCompile Include="Source\Systems\AttackManager.cpp" />
+    <ClCompile Include="Source\Systems\EntityFactory.cpp" />
+    <ClCompile Include="Source\Systems\EntityManager.cpp" />
+    <ClCompile Include="Source\Systems\EventManager.cpp" />
+    <ClCompile Include="Source\Systems\Game.cpp" />
+    <ClCompile Include="Source\Systems\InputManager.cpp" />
+    <ClCompile Include="Source\Systems\ItemFactroy.cpp" />
+    <ClCompile Include="Source\Systems\ItemManager.cpp" />
+    <ClCompile Include="Source\Systems\LevelManager.cpp" />
+    <ClCompile Include="Source\Systems\LuaStateManager.cpp" />
+    <ClCompile Include="Source\Systems\Main.cpp" />
+    <ClCompile Include="Source\Systems\ScriptManager.cpp" />
+    <ClCompile Include="Source\Systems\TransformManager.cpp" />
+    <ClCompile Include="Source\UI\CharacterWindow.cpp" />
+    <ClCompile Include="Source\UI\Inventory.cpp" />
+    <ClCompile Include="Source\UI\InventoryItem.cpp" />
+    <ClCompile Include="Source\UI\ItemOptionsMenu.cpp" />
+    <ClCompile Include="Source\UI\MainMenu.cpp" />
+    <ClCompile Include="Source\UI\UIManager.cpp" />
+    <ClCompile Include="Source\Utilities\Algorithms.cpp" />
+    <ClCompile Include="Source\Utilities\Debug.cpp" />
+    <ClCompile Include="Source\Utilities\tinyxml2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Components\AnimationComponent.h" />
+    <ClInclude Include="Source\Components\AttackComponent.h" />
+    <ClInclude Include="Source\Components\CollisionComponent.h" />
+    <ClInclude Include="Source\Components\ComponentFactory.h" />
+    <ClInclude Include="Source\Components\ConsumableItemComponent.h" />
+    <ClInclude Include="Source\Components\EquipmentComponent.h" />
+    <ClInclude Include="Source\Components\IComponent.h" />
+    <ClInclude Include="Source\Components\InputComponent.h" />
+    <ClInclude Include="Source\Components\InventoryComponent.h" />
+    <ClInclude Include="Source\Components\IScriptComponent.h" />
+    <ClInclude Include="Source\Components\ItemComponent.h" />
+    <ClInclude Include="Source\Components\MovementScriptComponent.h" />
+    <ClInclude Include="Source\Components\PickupComponent.h" />
+    <ClInclude Include="Source\Components\PlayerObserverComponent.h" />
+    <ClInclude Include="Source\Components\RenderComponent.h" />
+    <ClInclude Include="Source\Components\StatComponent.h" />
+    <ClInclude Include="Source\Components\TransformComponent.h" />
+    <ClInclude Include="Source\Components\VitalsComponent.h" />
+    <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\Events\EDEquipItem.h" />
+    <ClInclude Include="Source\Events\IEventData.h" />
+    <ClInclude Include="Source\Physics\BoxShape.h" />
+    <ClInclude Include="Source\Physics\ICollisionShape.h" />
+    <ClInclude Include="Source\Physics\PhysicsHelpers.h" />
+    <ClInclude Include="Source\Physics\PhysicsManager.h" />
+    <ClInclude Include="Source\Physics\PolyShape.h" />
+    <ClInclude Include="Source\Physics\CircleShape.h" />
+    <ClInclude Include="Source\Rendering\AnimationManager.h" />
+    <ClInclude Include="Source\Rendering\RenderManager.h" />
+    <ClInclude Include="Source\Systems\AttackManager.h" />
+    <ClInclude Include="Source\Systems\EntityFactory.h" />
+    <ClInclude Include="Source\Systems\EntityManager.h" />
+    <ClInclude Include="Source\Systems\EventManager.h" />
+    <ClInclude Include="Source\Systems\Game.h" />
+    <ClInclude Include="Source\Systems\InputManager.h" />
+    <ClInclude Include="Source\Systems\ItemManager.h" />
+    <ClInclude Include="Source\Systems\LevelManager.h" />
+    <ClInclude Include="Source\Systems\LuaStateManager.h" />
+    <ClInclude Include="Source\Systems\ScriptManager.h" />
+    <ClInclude Include="Source\Systems\TransformManager.h" />
+    <ClInclude Include="Source\UI\CharacterWindow.h" />
+    <ClInclude Include="Source\UI\Inventory.h" />
+    <ClInclude Include="Source\UI\InventoryItem.h" />
+    <ClInclude Include="Source\UI\ItemOptionsMenu.h" />
+    <ClInclude Include="Source\UI\MainMenu.h" />
+    <ClInclude Include="Source\UI\UIManager.h" />
+    <ClInclude Include="Source\Utilities\Algorithms.h" />
+    <ClInclude Include="Source\Utilities\Debug.h" />
+    <ClInclude Include="Source\Utilities\GameDefs.h" />
+    <ClInclude Include="Source\Utilities\tinyxml2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
