@@ -215,6 +215,7 @@
     <ClCompile Include="Source\Utilities\tinyxml2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EDAddItemToInv.h" />
     <ClInclude Include="Source\Components\AnimationComponent.h" />
     <ClInclude Include="Source\Components\AttackComponent.h" />
     <ClInclude Include="Source\Components\CollisionComponent.h" />

@@ -11,6 +11,10 @@ using std::vector;
 class InventoryComponent : public IComponent
 {
 public:
+	InventoryComponent(unsigned int ID)
+	{
+		m_id = ID;
+	}
 	virtual bool Init(XMLElement* node) override;
 	virtual void PostInit() override {};
 	void Update(float dt) {};

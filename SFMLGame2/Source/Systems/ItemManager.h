@@ -42,12 +42,20 @@ private:
 		string name;
 		vector<std::pair<ComponentID, XMLElement*>> itemComponents;
 	};
-
-	tinyxml2::XMLDocument m_xmlFile;
-	bool InitializeItem(XMLElement* node, ItemDefinition& item);
-	StrongItemComponentPtr CreateItemComponent(XMLElement* node);
-	static EntityManager* m_entityManager; //For creating dropped items
 	typedef map<ItemID, ItemDefinition> ItemCatalog;
+	tinyxml2::XMLDocument m_xmlFile;
+
+	void EquipItem(IEventData* data);
+
+	bool InitializeItem(XMLElement* node, ItemDefinition& item);
+
+	StrongItemComponentPtr CreateItemComponent(XMLElement* node);
+
+	static EntityManager* m_entityManager; //For creating dropped items
+
 	static ItemCatalog m_itemCatalog;
+
+	static std::vector<std::shared_ptr<InventoryComponent>> m_inventoryComponents;
+
 };
 #endif

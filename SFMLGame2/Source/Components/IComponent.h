@@ -32,6 +32,11 @@ public:
 		return m_inUse;
 	}
 
+	unsigned int GetID() const
+	{
+		return m_id;
+	}
+
 	WeakEntityPtr GetOwner() const;
 	virtual const char* GetName() = 0;
 	virtual ComponentID GetID() { return GetIDFromName(GetName()); }
@@ -43,6 +48,8 @@ public:
 protected:
 	StrongEntityPtr m_owner;
 	bool m_inUse;
+	//Index in managers vector;
+	unsigned int m_id;
 };
 
 #endif

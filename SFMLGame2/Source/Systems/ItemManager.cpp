@@ -7,6 +7,8 @@
 #include "..\Components\EquipmentComponent.h"
 #include "..\Components\PickupComponent.h"
 #include "EntityManager.h"
+#include "../Systems/EventManager.h"
+#include "../Events/EDEquipItem.h"
 
 using tinyxml2::XMLElement;
 
@@ -18,11 +20,15 @@ ItemManager::ItemManager()
 	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(ConsumableItemComponent::COMPONENT_NAME), GenericDerivedCreationFunction<StrongItemComponentPtr, ConsumableItemComponent>);
 	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(ItemRenderComponent::COMPONENT_NAME), GenericDerivedCreationFunction<StrongItemComponentPtr, ItemRenderComponent>);;
 	ComponentFactory::RegisterItemComponent(ItemComponent::GetIDFromName(EquipableItemComponent::COMPONENT_NAME), GenericDerivedCreationFunction<StrongItemComponentPtr, EquipableItemComponent>);;
+
+	EventManager::GetInstance()->AddEventListener(EventDefs::EventType::EQUIP_ITEM, std::bind(&ItemManager::EquipItem, this, std::placeholders::_1))
 }
 
 StrongComponentPtr ItemManager::CreateInventoryComponent()
 {
-	return std::shared_ptr<InventoryComponent>(new InventoryComponent());
+	std::shared_ptr<InventoryComponent> newInvComp(new InventoryComponent(m_inventoryComponents.size()));
+	m_inventoryComponents.push_back(newInvComp);
+	return newInvComp;
 }
 
 StrongComponentPtr ItemManager::CreateEquipmentComponent()
@@ -76,6 +82,7 @@ void ItemManager::LoadItemCatalog(string filepath)
 	}
 	return true;
 }*/
+
 bool ItemManager::InitializeItem(XMLElement* pItem, ItemDefinition& item)
 {
 	XMLElement* pItemComponent = pItem->FirstChildElement("Component");
@@ -136,5 +143,13 @@ bool ItemManager::DropItem(ItemID itemId, sf::Vector2f pos)
 	return true;
 }
 
+void ItemManager::EquipItem(IEventData* data)
+{
+	EDEquipItem* eqItemED = dynamic_cast<EDEquipItem*>(data);
+	if (!eqItemED)
+		return;
+}
+
 ItemManager::ItemCatalog ItemManager::m_itemCatalog;
 EntityManager* ItemManager::m_entityManager;
+std::vector<std::shared_ptr<InventoryComponent>> ItemManager::m_inventoryComponents;
