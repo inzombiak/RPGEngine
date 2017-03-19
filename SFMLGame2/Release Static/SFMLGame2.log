@@ -1,7 +1,0 @@
-﻿  Game.cpp
-Game.cpp(34): warning C4101: 'px' : unreferenced local variable
-Game.cpp(34): warning C4101: 'py' : unreferenced local variable
-Game.cpp(63): warning C4101: 'framerate' : unreferenced local variable
-  Generating code
-  Finished generating code
-  SFMLGame2.vcxproj -> C:\Users\Zareh\documents\visual studio 2013\Projects\SFMLGame2\Release Static\SFMLGame2.exe

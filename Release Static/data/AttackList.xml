@@ -1,0 +1,9 @@
+<Attacks>
+	<Melee>
+	</Melee>
+	<Ranged>
+		<RangedAttack name = "Toss Straight" script = "tossStraight.lua">
+	</Ranged>
+	<Magic>
+	</Magic>
+</Attacks>

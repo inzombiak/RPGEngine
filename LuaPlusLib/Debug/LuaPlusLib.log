@@ -1,106 +1,54 @@
-﻿Build started 1/25/2016 8:24:31 PM.
-     1>Project "C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\LuaPlusLib\LuaPlusLib.vcxproj" on node 4 (Rebuild target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt LuaObject.cpp LuaPlus.cpp LuaPlusFunctions.cpp LuaPlus_Libs.cpp LuaState.cpp LuaStateOutFile.cpp LuaState_DumpObject.cpp LuaTableIterator.cpp
-         LuaTableIterator.cpp
-         LuaState_DumpObject.cpp
-         LuaStateOutFile.cpp
-         LuaState.cpp
-         LuaPlus_Libs.cpp
-         LuaPlusFunctions.cpp
-         LuaPlus.cpp
-         LuaObject.cpp
-         Generating Code...
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _CRT_SECURE_NO_WARNINGS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt LuaPlusAddons.c lwstrlib.c popen.c src\lapi.c src\lauxlib.c src\lbaselib.c src\lcode.c src\ldblib.c src\ldebug.c src\ldo.c src\ldump.c src\lfunc.c src\lgc.c src\linit.c src\liolib.c src\llex.c src\lmathlib.c src\lmem.c src\loadlib.c src\lobject.c src\lopcodes.c src\loslib.c src\lparser.c src\lstate.c src\lstring.c src\lstrlib.c src\ltable.c src\ltablib.c src\ltm.c src\lundump.c src\lvm.c src\lzio.c src\print.c
-         print.c
-         lzio.c
-         lvm.c
-         lundump.c
-         ltm.c
-         ltablib.c
-         ltable.c
-         lstrlib.c
-         lstring.c
-         lstate.c
-         lparser.c
-         loslib.c
-         lopcodes.c
-         lobject.c
-         loadlib.c
-     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\luapluslib\src\loadlib.c(190): warning C4996: 'access': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _access. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\io.h(323) : see declaration of 'access'
-     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\luapluslib\src\loadlib.c(272): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(253) : see declaration of 'stricmp'
-         lmem.c
-         lmathlib.c
-         llex.c
-         liolib.c
-         linit.c
-         Generating Code...
-         Compiling...
-         lgc.c
-         lfunc.c
-         ldump.c
-         ldo.c
-         ldebug.c
-         ldblib.c
-         lcode.c
-         lbaselib.c
-         lauxlib.c
-         lapi.c
-         popen.c
-     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\luapluslib\popen.c(109): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strlwr. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(254) : see declaration of 'strlwr'
-     1>c:\users\zareh\documents\visual studio 2013\projects\rpgengine\luapluslib\popen.c(167): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strlwr. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\string.h(254) : see declaration of 'strlwr'
-         lwstrlib.c
-         LuaPlusAddons.c
-         Generating Code...
-       Lib:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\Lib.exe /OUT:"C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Debug\LUAPlus.lib" /NOLOGO Debug\LuaObject.obj
-         Debug\LuaPlus.obj
-         Debug\LuaPlusAddons.obj
-         Debug\LuaPlusFunctions.obj
-         Debug\LuaPlus_Libs.obj
-         Debug\LuaState.obj
-         Debug\LuaStateOutFile.obj
-         Debug\LuaState_DumpObject.obj
-         Debug\LuaTableIterator.obj
-         Debug\lwstrlib.obj
-         Debug\popen.obj
-         Debug\lapi.obj
-         Debug\lauxlib.obj
-         Debug\lbaselib.obj
-         Debug\lcode.obj
-         Debug\ldblib.obj
-         Debug\ldebug.obj
-         Debug\ldo.obj
-         Debug\ldump.obj
-         Debug\lfunc.obj
-         Debug\lgc.obj
-         Debug\linit.obj
-         Debug\liolib.obj
-         Debug\llex.obj
-         Debug\lmathlib.obj
-         Debug\lmem.obj
-         Debug\loadlib.obj
-         Debug\lobject.obj
-         Debug\lopcodes.obj
-         Debug\loslib.obj
-         Debug\lparser.obj
-         Debug\lstate.obj
-         Debug\lstring.obj
-         Debug\lstrlib.obj
-         Debug\ltable.obj
-         Debug\ltablib.obj
-         Debug\ltm.obj
-         Debug\lundump.obj
-         Debug\lvm.obj
-         Debug\lzio.obj
-         Debug\print.obj
-         LuaPlusLib.vcxproj -> C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\Debug\LUAPlus.lib
-     1>Done Building Project "C:\Users\Zareh\Documents\Visual Studio 2013\Projects\RPGEngine\LuaPlusLib\LuaPlusLib.vcxproj" (Rebuild target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:16.47
+﻿  LuaTableIterator.cpp
+  LuaState_DumpObject.cpp
+  LuaStateOutFile.cpp
+  LuaState.cpp
+  LuaPlus_Libs.cpp
+  LuaPlusFunctions.cpp
+  LuaPlus.cpp
+  LuaObject.cpp
+  Generating Code...
+  print.c
+  lzio.c
+  lvm.c
+  lundump.c
+  ltm.c
+  ltablib.c
+  ltable.c
+  lstrlib.c
+  lstring.c
+  lstate.c
+  lparser.c
+  loslib.c
+  lopcodes.c
+  lobject.c
+  loadlib.c
+e:\github\rpgengine\luapluslib\src\loadlib.c(190): warning C4996: 'access': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _access. See online help for details.
+          e:\program files\microsoft visual studio 12.0\vc\include\io.h(323) : see declaration of 'access'
+e:\github\rpgengine\luapluslib\src\loadlib.c(272): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
+          e:\program files\microsoft visual studio 12.0\vc\include\string.h(253) : see declaration of 'stricmp'
+  lmem.c
+  lmathlib.c
+  llex.c
+  liolib.c
+  linit.c
+  Generating Code...
+  Compiling...
+  lgc.c
+  lfunc.c
+  ldump.c
+  ldo.c
+  ldebug.c
+  ldblib.c
+  lcode.c
+  lbaselib.c
+  lauxlib.c
+  lapi.c
+  popen.c
+e:\github\rpgengine\luapluslib\popen.c(109): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strlwr. See online help for details.
+          e:\program files\microsoft visual studio 12.0\vc\include\string.h(254) : see declaration of 'strlwr'
+e:\github\rpgengine\luapluslib\popen.c(167): warning C4996: 'strlwr': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strlwr. See online help for details.
+          e:\program files\microsoft visual studio 12.0\vc\include\string.h(254) : see declaration of 'strlwr'
+  lwstrlib.c
+  LuaPlusAddons.c
+  Generating Code...
+  LuaPlusLib.vcxproj -> E:\GitHub\RPGEngine\Debug\LUAPlus.lib

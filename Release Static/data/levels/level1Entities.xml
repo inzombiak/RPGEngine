@@ -1,0 +1,5 @@
+<Entities>
+	<Entity type = "Player" x = "200" y = "200"/>
+	<Entity type = "Healing Potion" x = "300" y = "300"/>
+	<Entity type = "White Potion" x = "400" y = "300"/>
+</Entities>

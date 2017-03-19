@@ -1,0 +1,53 @@
+<ItemCatalog>
+	<Item name = "Healing Potion">
+		<Component name  = "BaseItemComponent" itemname = "Healing Potion" description = "Recover HP" iconfilepath = "data/Item Icons/red-potion.png"/>
+		<Component name  = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
+		<Component name  = "RestorationItemComponent" effect = "Health" amount = "100"/>
+		<Component name  = "ItemRenderComponent" filepath = "data/Item Icons/red-potion.png" visible = "1" depth = "2"/>
+	</Item>
+	<Item name = "Mana Potion">
+		<Component name  = "BaseItemComponent" itemname = "Mana Potion" description = "Recover Mana" />
+		<Component name  = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
+		<Component name  = "RestorationItemComponent" effect = "Mana" amount = "10"/>
+		<Component name  = "ItemRenderComponent" filepath = "data/Item Icons/blue-potion.png" visible = "1" depth = "2"/>
+	</Item>
+	<Item name = "White Potion">
+		<Component name  = "BaseItemComponent" itemname = "White Potion" description = "Recover derp" />
+		<Component name  = "ConsumableItemComponent" uses = "1" maxstack = "99"/>
+		<Component name  = "RestorationItemComponent" effect = "Mana" amount = "10"/>
+		<Component name  = "ItemRenderComponent" filepath = "data/Item Icons/white-potion.png" visible = "1" depth = "2"/>
+	</Item>
+	<Item name = "Axe">
+		<Component name  = "BaseItemComponent" itemname = "Axe" description = "Basic axe" />
+		<Component name  = "EquipableItemComponent" slot = "RightHand">
+			<Modifiers>
+				<Modifier name = "HP" effect = "-10"/>
+				<Modifier name = "Damage" effect = "5"/>
+				<Modifier name = "Movement Speed" effect = "-0.5"/>
+			</Modifiers>
+		</Component>
+		<Component name = "ItemRenderComponent" filepath = "data/Item Icons/Axe01.PNG" visible = "1" depth = "2"/>
+	</Item>
+	<Item name = "Gold Axe">
+		<Component name = "BaseItemComponent" itemname = "Gold Axe" description = "Basic axe" />
+		<Component name = "EquipableItemComponent" slot = "RightHand">
+			<Modifiers>
+				<Modifier name = "HP" effect = "+5"/>
+				<Modifier name = "Damage" effect = "10"/>
+				<Modifier name = "Movement Speed" effect = "-1.0"/>
+			</Modifiers>
+		</Component>
+		<Component name = "ItemRenderComponent" filepath = "data/Item Icons/GoldAxe.PNG" visible = "1" depth = "2"/>
+	</Item>
+	<Item name = "Small Shield">
+		<Component name = "BaseItemComponent" itemname = "Small Shield" description = "Defensive Shield" />
+		<Component name = "EquipableItemComponent" slot = "LeftHand">
+			<Modifiers>
+				<Modifier name = "Armor" effect = "+10"/>
+				<Modifier name = "Damage" effect = "0"/>
+				<Modifier name = "Movement Speed" effect = "-1.0"/>
+			</Modifiers>
+		</Component>
+		<Component name = "ItemRenderComponent" filepath = "data/Item Icons/ShieldWoodSmall.PNG" visible = "1" depth = "2"/>
+	</Item>
+</ItemCatalog>
