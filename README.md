@@ -22,4 +22,4 @@ Animations were create using [darkFunction Editor](http://darkfunction.com/edito
 SFML for rendering
 
 ## References
- * 
+ * McShaffry, Mike, and David Graham. "Game Coding Complete." (2012).
