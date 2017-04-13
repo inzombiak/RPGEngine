@@ -14,7 +14,7 @@ A few of the features:
 
 
 All artwork is from OpenGameArt.org
- * Tiles - [Kenny] https://opengameart.org/users/kenney
+ * Tiles - [Kenny](https://opengameart.org/users/kenney)
  
 Animations were create using [darkFunction Editor](http://darkfunction.com/editor/)
 
